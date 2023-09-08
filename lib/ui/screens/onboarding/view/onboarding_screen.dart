@@ -39,12 +39,12 @@ class OnboardingScreen extends StatelessWidget {
                                 height: context.getScreenHeight * 0.5,
                                 fit: BoxFit.contain,
                               ),
-                              const Text(
+                              Text(
                                 'Pedigree for Pets',
                                 style: TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFFAC4FC6)),
+                                    color: context.getMainColor),
                               ),
                               Text(
                                 contents[i].text,
@@ -54,8 +54,7 @@ class OnboardingScreen extends StatelessWidget {
                             ],
                           ),
                         );
-                      })
-                  ),
+                      })),
               Container(
                 padding:
                     EdgeInsets.only(bottom: context.getScreenHeight * 0.03),
@@ -68,28 +67,36 @@ class OnboardingScreen extends StatelessWidget {
                       padding: EdgeInsets.only(
                           top: context.getScreenHeight * 0.1, bottom: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                            3,
-                            (index) =>
-                            OnboardingWidget().buildDots(context: context, index: index, onboardingState: onboardingState))  //buildDots(context: context, index: index,onboardingState: onboardingState)),
-                      ),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                              3,
+                              (index) => OnboardingWidget().buildDots(
+                                  context: context,
+                                  index: index,
+                                  onboardingState:
+                                      onboardingState)) //buildDots(context: context, index: index,onboardingState: onboardingState)),
+                          ),
                     ),
                     SizedBox(
                       width: context.getScreenWidth * 0.8,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFAC4FC6),
+                          backgroundColor: context.getMainColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 8.0), // Adjust the radius as needed
                           ),
                         ),
                         child: Text(
-                          onboardingState.index == contents.length-1 ? 'Get Started' : 'Skip',
+                          onboardingState.index == contents.length - 1
+                              ? 'Get Started'
+                              : 'Skip',
                           style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -117,19 +124,19 @@ class OnboardingContent {
 List<OnboardingContent> contents = [
   OnboardingContent(
       text:
-      "First Pet pedigree is a record of an animal's ancestry, showcasing its lineage and genetic history."
+          "First Pet pedigree is a record of an animal's ancestry, showcasing its lineage and genetic history."
           "It helps trace and document generations of a particular breed, aiding in maintaining desired traits and health."
           "Pedigrees assist breeders in making informed decisions for responsible breeding practices.",
       image: 'assets/images/logo.png'),
   OnboardingContent(
       text:
-      "Second Pet pedigree is a record of an animal's ancestry, showcasing its lineage and genetic history."
+          "Second Pet pedigree is a record of an animal's ancestry, showcasing its lineage and genetic history."
           "It helps trace and document generations of a particular breed, aiding in maintaining desired traits and health."
           "Pedigrees assist breeders in making informed decisions for responsible breeding practices.",
       image: 'assets/images/logo.png'),
   OnboardingContent(
       text:
-      "Third Pet pedigree is a record of an animal's ancestry, showcasing its lineage and genetic history."
+          "Third Pet pedigree is a record of an animal's ancestry, showcasing its lineage and genetic history."
           "It helps trace and document generations of a particular breed, aiding in maintaining desired traits and health."
           "Pedigrees assist breeders in making informed decisions for responsible breeding practices.",
       image: 'assets/images/logo.png'),

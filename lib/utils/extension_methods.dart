@@ -8,5 +8,7 @@ extension ScreenSize on BuildContext {
 
    Color get getMainColor => Theme.of(this).primaryColor;
 
+  Color get getSecondaryColor => Theme.of(this).colorScheme.secondary;
+
    ColorScheme get colorScheme => Theme.of(this).colorScheme;
 }
