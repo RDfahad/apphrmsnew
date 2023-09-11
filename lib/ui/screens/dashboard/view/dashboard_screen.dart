@@ -96,7 +96,7 @@ class DashBoardScreen extends StatelessWidget {
           style: const TextStyle(
             fontSize: 14.2,
             fontWeight: FontWeight.bold,
-            color: AppColor.primeryTextColor,
+            color: AppColor.primaryTextColor,
           ),
         ),
       ],

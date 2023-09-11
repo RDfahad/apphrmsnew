@@ -12,9 +12,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState>{
 
   Future<void> signupUser({String? firstName, String? lastName, String? email, String? password})async{
     try{
-      emit(state.copyWith(signUpLoading: true));
-      var userSignup = await authenticationRepo.signUpUser(email: email,firstName: firstName,lastName: lastName, password: password);
-      emit(state.copyWith(signUpLoading: false, signUpSuccessfull: true));
+      // emit(state.copyWith(signUpLoading: true));
+      // var userSignup = await authenticationRepo.signUpUser(email: email,firstName: firstName,lastName: lastName, password: password);
+      // emit(state.copyWith(signUpLoading: false, signUpSuccessfull: true));
     }
     catch(e){
       ExceptionHandler().handleException(e);

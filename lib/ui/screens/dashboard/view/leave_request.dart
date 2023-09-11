@@ -15,7 +15,7 @@ class LeaveRequestScreen extends StatelessWidget {
   final List listColor = [
     AppColor.primaryColor,
     AppColor.secondaryColor,
-    AppColor.primeryTextColor
+    AppColor.primaryTextColor
   ];
 
   @override

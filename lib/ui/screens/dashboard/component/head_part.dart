@@ -115,7 +115,7 @@ class CardRow extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 14,
-              color: AppColor.primeryTextColor,
+              color: AppColor.primaryTextColor,
             ),
           ),
         ],
