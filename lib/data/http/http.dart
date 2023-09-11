@@ -34,7 +34,7 @@ class HTTPRequest{
   post({required String url, Map<String, dynamic>? body, Map<String,dynamic>? queryParameters, String? token, Map<String,String>? header})async{
     try{
         var headers = {
-          'authorization': token ?? '',
+          'Authorization': token != null ?'Bearer $token' : '',
           'Content-Type': 'application/json'
       };
          if(header != null){
