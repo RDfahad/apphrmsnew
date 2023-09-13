@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_emp_proj/ui/widgets/custom_text_field.dart';
 import 'package:hr_emp_proj/ui/widgets/round_button.dart';
-import 'package:hr_emp_proj/utils/custom_text_field.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 
 class LoginScreen2 extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../../../widgets/oboarding_widget.dart';
 import '../../authentication/view/login_screen.dart';
@@ -14,8 +15,12 @@ class OnboardingScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder(
         bloc: BlocProvider.of<OnboardingCubit>(context),
-        builder: (context, state) {
-          final onboardingState = state as OnboardingState;
+        builder: (context, OnboardingState onboardingState) {
+          if (onboardingState.onBoardingStatus && onboardingState.userData!.token!.isEmpty) {
+            return LoginScreen();
+          } else if (onboardingState.userData!.token!.isNotEmpty && onboardingState.onBoardingStatus) {
+            return DashBoardScreen();
+          }
           return Stack(
             children: [
               Center(
@@ -81,10 +86,12 @@ class OnboardingScreen extends StatelessWidget {
                       width: context.getScreenWidth * 0.8,
                       child: ElevatedButton(
                         onPressed: () {
+                          onboardingState.hiveStorage
+                              .putData("onboardingstatus", true);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  LoginScreen()));
+                                  builder: (context) => LoginScreen()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: context.getMainColor,

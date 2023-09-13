@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:hr_emp_proj/domain/entities/authentication_entities/login_user_entity.dart';
+import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
 
-class OnboardingState{
+class OnboardingState {
   final bool isLoading;
+  final bool onBoardingStatus;
   final int? index;
   final PageController? pageController;
-  const OnboardingState({required this.isLoading,required this.index, required this.pageController});
+  final UserData? userData;
+  final hiveStorage = HiveStorage();
 
-  factory OnboardingState.init() => OnboardingState(isLoading: false, index: 0,pageController: PageController(initialPage: 0));
+  OnboardingState(
+      {required this.isLoading,
+      required this.userData,
+      required this.index,
+      required this.onBoardingStatus,
+      required this.pageController});
 
-  OnboardingState copyWith({bool? isLoading,int? index,PageController? pageController }) => OnboardingState(
-      isLoading: isLoading ?? this.isLoading,
-      index: index ?? this.index,
-      pageController: pageController ?? this.pageController
-  );
+  factory OnboardingState.init() => OnboardingState(
+      isLoading: false,
+      onBoardingStatus: false,
+      index: 0,
+      pageController: PageController(initialPage: 0),
+      userData: UserData());
 
+  OnboardingState copyWith(
+          {bool? isLoading,
+          bool? onBoardingStatus,
+          int? index,
+          PageController? pageController,
+          UserData? userData}) =>
+      OnboardingState(
+          isLoading: isLoading ?? this.isLoading,
+          onBoardingStatus: onBoardingStatus ?? this.onBoardingStatus,
+          index: index ?? this.index,
+          pageController: pageController ?? this.pageController,
+          userData: userData ?? this.userData);
 }

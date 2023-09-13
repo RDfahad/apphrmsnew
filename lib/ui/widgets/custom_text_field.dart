@@ -74,6 +74,8 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/authentication/bloc/authentication_bloc.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 
@@ -138,5 +140,77 @@ class CustomTextFormField extends StatelessWidget {
           ),
           onChanged: onChange,
         ));
+  }
+}
+
+
+
+
+class CustomPasswordTextField extends StatelessWidget {
+  const CustomPasswordTextField({
+    super.key,
+    required ValueNotifier<bool> obsecurePassword,
+    required this.controller,
+  }) : _obsecurePassword = obsecurePassword;
+
+  final ValueNotifier<bool> _obsecurePassword;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColor.whiteColor,
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: const [
+          BoxShadow(
+              spreadRadius: 16,
+              color: AppColor.secondaryButtonColor,
+              blurRadius: 16),
+        ],
+      ),
+      child: ValueListenableBuilder(
+        valueListenable: _obsecurePassword,
+        builder: (context, value, child) {
+          return TextFormField(
+            style: TextStyle(color: AppColor.blackColor),
+            obscureText: _obsecurePassword.value,
+            obscuringCharacter: "*",
+            controller: controller,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              labelText: "Password",
+              labelStyle: const TextStyle(
+                color: AppColor.blackColor,
+              ),
+              hintText: "password",
+              hintStyle: const TextStyle(
+                color: AppColor.blackColor,
+              ),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: AppColor.secondaryTextColor,
+              ),
+              suffixIcon: InkWell(
+                  onTap: () {
+                    _obsecurePassword.value = !_obsecurePassword.value;
+                  },
+                  child: Icon(
+                    _obsecurePassword.value
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility,
+                    size: 25,
+                    color: AppColor.secondaryTextColor,
+                  )),
+            ),
+            onChanged: (value) {
+              context.read<AuthenticationCubit>().checkButtonEnabledDisabled();
+            },
+          );
+        },
+      ),
+    );
   }
 }

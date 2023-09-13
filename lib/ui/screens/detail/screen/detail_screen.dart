@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hr_emp_proj/ui/widgets/custom_app_bar.dart';
 import 'package:hr_emp_proj/ui/widgets/fl_charts/bar_graph.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/custom_app_bar.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 
 class DetailScreen extends StatelessWidget {

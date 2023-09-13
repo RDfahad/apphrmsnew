@@ -1,39 +1,46 @@
+import 'package:flutter/widgets.dart';
+import 'package:hr_emp_proj/domain/entities/authentication_entities/login_user_entity.dart';
+import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
+
 class AuthenticationState {
+  final LoginUserModel loginUserModel;
   final bool error;
   final bool loginLoading;
   final bool signUpLoading;
   final bool signUpSuccessfull;
   final bool loginSuccessfull;
-  final String email;
-  final String password;
-  final bool isValid;
+  final bool isButtonEnabled;
   final String? errorMessage;
-
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
   final String token;
-  const AuthenticationState({
-    required this.loginLoading,
-    required this.signUpLoading,
-    required this.signUpSuccessfull,
-    required this.loginSuccessfull,
-    required this.token,
-    required this.error,
-    required this.email,
-    required this.password,
-    required this.isValid,
-    this.errorMessage,
-  });
+  final hiveStorage = HiveStorage();
+  
+  AuthenticationState(
+      {required this.loginUserModel,
+      required this.loginLoading,
+      required this.signUpLoading,
+      required this.signUpSuccessfull,
+      required this.loginSuccessfull,
+      required this.token,
+      required this.error,
+      required this.isButtonEnabled,
+      this.errorMessage,
+      required this.emailController,
+      required this.passwordController});
 
-  factory AuthenticationState.init() => const AuthenticationState(
+  factory AuthenticationState.init() => AuthenticationState(
       error: false,
       loginLoading: false,
       signUpLoading: false,
       signUpSuccessfull: false,
       loginSuccessfull: false,
       token: '',
-      email: "",
-      password: "",
-      isValid: false,
-      errorMessage: null);
+      isButtonEnabled: false,
+      errorMessage: null,
+      emailController: TextEditingController(text: ''),
+      passwordController: TextEditingController(text: ''),
+      loginUserModel: LoginUserModel());
 
   AuthenticationState copyWith({
     bool? error,
@@ -42,21 +49,23 @@ class AuthenticationState {
     bool? signUpSuccessfull,
     bool? loginSuccessfull,
     String? token,
-    String? email,
-    String? password,
-    bool? isValid,
+    bool? isButtonEnabled,
     String? errorMessage,
+    TextEditingController? emailController,
+    TextEditingController? passwordController,
+    LoginUserModel? loginUserModel,
   }) =>
       AuthenticationState(
+        loginUserModel: loginUserModel ?? this.loginUserModel,
         error: error ?? this.error,
         loginLoading: loginLoading ?? this.loginLoading,
         signUpLoading: signUpLoading ?? this.signUpLoading,
         signUpSuccessfull: signUpSuccessfull ?? this.signUpSuccessfull,
         loginSuccessfull: loginSuccessfull ?? this.loginSuccessfull,
         token: token ?? this.token,
-        email: email ?? this.email,
-        password: password ?? this.password,
-        isValid: isValid ?? this.isValid,
+        isButtonEnabled: isButtonEnabled ?? this.isButtonEnabled,
         errorMessage: errorMessage ?? this.errorMessage,
+        emailController: emailController ?? this.emailController,
+        passwordController: passwordController ?? this.passwordController,
       );
 }

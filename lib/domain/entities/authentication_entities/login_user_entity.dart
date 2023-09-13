@@ -1,27 +1,20 @@
-class LoginUser {
-  bool? success;
-  int? statusCode;
-  String? code;
-  String? message;
-  Data? data;
+class LoginUserModel {
+  bool? response;
+  String? responseMessage;
+  UserData? data;
 
-  LoginUser(
-      {this.success, this.statusCode, this.code, this.message, this.data});
+  LoginUserModel({this.response, this.responseMessage, this.data});
 
-  LoginUser.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    statusCode = json['statusCode'];
-    code = json['code'];
-    message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  LoginUserModel.fromJson(Map<String, dynamic> json) {
+    response = json['response'];
+    responseMessage = json['responseMessage'];
+    data = json['data'] != null ? UserData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['statusCode'] = statusCode;
-    data['code'] = code;
-    data['message'] = message;
+    data['response'] = response;
+    data['responseMessage'] = responseMessage;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -29,43 +22,63 @@ class LoginUser {
   }
 }
 
-class Data {
+class UserData {
+  User? user;
   String? token;
-  int? id;
-  String? email;
-  String? niceName;
-  String? firstName;
-  String? lastName;
-  String? displayName;
+  String? tokenType;
 
-  Data(
-      {this.token,
-        this.id,
-        this.email,
-        this.niceName,
-        this.firstName,
-        this.lastName,
-        this.displayName});
+  UserData({this.user, this.token, this.tokenType});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  UserData.fromJson(Map<String, dynamic> json) {
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     token = json['token'];
-    id = json['id'];
-    email = json['email'];
-    niceName = json['nicename'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    displayName = json['displayName'];
+    tokenType = json['token_type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
     data['token'] = token;
+    data['token_type'] = tokenType;
+    return data;
+  }
+}
+
+class User {
+  int? id;
+  String? name;
+  String? email;
+  String? emailVerifiedAt;
+  String? createdAt;
+  String? updatedAt;
+
+  User(
+      {this.id,
+      this.name,
+      this.email,
+      this.emailVerifiedAt,
+      this.createdAt,
+      this.updatedAt});
+
+  User.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    emailVerifiedAt = json['email_verified_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
+    data['name'] = name;
     data['email'] = email;
-    data['nicename'] = niceName;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['displayName'] = displayName;
+    data['email_verified_at'] = emailVerifiedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

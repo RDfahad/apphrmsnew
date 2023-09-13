@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 
+
 extension ScreenSize on BuildContext {
    double get getScreenWidth => MediaQuery.of(this).size.width;
 
@@ -11,4 +12,6 @@ extension ScreenSize on BuildContext {
   Color get getSecondaryColor => Theme.of(this).colorScheme.secondary;
 
    ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
+  
 }

@@ -5,12 +5,16 @@ import 'package:hr_emp_proj/data/http/response_parser.dart';
 import 'package:http/http.dart' as http;
 import 'curl_base.dart' as curl;
 
-class HTTPRequest{
+class HTTPRequest {
   ResponseHandler? responseHandler = GetIt.I<ResponseHandler>();
 
-  get({required String url, Map<String,dynamic>? queryParameters, String? token})async{
-    try{
-      var queryParam = queryParameters != null ? buildQuery(queryParameters) : '';
+  get(
+      {required String url,
+      Map<String, dynamic>? queryParameters,
+      String? token}) async {
+    try {
+      var queryParam =
+          queryParameters != null ? buildQuery(queryParameters) : '';
       var headers = {
         'Authorization': token ?? '',
         'Content-Type': 'application/json'
@@ -20,49 +24,52 @@ class HTTPRequest{
         url: '$url?$queryParam',
         headers: headers,
       )));
-      var response = await http.get(Uri.parse('$url?$queryParam'),
-          headers: headers,
+      var response = await http.get(
+        Uri.parse('$url?$queryParam'),
+        headers: headers,
       );
       print(response.body);
       var processedResponse = responseHandler?.processResponse(response);
       return returnResponse(processedResponse);
-    }catch(e){
+    } catch (e) {
       return e;
     }
   }
 
-  post({required String url, Map<String, dynamic>? body, Map<String,dynamic>? queryParameters, String? token, Map<String,String>? header})async{
-    try{
-        var headers = {
-          'Authorization': token != null ?'Bearer $token' : '',
-          'Content-Type': 'application/json'
+  post(
+      {required String url,
+      Map<String, dynamic>? body,
+      Map<String, dynamic>? queryParameters,
+      String? token,
+      Map<String, String>? header}) async {
+    try {
+      var headers = {
+        'Authorization': token != null ? 'Bearer $token' : '',
+        'Content-Type': 'application/json'
       };
-         if(header != null){
-           headers.addAll(header);
-         }
+      if (header != null) {
+        headers.addAll(header);
+      }
       log(curl.toCurl(curl.MappedRequest(
         method: 'POST',
         url: url,
         body: body,
         headers: headers,
       )));
-        var response = await http.post(Uri.parse(url),
-            body: jsonEncode(body),
-            headers: headers
-        );
-        print(response.body);
-        var processedResponse = responseHandler?.processResponse(response);
-        return returnResponse(processedResponse);
-    }catch(e){
-        rethrow;
+      var response = await http.post(Uri.parse(url),
+          body: jsonEncode(body), headers: headers);
+      log("From Post Http Page ${response.body}");
+      var processedResponse = responseHandler?.processResponse(response);
+      return returnResponse(processedResponse);
+    } catch (e) {
+      rethrow;
     }
   }
 
-  returnResponse(MappedResponse mappedResponse){
-    if(mappedResponse.success){
+  returnResponse(MappedResponse mappedResponse) {
+    if (mappedResponse.success) {
       return mappedResponse;
-    }
-    else{
+    } else {
       throw HttpCustomException(
           code: mappedResponse.code,
           message: mappedResponse.message,
@@ -77,34 +84,40 @@ class HTTPRequest{
   }
 }
 
-
-class ResponseHandler{
-  processResponse(http.Response response){
-    if(response.statusCode == 200 || response.statusCode == 201)
-      {
-        return MappedResponse<dynamic>(
+class ResponseHandler {
+  processResponse(http.Response response) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return MappedResponse<dynamic>(
           code: response.statusCode,
           success: true,
           message: 'success',
           content: response.body,
-          headers: response.headers
-        );
-      }
-    else if(response.statusCode == 503 || response.statusCode == 500){
+          headers: response.headers);
+    } else if (response.statusCode == 503 || response.statusCode == 500) {
       throw HttpCustomException(
-          code: response.statusCode, errorCode: response.statusCode.toString(), message: 'something went wrong');
-    }
-    else{
+          code: response.statusCode,
+          errorCode: response.statusCode.toString(),
+          message: 'something went wrong');
+    } else {
       var decodedRes = json.decode(response.body);
-      throw HttpCustomException(
-          code: response.statusCode, errorCode: parseErrorCode(decodedRes), message: parseErrorMessage(decodedRes));
+      throw
+       ErrorResponse(
+          response: decodedRes["response"],
+          responseMessage: decodedRes['responseMessage'],
+          data: decodedRes['data']);
+
+      HttpCustomException(
+          code: response.statusCode,
+          errorCode: '400',
+          message: parseErrorMessage(decodedRes));
     }
   }
 
-  parseErrorMessage(body){
-    return body['message'];
+  parseErrorMessage(body) {
+    return 'something went wrong';
   }
-  parseErrorCode(body){
+
+  parseErrorCode(body) {
     return body['data']['status'].toString();
   }
 }

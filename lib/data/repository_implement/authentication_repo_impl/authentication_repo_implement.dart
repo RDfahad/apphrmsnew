@@ -11,12 +11,12 @@ class AuthenticationRepoImpl implements AuthenticationRepo {
   AuthenticationRepoImpl({required this.httpRequest});
 
   @override
-  Future<LoginUser> loginUser({String? email, String? password}) async {
+  Future<LoginUserModel> loginUser({String? email, String? password}) async {
     try {
       var body = {"email": email, "password": password};
       var response = await httpRequest?.post(
           url: paths.customerLogin, body: body, token: Config.token);
-      return LoginUser.fromJson(json.decode(response.content) ?? {});
+      return LoginUserModel.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);
     }
