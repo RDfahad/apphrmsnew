@@ -55,7 +55,7 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.leaveRequest:
         return LeaveRequestScreen();
       case BottomNavigationTabState.leaveRequestScreen:
-        return const DetailScreen();
+        return DetailScreen();
       case BottomNavigationTabState.profile:
         return Container();
       default:
