@@ -8,7 +8,7 @@ import '/ui/widgets/custom_text_field.dart';
 import '/ui/widgets/loader_widget.dart';
 import '/ui/widgets/round_button.dart';
 import '/utils/app_color.dart';
-import '/utils/extension_methods.dart';  
+import '/utils/extension_methods.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -56,7 +56,9 @@ class LoginScreen extends StatelessWidget {
                           const Text(
                             "Sign In",
                             style: TextStyle(
-                                fontSize: 34, fontWeight: FontWeight.w500),
+                                color: AppColor.primaryTextWhiteColor,
+                                fontSize: 34,
+                                fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
