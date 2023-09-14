@@ -3,7 +3,7 @@ import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
 
 class RoundButton extends StatelessWidget {
-  const RoundButton({
+  RoundButton({
     Key? key,
     this.buttonColor = AppColor.primaryButtonColor,
     this.textColor,
@@ -13,6 +13,7 @@ class RoundButton extends StatelessWidget {
     this.height = 50,
     this.borderRadius = 10,
     this.loading = false,
+    this.borderColor = AppColor.primaryColor,
   }) : super(key: key);
 
   final bool loading;
@@ -22,6 +23,7 @@ class RoundButton extends StatelessWidget {
   final VoidCallback onPress;
 
   final Color? textColor, buttonColor;
+  Color borderColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -32,12 +34,13 @@ class RoundButton extends StatelessWidget {
           width: width,
           decoration: BoxDecoration(
               color: buttonColor,
-              borderRadius: BorderRadius.circular(borderRadius)),
+              borderRadius: BorderRadius.circular(borderRadius),
+              border: Border.all(color: borderColor)),
           child: loading
               ? const Center(child: CircularProgressIndicator())
               : Center(
                   child: Text(title,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           // fontWeight: FontWeight.bold,
                           color: textColor != null
                               ? textColor
@@ -54,7 +57,7 @@ class RoundElevatedButton extends StatelessWidget {
     required this.title,
     this.onPress,
     this.width = 60,
-    this.height = 50,
+    this.height,
     this.borderRadius = 10,
     this.loading = false,
     this.fontStyle,
@@ -62,7 +65,8 @@ class RoundElevatedButton extends StatelessWidget {
 
   final bool loading;
   final String title;
-  final double height, width;
+  final double? height;
+  final double width;
   final double borderRadius;
   final VoidCallback? onPress;
   final FontStyle? fontStyle;
@@ -72,7 +76,7 @@ class RoundElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
-      height: context.getScreenHeight * 0.06,
+      height: height != null ? height : context.getScreenHeight * 0.06,
       child: ElevatedButton(
           onPressed: onPress,
           style: ButtonStyle(
@@ -90,7 +94,7 @@ class RoundElevatedButton extends StatelessWidget {
               : Center(
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         // fontWeight: FontWeight.bold,
                         fontStyle:
                             fontStyle != null ? fontStyle : FontStyle.normal,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../widgets/status_card.dart';
 import '/ui/widgets/custom_app_bar.dart';
 import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
@@ -59,7 +60,8 @@ class LeaveRequestScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: context.getScreenHeight * 0.02),
-            CardTops(listColor: listColor, listCards: listCards),
+            
+            StatusCard(listColor: listColor, listCards: listCards),
             SizedBox(height: context.getScreenHeight * 0.03),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -151,53 +153,6 @@ class LeaveRequestScreen extends StatelessWidget {
       //        ),
       //   ],
       // ),
-    );
-  }
-}
-
-class CardTops extends StatelessWidget {
-  const CardTops({
-    super.key,
-    required this.listColor,
-    required this.listCards,
-  });
-
-  final List listColor;
-  final Map<String, String> listCards;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: List.generate(
-        3,
-        (index) => Container(
-          height: context.getScreenHeight * 0.12,
-          width: context.getScreenWidth * 0.3,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: listColor[index],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                listCards.keys.elementAt(index),
-                style:
-                    const TextStyle(fontSize: 14, color: AppColor.whiteColor),
-              ),
-              Text(
-                listCards.values.elementAt(index),
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.whiteColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

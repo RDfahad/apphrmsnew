@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/example.dart';
+import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
+import 'package:hr_emp_proj/ui/screens/detail/screen/detail_screen.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
@@ -68,7 +70,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: OnboardingScreen(),
+      home: BottomNavigationWidget(),
     );
   }
 }
