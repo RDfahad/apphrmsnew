@@ -39,12 +39,13 @@ class DashBoardScreen extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: SizedBox(
-                height: context.getScreenHeight * 0.24,
+                height: context.getScreenHeight * 0.26,
+                width: context.getScreenWidth,
                 child: const HeadPart(),
               ),
             ),
             SliverToBoxAdapter(
-                child: SizedBox(height: context.getScreenHeight * 0.01)),
+                child: SizedBox(height: context.getScreenHeight * 0.02)),
             SliverToBoxAdapter(
               child: GridViewScreenPart(
                 properties: properties,
@@ -57,8 +58,10 @@ class DashBoardScreen extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
+                child: SizedBox(height: context.getScreenHeight * 0.02)),
+            SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
+                margin:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
                 height: context.getScreenHeight * 0.1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -76,7 +79,8 @@ class DashBoardScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+
           ],
         ));
   }
@@ -103,167 +107,3 @@ class DashBoardScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-// Widget _head() {
-//   return Stack(
-//     children: [
-//       Column(
-//         children: [
-//           Container(
-//             width: double.infinity,
-//             height: 140,
-//             decoration: const BoxDecoration(
-//               color: Color(0xff368983),
-//               borderRadius: BorderRadius.only(
-//                 bottomLeft: Radius.circular(20),
-//                 bottomRight: Radius.circular(20),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       Positioned(
-//         top: 100,
-//         left: 37,
-//         child: Container(
-//           height: 170,
-//           width: 320,
-//           decoration: BoxDecoration(
-//             boxShadow: const [
-//               BoxShadow(
-//                 color: Color.fromRGBO(47, 125, 121, 0.3),
-//                 offset: Offset(0, 6),
-//                 blurRadius: 12,
-//                 spreadRadius: 6,
-//               ),
-//             ],
-//             color: const Color.fromARGB(255, 47, 125, 121),
-//             borderRadius: BorderRadius.circular(15),
-//           ),
-//           child: const Column(
-//             children: [
-//               SizedBox(height: 10),
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 15),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text(
-//                       'Total Balance',
-//                       style: TextStyle(
-//                         fontWeight: FontWeight.w500,
-//                         fontSize: 16,
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                     Icon(
-//                       Icons.more_horiz,
-//                       color: Colors.white,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               SizedBox(height: 7),
-//               Padding(
-//                 padding: EdgeInsets.only(left: 15),
-//                 child: Row(
-//                   children: [
-//                     Text(
-//                       '\$ 145',
-//                       style: TextStyle(
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 25,
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               SizedBox(height: 25),
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 15),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Row(
-//                       children: [
-//                         CircleAvatar(
-//                           radius: 13,
-//                           backgroundColor: Color.fromARGB(255, 85, 145, 141),
-//                           child: Icon(
-//                             Icons.arrow_downward,
-//                             color: Colors.white,
-//                             size: 19,
-//                           ),
-//                         ),
-//                         SizedBox(width: 7),
-//                         Text(
-//                           'Income',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.w500,
-//                             fontSize: 16,
-//                             color: Color.fromARGB(255, 216, 216, 216),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     Row(
-//                       children: [
-//                         CircleAvatar(
-//                           radius: 13,
-//                           backgroundColor: Color.fromARGB(255, 85, 145, 141),
-//                           child: Icon(
-//                             Icons.arrow_upward,
-//                             color: Colors.white,
-//                             size: 19,
-//                           ),
-//                         ),
-//                         SizedBox(width: 7),
-//                         Text(
-//                           'Expenses',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.w500,
-//                             fontSize: 16,
-//                             color: Color.fromARGB(255, 216, 216, 216),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               SizedBox(height: 6),
-//               Padding(
-//                 padding: EdgeInsets.symmetric(horizontal: 30),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text(
-//                       '\$ 125}',
-//                       style: TextStyle(
-//                         fontWeight: FontWeight.w600,
-//                         fontSize: 17,
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                     Text(
-//                       '\$ 465',
-//                       style: TextStyle(
-//                         fontWeight: FontWeight.w600,
-//                         fontSize: 17,
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//       )
-//     ],
-//   );
-// }

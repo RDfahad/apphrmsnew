@@ -59,7 +59,7 @@ class DetailScreen extends StatelessWidget {
           Container(
             height: 200,
             width: 350,
-            child: MyBarGraph(
+            child: const MyBarGraph(
               monthlySummary: <double>[
                 2,
                 5,

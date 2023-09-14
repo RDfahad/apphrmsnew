@@ -22,11 +22,12 @@ class HeadPart extends StatelessWidget {
         // Card with balance information
         Positioned(
           top: context.getScreenHeight * 0.01,
-          left: context.getScreenWidth *
-              0.03, //context.getScreenWidth / 11, //37,
+          left: context.getScreenWidth * 0.03, //context.getScreenWidth / 11, //37,
+          right: context.getScreenWidth * 0.03,
           child: Container(
-            height: context.getScreenHeight * 0.22, //170,
-            width: context.getScreenWidth * 0.94, //320,
+            height: context.getScreenHeight * 0.24, //170,
+            width: context.getScreenWidth,
+            // margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),//320,
             decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
@@ -57,13 +58,13 @@ class HeadPart extends StatelessWidget {
                     style: TextStyle(fontSize: 12),
                   ),
                 ),
-                SizedBox(height: context.getScreenHeight * .015),
-                Divider(
+                SizedBox(height: context.getScreenHeight * .012),
+                const Divider(
                   height: 1,
                   thickness: 0.4,
                   color: AppColor.secondaryTextColor,
                 ),
-                SizedBox(height: context.getScreenHeight * .015),
+                SizedBox(height: context.getScreenHeight * .012),
                 // Total balance amount
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -98,7 +99,7 @@ class CardRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0, bottom: 3),
+      padding: const EdgeInsets.only(top: 3.0, bottom: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

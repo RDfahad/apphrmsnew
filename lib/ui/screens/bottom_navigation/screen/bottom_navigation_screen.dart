@@ -7,7 +7,7 @@ import '/ui/screens/dashboard/view/leave_request.dart';
 import '/ui/screens/detail/screen/detail_screen.dart';
 import '/utils/app_color.dart';
 
-class BottomNavigationWidget extends StatelessWidget {
+class BottomNavigationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationCubit, BottomNavigationTabState>(
@@ -50,14 +50,14 @@ class BottomNavigationWidget extends StatelessWidget {
 
   Widget _getBodyForTab(BottomNavigationTabState tab) {
     switch (tab) {
-      case BottomNavigationTabState.Tab1:
-        return LeaveRequestScreen();
-      case BottomNavigationTabState.Tab2:
+      case BottomNavigationTabState.homeScreen:
         return DashBoardScreen();
-      case BottomNavigationTabState.Tab3:
-        return DetailScreen();
-      case BottomNavigationTabState.Tab4:
-        return Tab3Screen();
+      case BottomNavigationTabState.leaveRequest:
+        return LeaveRequestScreen();
+      case BottomNavigationTabState.leaveRequestScreen:
+        return const DetailScreen();
+      case BottomNavigationTabState.profile:
+        return Container();
       default:
         return Container();
     }

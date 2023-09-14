@@ -9,7 +9,6 @@ import '/ui/screens/onboarding/view/onboarding_screen.dart';
 import 'data/http/http.dart';
 import 'data/repository_implement/authentication_repo_impl/authentication_repo_implement.dart';
 import 'domain/repository/authentication_repo/authentication_repo.dart';
-import 'ui/screens/authentication/view/login_screen.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      home: OnboardingScreen(),
     );
   }
 }
