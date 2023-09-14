@@ -1,25 +1,29 @@
-import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/domain/entities/authentication_entities/login_user_entity.dart';
-
+import 'package:hr_emp_proj/utils/configuration.dart';
 import 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit() : super(OnboardingState.init());
 
   init() {
-    var userModel = state.hiveStorage.getData("userdata");
-    var userData = UserData.fromJson(jsonDecode(userModel ?? ''));
-    bool onBoardingStatus = state.hiveStorage.getData("onboardingstatus");
-    if (userData.token?.isNotEmpty ?? false) {
-      emit(state.copyWith(
-          userData: userData, onBoardingStatus: onBoardingStatus));
-    }
     emit(state);
+    bool onBoardingStatus = state.hiveStorage.getData("onBoardingStatus") ?? false;
+    bool isLoggedIn = state.hiveStorage.getData("isLogIn") ?? false;
+    if (isLoggedIn) {
+      Config.isLoggedIn = isLoggedIn;
+      emit(state.copyWith(
+          isLogIn: isLoggedIn, onBoardingStatus: onBoardingStatus));
+    }
+    emit(state.copyWith(onBoardingStatus: onBoardingStatus));
   }
 
   onPageChange({int? index}) {
     emit(state.copyWith(index: index));
+  }
+
+  storeOnboardingStatus(){
+    state.hiveStorage.putData(
+        "onBoardingStatus",true);
+    emit(state.copyWith(onBoardingStatus: true));
   }
 }

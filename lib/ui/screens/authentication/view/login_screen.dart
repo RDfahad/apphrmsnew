@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  final ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> passScene = ValueNotifier<bool>(true);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                             SizedBox(height: context.getScreenHeight * 0.02),
                             CustomPasswordTextField(
                               isIconColorChange: state.isIconFieldColorEnabled,
-                              obsecurePassword: _obsecurePassword,
+                              obsecurePassword: passScene,
                               controller: state.passwordController,
                             ),
                             SizedBox(height: context.getScreenHeight * 0.02),

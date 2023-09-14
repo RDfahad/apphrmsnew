@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/domain/entities/authentication_entities/login_user_entity.dart';
-import '/utils/hive_db/hive_db.dart';
-
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/repository/authentication_repo/authentication_repo.dart';
 import 'authentication_state.dart';
@@ -41,6 +38,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
                     token: userLogin.data!.token,
                     tokenType: userLogin.data!.tokenType)
                 .toJson()));
+        state.hiveStorage.putData(
+            "isLogIn",true);
       }
       emit(state.copyWith(
         loginLoading: false,

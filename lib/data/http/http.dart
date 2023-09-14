@@ -100,13 +100,7 @@ class ResponseHandler {
           message: 'something went wrong');
     } else {
       var decodedRes = json.decode(response.body);
-      throw
-       ErrorResponse(
-          response: decodedRes["response"],
-          responseMessage: decodedRes['responseMessage'],
-          data: decodedRes['data']);
-
-      HttpCustomException(
+      throw HttpCustomException(
           code: response.statusCode,
           errorCode: '400',
           message: parseErrorMessage(decodedRes));

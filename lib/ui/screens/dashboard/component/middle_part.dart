@@ -16,7 +16,7 @@ class GridViewScreenPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(12),
+      margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
       height: context.getScreenHeight * 0.4,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
