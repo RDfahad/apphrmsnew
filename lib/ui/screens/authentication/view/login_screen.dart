@@ -37,21 +37,23 @@ class LoginScreen extends StatelessWidget {
                   SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: context.getScreenWidth * 0.03),
-                      height: context.getScreenHeight * 0.2,
+                          horizontal: context.getScreenWidth * 0.06),
+                      height: context.getScreenHeight * 0.25,
                       width: double.infinity,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/back_ground.png'),
-                          fit: BoxFit.fill,
-                        ),
+                            image: AssetImage('assets/images/back_ground.png'),
+                            fit: BoxFit.fill,
+                            colorFilter: ColorFilter.mode(
+                                AppColor.primaryColor.withOpacity(0.5),
+                                BlendMode.lighten)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: context.getScreenHeight * 0.04),
-                          Image.asset("assets/icons/login_icon.png"),
+                          Image.asset("assets/icons/login_icon_white.png"),
                           SizedBox(height: context.getScreenHeight * 0.015),
                           const Text(
                             "Sign In",
@@ -69,11 +71,12 @@ class LoginScreen extends StatelessWidget {
                       flex: 6,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: context.getScreenWidth * 0.02),
+                            horizontal: context.getScreenWidth * 0.03),
                         child: Column(
                           children: [
                             CustomTextFormField(
                               preffixIcon: Icons.email,
+                              isIconColorChange: state.isIconFieldColorEnabled,
                               controller: state.emailController,
                               labelText: "Email",
                               hintText: "Email",
@@ -86,6 +89,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             SizedBox(height: context.getScreenHeight * 0.02),
                             CustomPasswordTextField(
+                              isIconColorChange: state.isIconFieldColorEnabled,
                               obsecurePassword: _obsecurePassword,
                               controller: state.passwordController,
                             ),
@@ -146,7 +150,7 @@ class LoginScreen extends StatelessWidget {
                       builder: (context, state) {
                         return Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: context.getScreenWidth * 0.03),
+                              horizontal: context.getScreenWidth * 0.04),
                           child: RoundElevatedButton(
                             title: "Sign In",
                             onPress: state.isButtonEnabled

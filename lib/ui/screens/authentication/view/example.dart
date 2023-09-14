@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_emp_proj/utils/app_color.dart';
 import '/ui/widgets/custom_text_field.dart';
 import '/ui/widgets/round_button.dart';
 import '/utils/extension_methods.dart';
@@ -40,6 +41,7 @@ class LoginScreen2 extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             CustomTextFormField(
+              isIconColorChange: false,
               preffixIcon: Icons.email,
               controller: emailController,
               labelText: "Email",
@@ -140,6 +142,81 @@ class LoginScreen2 extends StatelessWidget {
             SizedBox(height: context.getScreenHeight * 0.02),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SignInScreen extends StatelessWidget {
+  SignInScreen({super.key});
+  final ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            padding:
+                EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.06),
+            height: context.getScreenHeight * 0.25,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/back_ground.png'),
+                  fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(
+                      AppColor.primaryColor.withOpacity(0.5),
+                      BlendMode.lighten)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: context.getScreenHeight * 0.04),
+                Image.asset("assets/icons/login_icon_white.png"),
+                SizedBox(height: context.getScreenHeight * 0.015),
+                const Text(
+                  "Sign In",
+                  style: TextStyle(
+                      color: AppColor.primaryTextWhiteColor,
+                      fontSize: 34,
+                      fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+          ),
+          CustomTextFormField(
+            preffixIcon: Icons.email,
+            isIconColorChange: false,
+            controller: TextEditingController(),
+            labelText: "Email",
+            hintText: "Email",
+            borderRadius: 25,
+            onChange: (value) {},
+          ),
+          CustomPasswordTextField(
+            isIconColorChange: false,
+            obsecurePassword: _obsecurePassword,
+            controller: TextEditingController(),
+          ),
+          // RoundElevatedButton(
+          //                   title: "Sign In",
+          //                   onPress: () {
+                                    
+          //                         }
+          //                      ,
+          //                   width: double.infinity,
+          //                   borderRadius: 25,
+          //                   height: 10,
+          //                   buttonColor: (state.isButtonEnabled)
+          //                       ? AppColor.primaryButtonColor
+          //                       : AppColor.secondaryButtonColor,
+          //                   textColor: (state.isButtonEnabled)
+          //                       ? AppColor.whiteColor
+          //                       : AppColor.secondaryTextColor,
+          //                 ),
+                        
+        ],
       ),
     );
   }

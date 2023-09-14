@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../widgets/round_button.dart';
-import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/utils/extension_methods.dart';
-import '../../../widgets/oboarding_widget.dart';
-import '../../authentication/view/login_screen.dart';
-import '../bloc/onboarding_bloc.dart';
-import '../bloc/onboarding_state.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -47,7 +41,9 @@ class OnboardingScreen extends StatelessWidget {
             RoundElevatedButton(
               title: "Get Started",
               fontStyle: FontStyle.italic,
-              onPress: () {},
+              onPress: () {
+                
+              },
             ),
             SizedBox(height: context.getScreenHeight * 0.05),
           ],

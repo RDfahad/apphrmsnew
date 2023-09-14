@@ -10,26 +10,31 @@ class AuthenticationState {
   final bool signUpSuccessfull;
   final bool loginSuccessfull;
   final bool isButtonEnabled;
+  final bool isIconFieldColorEnabled;
+
   final String? errorMessage;
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final String token;
   final hiveStorage = HiveStorage();
-  
-  AuthenticationState(
-      {required this.loginUserModel,
-      required this.loginLoading,
-      required this.signUpLoading,
-      required this.signUpSuccessfull,
-      required this.loginSuccessfull,
-      required this.token,
-      required this.error,
-      required this.isButtonEnabled,
-      this.errorMessage,
-      required this.emailController,
-      required this.passwordController});
+
+  AuthenticationState({
+    required this.loginUserModel,
+    required this.loginLoading,
+    required this.signUpLoading,
+    required this.signUpSuccessfull,
+    required this.loginSuccessfull,
+    required this.token,
+    required this.error,
+    required this.isButtonEnabled,
+    this.errorMessage,
+    required this.emailController,
+    required this.passwordController,
+    required this.isIconFieldColorEnabled,
+  });
 
   factory AuthenticationState.init() => AuthenticationState(
+      isIconFieldColorEnabled: false,
       error: false,
       loginLoading: false,
       signUpLoading: false,
@@ -43,6 +48,7 @@ class AuthenticationState {
       loginUserModel: LoginUserModel());
 
   AuthenticationState copyWith({
+    bool? isIconFieldColorEnabled,
     bool? error,
     bool? loginLoading,
     bool? signUpLoading,
@@ -56,6 +62,8 @@ class AuthenticationState {
     LoginUserModel? loginUserModel,
   }) =>
       AuthenticationState(
+        isIconFieldColorEnabled:
+            isIconFieldColorEnabled ?? this.isIconFieldColorEnabled,
         loginUserModel: loginUserModel ?? this.loginUserModel,
         error: error ?? this.error,
         loginLoading: loginLoading ?? this.loginLoading,

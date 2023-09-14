@@ -15,13 +15,16 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit(this.authenticationRepo)
       : super(AuthenticationState.init());
 
-
   checkButtonEnabledDisabled() {
     if (state.emailController.text.isEmpty ||
         state.passwordController.text.isEmpty) {
       emit(state.copyWith(isButtonEnabled: false));
     } else {
       emit(state.copyWith(isButtonEnabled: true));
+    }
+
+    if (state.emailController.text.isNotEmpty) {
+      emit(state.copyWith(isIconFieldColorEnabled: true));
     }
   }
 
@@ -43,8 +46,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         loginLoading: false,
         loginSuccessfull: true,
         loginUserModel: userLogin,
+        isIconFieldColorEnabled: false,
       ));
-
     } catch (e) {
       log("Log From Cubit Eror $e");
 
@@ -54,6 +57,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         error: true,
         errorMessage: e.toString(),
         loginSuccessfull: false,
+        isIconFieldColorEnabled: false,
       ));
     }
   }

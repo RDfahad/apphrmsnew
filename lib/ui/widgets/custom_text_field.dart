@@ -87,9 +87,11 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final double borderRadius;
   final Color errorColor;
+  final bool isIconColorChange;
   final Function(String) onChange;
 
-  CustomTextFormField({
+  const CustomTextFormField({
+    super.key,
     required this.controller,
     required this.labelText,
     this.suffixIcon,
@@ -98,9 +100,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.preffixIcon,
     this.errorColor = Colors.red,
     required this.onChange,
+    required this.isIconColorChange,
   });
-
-  bool isVisibleSuffixIcons = false;
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +119,6 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
         ),
         child: TextFormField(
-          //style: TextStyle(color: AppColor.blackColor),
           controller: controller,
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -132,7 +132,9 @@ class CustomTextFormField extends StatelessWidget {
             ),
             prefixIcon: Icon(
               preffixIcon,
-              color: AppColor.secondaryTextColor,
+              color: isIconColorChange
+                  ? AppColor.primaryColor
+                  : AppColor.secondaryTextColor,
             ),
             errorStyle: TextStyle(
               color: errorColor,
@@ -143,18 +145,17 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
-
-
-
 class CustomPasswordTextField extends StatelessWidget {
   const CustomPasswordTextField({
     super.key,
     required ValueNotifier<bool> obsecurePassword,
     required this.controller,
+    required this.isIconColorChange,
   }) : _obsecurePassword = obsecurePassword;
 
   final ValueNotifier<bool> _obsecurePassword;
   final TextEditingController controller;
+  final bool isIconColorChange;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +192,9 @@ class CustomPasswordTextField extends StatelessWidget {
               ),
               prefixIcon: Icon(
                 Icons.lock,
-                color: AppColor.secondaryTextColor,
+                color: isIconColorChange
+                    ? AppColor.primaryColor
+                    : AppColor.secondaryTextColor,
               ),
               suffixIcon: InkWell(
                   onTap: () {
