@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
+import '/utils/app_color.dart';
 
 class CustomAppBar extends StatelessWidget {
   final IconButton leadingIcon;

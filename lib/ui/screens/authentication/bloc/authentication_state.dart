@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:hr_emp_proj/domain/entities/authentication_entities/login_user_entity.dart';
-import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
+import '/domain/entities/authentication_entities/login_user_entity.dart';
+import '/utils/hive_db/hive_db.dart';
 
 class AuthenticationState {
   final LoginUserModel loginUserModel;

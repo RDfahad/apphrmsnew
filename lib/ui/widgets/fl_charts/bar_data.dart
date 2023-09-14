@@ -1,4 +1,4 @@
-import 'package:hr_emp_proj/ui/widgets/fl_charts/individual_bar.dart';
+import '/ui/widgets/fl_charts/individual_bar.dart';
 
 class BarData {
   final double sunAmount;

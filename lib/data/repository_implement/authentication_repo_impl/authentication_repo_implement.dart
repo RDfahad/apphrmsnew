@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:hr_emp_proj/utils/configuration.dart';
+import '/utils/configuration.dart';
 
 import '../../../domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../domain/repository/authentication_repo/authentication_repo.dart';

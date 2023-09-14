@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/component/head_part.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/component/middle_part.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/leave_request.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/screens/dashboard/component/head_part.dart';
+import '/ui/screens/dashboard/component/middle_part.dart';
+import '/ui/screens/dashboard/view/leave_request.dart';
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';
 
 class DashBoardScreen extends StatelessWidget {
   DashBoardScreen({super.key});

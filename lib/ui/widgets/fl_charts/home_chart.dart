@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/ui/widgets/fl_charts/bar_graph.dart';
+import '/ui/widgets/fl_charts/bar_graph.dart';
 
 class HomeChart extends StatefulWidget {
   const HomeChart({super.key});

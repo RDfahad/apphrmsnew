@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';
 
 class RoundButton extends StatelessWidget {
   const RoundButton({

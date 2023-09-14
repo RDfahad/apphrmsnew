@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:hr_emp_proj/data/http/response_parser.dart';
+import '/data/http/response_parser.dart';
 import 'package:http/http.dart';
 
 class ExceptionData {

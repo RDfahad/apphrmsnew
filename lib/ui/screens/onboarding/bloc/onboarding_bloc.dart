@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/domain/entities/authentication_entities/login_user_entity.dart';
+import '/domain/entities/authentication_entities/login_user_entity.dart';
 
 import 'onboarding_state.dart';
 

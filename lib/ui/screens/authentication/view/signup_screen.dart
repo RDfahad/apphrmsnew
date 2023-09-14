@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/utils/extension_methods.dart';
 
 import '../../../widgets/loader_widget.dart';
 import '../bloc/authentication_bloc.dart';

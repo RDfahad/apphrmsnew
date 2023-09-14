@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/component/container_card.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/screens/dashboard/component/container_card.dart';
+import '/utils/extension_methods.dart';
 
 class GridViewScreenPart extends StatelessWidget {
   const GridViewScreenPart({
