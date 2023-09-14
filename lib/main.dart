@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
@@ -29,11 +30,10 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (BuildContext context) => OnboardingCubit()..init()),
+        BlocProvider(create: (BuildContext context) => OnboardingCubit()..init()),
         BlocProvider(create: (BuildContext context) => BottomNavigationCubit()),
-        BlocProvider(
-            create: (BuildContext context) => AuthenticationCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => AuthenticationCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => DashboardCubit(getIt())..refreshToken()),
       ],
       child: const MyApp(),
     ),

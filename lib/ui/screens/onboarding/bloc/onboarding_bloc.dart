@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/utils/configuration.dart';
 import 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
@@ -6,13 +7,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 
   init() {
     emit(state);
-    // var userModel = state.hiveStorage.getData("userdata");
-    // var userData = userModel != null ? UserData.fromJson(jsonDecode(userModel ?? '')) : null;
     bool onBoardingStatus = state.hiveStorage.getData("onBoardingStatus") ?? false;
-    bool islogIn = state.hiveStorage.getData("isLogIn") ?? false;
-    if (islogIn) {
+    bool isLoggedIn = state.hiveStorage.getData("isLogIn") ?? false;
+    if (isLoggedIn) {
+      Config.isLoggedIn = isLoggedIn;
       emit(state.copyWith(
-          isLogIn: islogIn, onBoardingStatus: onBoardingStatus));
+          isLogIn: isLoggedIn, onBoardingStatus: onBoardingStatus));
     }
     emit(state.copyWith(onBoardingStatus: onBoardingStatus));
   }

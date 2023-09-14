@@ -3,8 +3,12 @@ import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
 
 class HeadPart extends StatelessWidget {
+  final String email;
+  final String name;
   const HeadPart({
     super.key,
+    required this.email,
+    required this.name
   });
 
   @override
@@ -44,16 +48,16 @@ class HeadPart extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
                 // Total Balance title and more options icon
-                const ListTile(
-                  leading: CircleAvatar(
+                ListTile(
+                  leading: const CircleAvatar(
                     radius: 25,
                     backgroundColor: Colors.amber,
                   ),
                   title: Text(
-                    "Indigo Violet",
-                    style: TextStyle(fontSize: 14),
+                    name,
+                    style: const TextStyle(fontSize: 14),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     "General Coordinator",
                     style: TextStyle(fontSize: 12),
                   ),
@@ -69,11 +73,11 @@ class HeadPart extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: context.getScreenWidth * .02),
-                  child: const Column(
+                  child:  Column(
                     children: [
-                      CardRow(title: "Emp Code:", text: "21EWO98D"),
-                      CardRow(title: "Email:", text: "indigo@email.com"),
-                      CardRow(
+                      const CardRow(title: "Emp Code:", text: "21EWO98D"),
+                      CardRow(title: "Email:", text: email),
+                      const CardRow(
                           title: "Reporting Manager:", text: "Mr.Eric Widget"),
                     ],
                   ),
