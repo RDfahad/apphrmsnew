@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/authentication/bloc/authentication_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/authentication/bloc/authentication_state.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
-import 'package:hr_emp_proj/ui/widgets/custom_text_field.dart';
-import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
-import 'package:hr_emp_proj/ui/widgets/round_button.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/screens/authentication/bloc/authentication_bloc.dart';
+import '/ui/screens/authentication/bloc/authentication_state.dart';
+import '/ui/screens/dashboard/view/dashboard_screen.dart';
+import '/ui/widgets/custom_text_field.dart';
+import '/ui/widgets/loader_widget.dart';
+import '/ui/widgets/round_button.dart';
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';  
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});

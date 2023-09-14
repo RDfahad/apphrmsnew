@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
-import 'package:hr_emp_proj/ui/widgets/round_button.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/screens/dashboard/view/dashboard_screen.dart';
+import '/utils/extension_methods.dart';
 import '../../../widgets/oboarding_widget.dart';
 import '../../authentication/view/login_screen.dart';
 import '../bloc/onboarding_bloc.dart';

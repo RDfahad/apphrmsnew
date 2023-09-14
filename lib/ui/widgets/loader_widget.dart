@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/utils/extension_methods.dart';
 
 class CustomLoaderWidget extends StatelessWidget {
   final bool isLoading;

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/leave_request.dart';
-import 'package:hr_emp_proj/ui/screens/detail/screen/detail_screen.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
+import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
+import '/ui/screens/dashboard/view/dashboard_screen.dart';
+import '/ui/screens/dashboard/view/leave_request.dart';
+import '/ui/screens/detail/screen/detail_screen.dart';
+import '/utils/app_color.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   @override

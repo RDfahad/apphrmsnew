@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/ui/widgets/custom_app_bar.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/widgets/custom_app_bar.dart';
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';
 
 class LeaveRequestScreen extends StatelessWidget {
   LeaveRequestScreen({super.key});

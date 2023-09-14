@@ -2,8 +2,8 @@
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/ui/widgets/fl_charts/bar_data.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
+import '/ui/widgets/fl_charts/bar_data.dart';
+import '/utils/app_color.dart';
 
 class MyBarGraph extends StatelessWidget {
   final List<double> monthlySummary;

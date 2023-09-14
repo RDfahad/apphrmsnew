@@ -1,4 +1,4 @@
-import 'package:hr_emp_proj/domain/entities/authentication_entities/login_user_entity.dart';
+import '/domain/entities/authentication_entities/login_user_entity.dart';
 
 class SplashScreenState {
   final UserData userData;

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/domain/entities/authentication_entities/login_user_entity.dart';
-import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
+import '/domain/entities/authentication_entities/login_user_entity.dart';
+import '/utils/hive_db/hive_db.dart';
 
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/repository/authentication_repo/authentication_repo.dart';

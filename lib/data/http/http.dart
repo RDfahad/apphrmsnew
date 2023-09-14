@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:get_it/get_it.dart';
-import 'package:hr_emp_proj/data/http/response_parser.dart';
+import '/data/http/response_parser.dart';
 import 'package:http/http.dart' as http;
 import 'curl_base.dart' as curl;
 
