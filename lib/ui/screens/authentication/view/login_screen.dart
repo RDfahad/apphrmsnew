@@ -8,15 +8,13 @@ import 'package:hr_emp_proj/ui/widgets/custom_text_field.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/ui/widgets/round_button.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';  
+import 'package:hr_emp_proj/utils/extension_methods.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController =
-      TextEditingController(text: "hamzab@gmail.com");
-  final TextEditingController passwordController = TextEditingController();
+
   final ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
   @override
   Widget build(BuildContext context) {
@@ -40,9 +38,14 @@ class LoginScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.symmetric(
                           horizontal: context.getScreenWidth * 0.03),
-                      height: context.getScreenHeight * 0.18,
+                      height: context.getScreenHeight * 0.2,
                       width: double.infinity,
-                      color: AppColor.loginAppBackgroundColor,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/back_ground.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +99,8 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                             // Expanded(child: SizedBox()),
-                            BlocBuilder<AuthenticationCubit, AuthenticationState>(
+                            BlocBuilder<AuthenticationCubit,
+                                AuthenticationState>(
                               builder: (context, state) {
                                 if (state.errorMessage != null) {
                                   return Center(
@@ -135,7 +139,8 @@ class LoginScreen extends StatelessWidget {
                       )),
                   Flexible(
                     flex: 1,
-                    child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+                    child:
+                        BlocBuilder<AuthenticationCubit, AuthenticationState>(
                       builder: (context, state) {
                         return Padding(
                           padding: EdgeInsets.symmetric(
@@ -144,9 +149,12 @@ class LoginScreen extends StatelessWidget {
                             title: "Sign In",
                             onPress: state.isButtonEnabled
                                 ? () {
-                                    context.read<AuthenticationCubit>().loginUser(
+                                    context
+                                        .read<AuthenticationCubit>()
+                                        .loginUser(
                                           email: state.emailController.text,
-                                          password: state.passwordController.text,
+                                          password:
+                                              state.passwordController.text,
                                         );
                                   }
                                 : null,

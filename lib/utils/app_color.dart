@@ -15,7 +15,9 @@ class AppColor {
 
   static const Color redColor = Color(0xffFC3F5B);
 
-  static const Color primaryTextColor = Color(0xff121212);
+  static const Color primaryTextBlackColor = Color(0xff121212);
+  static const Color primaryTextWhiteColor = Color(0xffffffff);
+
   static const Color secondaryTextColor = Color(0xff8B9390);
 
   static const Color appBackgroundColor = Color(0xffF2F2F2);

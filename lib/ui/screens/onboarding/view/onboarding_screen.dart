@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
+import 'package:hr_emp_proj/ui/widgets/round_button.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../../../widgets/oboarding_widget.dart';
 import '../../authentication/view/login_screen.dart';
@@ -13,110 +14,44 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder(
-        bloc: BlocProvider.of<OnboardingCubit>(context),
-        builder: (context, OnboardingState onboardingState) {
-          if (onboardingState.onBoardingStatus && onboardingState.userData!.token!.isEmpty) {
-            return LoginScreen();
-          } else if (onboardingState.userData!.token!.isNotEmpty && onboardingState.onBoardingStatus) {
-            return DashBoardScreen();
-          }
-          return Stack(
-            children: [
-              Center(
-                  child: PageView.builder(
-                      onPageChanged: (int index) {
-                        context
-                            .read<OnboardingCubit>()
-                            .onPageChange(index: index);
-                      },
-                      controller: onboardingState.pageController,
-                      itemCount: 3,
-                      itemBuilder: (_, i) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: context.getScreenWidth * 0.02),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                contents[i].image,
-                                width: context.getScreenWidth * 0.8,
-                                height: context.getScreenHeight * 0.5,
-                                fit: BoxFit.contain,
-                              ),
-                              Text(
-                                'Pedigree for Pets',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: context.getMainColor),
-                              ),
-                              Text(
-                                contents[i].text,
-                                style: const TextStyle(color: Colors.grey),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        );
-                      })),
-              Container(
-                padding:
-                    EdgeInsets.only(bottom: context.getScreenHeight * 0.03),
-                width: context.getScreenWidth,
-                height: context.getScreenHeight,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: context.getScreenHeight * 0.1, bottom: 10),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                              3,
-                              (index) => OnboardingWidget().buildDots(
-                                  context: context,
-                                  index: index,
-                                  onboardingState:
-                                      onboardingState)) //buildDots(context: context, index: index,onboardingState: onboardingState)),
-                          ),
-                    ),
-                    SizedBox(
-                      width: context.getScreenWidth * 0.8,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          onboardingState.hiveStorage
-                              .putData("onboardingstatus", true);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: context.getMainColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                8.0), // Adjust the radius as needed
-                          ),
-                        ),
-                        child: Text(
-                          onboardingState.index == contents.length - 1
-                              ? 'Get Started'
-                              : 'Skip',
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          );
-        },
+      body: Container(
+        padding:
+            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.06),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/back_ground.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Text(
+              'Enhance your',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w300,
+                color: Colors.white,
+              ),
+            ),
+            const Text(
+              'Productivity',
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: context.getScreenHeight * 0.02),
+            RoundElevatedButton(
+              title: "Get Started",
+              fontStyle: FontStyle.italic,
+              onPress: () {},
+            ),
+            SizedBox(height: context.getScreenHeight * 0.05),
+          ],
+        ),
       ),
     );
   }

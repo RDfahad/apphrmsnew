@@ -57,6 +57,7 @@ class RoundElevatedButton extends StatelessWidget {
     this.height = 50,
     this.borderRadius = 10,
     this.loading = false,
+    this.fontStyle,
   }) : super(key: key);
 
   final bool loading;
@@ -64,6 +65,7 @@ class RoundElevatedButton extends StatelessWidget {
   final double height, width;
   final double borderRadius;
   final VoidCallback? onPress;
+  final FontStyle? fontStyle;
 
   final Color textColor, buttonColor;
   @override
@@ -90,6 +92,8 @@ class RoundElevatedButton extends StatelessWidget {
                     title,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         // fontWeight: FontWeight.bold,
+                        fontStyle:
+                            fontStyle != null ? fontStyle : FontStyle.normal,
                         color: textColor),
                   ),
                 )),
