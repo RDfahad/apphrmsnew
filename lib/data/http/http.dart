@@ -45,7 +45,7 @@ class HTTPRequest {
     try {
       var headers = {
         'Authorization': token != null ? 'Bearer $token' : '',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
       };
       if (header != null) {
         headers.addAll(header);
@@ -57,7 +57,7 @@ class HTTPRequest {
         headers: headers,
       )));
       var response = await http.post(Uri.parse(url),
-          body: jsonEncode(body), headers: headers);
+          body: body, headers: headers);
       log("From Post Http Page ${response.body}");
       var processedResponse = responseHandler?.processResponse(response);
       return returnResponse(processedResponse);
@@ -108,10 +108,10 @@ class ResponseHandler {
   }
 
   parseErrorMessage(body) {
-    return 'something went wrong';
+    return body['responseMessage'];
   }
 
   parseErrorCode(body) {
-    return body['data']['status'].toString();
+    return body['responseCode'].toString();
   }
 }

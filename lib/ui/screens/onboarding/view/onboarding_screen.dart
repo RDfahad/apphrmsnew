@@ -53,7 +53,7 @@ class OnboardingScreen extends StatelessWidget {
                       context.read<OnboardingCubit>().storeOnboardingStatus();
                     },
                   ),
-                  SizedBox(height: context.getScreenHeight * 0.05),
+                  SizedBox(height: context.getScreenHeight * 0.1),
                 ],
               ),
 

@@ -19,15 +19,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     } else {
       emit(state.copyWith(isButtonEnabled: true));
     }
-
     if (state.emailController.text.isNotEmpty) {
       emit(state.copyWith(isIconFieldColorEnabled: true));
+    }
+    else{
+      emit(state.copyWith(isIconFieldColorEnabled: false));
     }
   }
 
   Future<void> loginUser({String? email, String? password}) async {
     try {
-      emit(state.copyWith(loginLoading: true, loginSuccessfull: false));
+      emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
       LoginUserModel userLogin =
           await authenticationRepo.loginUser(email: email, password: password);
       if (userLogin.data != null) {
