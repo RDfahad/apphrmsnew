@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/detail/screen/emp_attendance.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/ui/screens/dashboard/view/leave_request.dart';
@@ -22,7 +23,7 @@ class BottomNavigationScreen extends StatelessWidget {
             currentIndex: selectedTab.index,
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_rounded),
+                icon: Icon(CupertinoIcons.home),
                 label: 'Tab 1',
               ),
               BottomNavigationBarItem(
@@ -34,7 +35,7 @@ class BottomNavigationScreen extends StatelessWidget {
                 label: 'Tab 3',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline_sharp),
+                icon: Icon(CupertinoIcons.person),
                 label: 'Tab 4',
               ),
             ],
@@ -53,9 +54,9 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.homeScreen:
         return DashBoardScreen();
       case BottomNavigationTabState.leaveRequest:
-        return LeaveRequestScreen();
+        return AttendanceScreen();
       case BottomNavigationTabState.leaveRequestScreen:
-        return const DetailScreen();
+        return DetailScreen();
       case BottomNavigationTabState.profile:
         return Container();
       default:

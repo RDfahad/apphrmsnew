@@ -7,10 +7,10 @@ class AppColor {
   // static const Color primaryColor = Color(0xFF1A2980);
   // static const Color secondaryColor = Color(0xFF26D0CE);
 
-  static const Color primaryColor = Color(0xFF1a1aff);
+  static const Color primaryColor = Color(0xFF4684e2);
   static const Color secondaryColor = Color(0xFF26D0CE);
 
-  static const Color primaryButtonColor = Color(0xFF1E58F1);
+  static const Color primaryButtonColor = Color(0xFF2266d8);
   static const Color secondaryButtonColor = Color(0xffEAECF0);
 
   static const Color redColor = Color(0xffFC3F5B);

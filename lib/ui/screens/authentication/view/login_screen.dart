@@ -166,7 +166,7 @@ class LoginScreen extends StatelessWidget {
                                 : null,
                             width: double.infinity,
                             borderRadius: 25,
-                            height: 10,
+                            height: context.getScreenHeight * 0.05,
                             buttonColor: (state.isButtonEnabled)
                                 ? AppColor.primaryButtonColor
                                 : AppColor.secondaryButtonColor,

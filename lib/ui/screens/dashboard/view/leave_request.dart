@@ -60,7 +60,6 @@ class LeaveRequestScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: context.getScreenHeight * 0.02),
-            
             StatusCard(listColor: listColor, listCards: listCards),
             SizedBox(height: context.getScreenHeight * 0.03),
             const Padding(
