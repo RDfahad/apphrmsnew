@@ -27,10 +27,6 @@ class DashBoardScreen extends StatelessWidget {
         backgroundColor: AppColor.appBackgroundColor,
         appBar: AppBar(
           backgroundColor: AppColor.primaryColor,
-          leading: const Icon(
-            Icons.arrow_back,
-            color: AppColor.whiteColor,
-          ),
           title: const Text(
             "Dashboard",
             style: TextStyle(fontSize: 16, color: AppColor.whiteColor),
@@ -38,22 +34,21 @@ class DashBoardScreen extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: (){
-                HiveStorage().putData(
-                    "isLogIn",false);
+              onPressed: () {
+                HiveStorage().putData("isLogIn", false);
                 Config.isLoggedIn = false;
-                Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => LoginScreen()));
+                Navigator.push(
+                    context, CupertinoPageRoute(builder: (_) => LoginScreen()));
               },
               icon: const Icon(
-                Icons.more_vert,
+                Icons.logout,
                 color: AppColor.whiteColor,
               ),
             ),
           ],
         ),
         body: BlocBuilder<DashboardCubit, DashboardState>(
-          builder: (context, state){
+          builder: (context, state) {
             return CustomLoaderWidget(
               isLoading: state.isLoading,
               child: CustomScrollView(
@@ -62,7 +57,9 @@ class DashBoardScreen extends StatelessWidget {
                     child: SizedBox(
                       height: context.getScreenHeight * 0.26,
                       width: context.getScreenWidth,
-                      child: HeadPart(email: state.userData.user?.email ?? '',name:  state.userData.user?.name ?? ''),
+                      child: HeadPart(
+                          email: state.userData.user?.email ?? '',
+                          name: state.userData.user?.name ?? ''),
                     ),
                   ),
                   SliverToBoxAdapter(
@@ -82,7 +79,8 @@ class DashBoardScreen extends StatelessWidget {
                       child: SizedBox(height: context.getScreenHeight * 0.02)),
                   SliverToBoxAdapter(
                     child: Container(
-                      margin:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: context.getScreenWidth * 0.03),
                       height: context.getScreenHeight * 0.1,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
@@ -101,13 +99,11 @@ class DashBoardScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               ),
             );
           },
-        )
-    );
+        ));
   }
 
   Column timeData(String title, String time) {

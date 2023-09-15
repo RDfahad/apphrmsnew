@@ -65,7 +65,7 @@ class OnboardingScreen extends StatelessWidget {
           return LoginScreen();
         }
         else if(onboardingState.onBoardingStatus && onboardingState.isLogIn){
-          return BottomNavigationScreen();
+          return const BottomNavigationScreen();
         }
         else{
           return Container();

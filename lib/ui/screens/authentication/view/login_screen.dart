@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
           if (state.loginSuccessfull) {
             print('done');
             Navigator.push(
-                context, CupertinoPageRoute(builder: (_) => BottomNavigationScreen()));
+                context, CupertinoPageRoute(builder: (_) => const BottomNavigationScreen()));
           }
         },
         builder: (context, state) {

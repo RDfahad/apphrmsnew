@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
-import 'package:hr_emp_proj/ui/screens/detail/screen/emp_attendance.dart';
+import 'package:hr_emp_proj/ui/screens/attendance/screen/emp_attendance.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';

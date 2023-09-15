@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 
@@ -19,7 +21,7 @@ class AttendanceScreen extends StatelessWidget {
         backgroundColor: AppColor.appBackgroundColor,
         appBar: AppBar(
           title: const Text(
-            "Employee Attend List",
+            "Employee Attendance List",
             style: TextStyle(color: AppColor.whiteColor),
           ),
           centerTitle: true,
@@ -27,7 +29,9 @@ class AttendanceScreen extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
             color: AppColor.whiteColor,
             onPressed: () {
-              Navigator.pop(context);
+              context
+                  .read<BottomNavigationCubit>()
+                  .changeTab(BottomNavigationTabState.homeScreen);
             },
           ),
           backgroundColor: AppColor.primaryColor,
