@@ -7,6 +7,7 @@ import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
 import '../../../../utils/hive_db/hive_db.dart';
+import '../../../widgets/fl_charts/bar_graph.dart';
 import '/ui/screens/dashboard/component/head_part.dart';
 import '/ui/screens/dashboard/component/middle_part.dart';
 import '/ui/screens/dashboard/view/leave_request.dart';
@@ -135,140 +136,261 @@ class DashBoardScreenNew extends StatelessWidget {
     Icons.calendar_today_rounded,
     Icons.layers_outlined,
     Icons.chat,
-    Icons.warning,
+    Icons.warning_rounded,
     Icons.copy,
+  ];
+  final List listIconName = [
+    "Attendance",
+    "Leaves",
+    "Requests",
+    "Offenses",
+    "Documnents",
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: context.getScreenHeight * 0.3,
-            child: Stack(
+      body: Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
+        child: Column(
+          children: [
+            // SizedBox(
+            //   height: context.getScreenHeight * 0.28,
+            //   child: Stack(
+            //     children: [
+            //       Container(
+            //         padding: EdgeInsets.symmetric(
+            //             horizontal: context.getScreenWidth * 0.03),
+            //         decoration: const BoxDecoration(
+            //             gradient: LinearGradient(
+            //               begin: Alignment.topLeft,
+            //               end: Alignment.centerRight,
+            //               colors: [
+            //                 Color(0xFF0b84c8),
+            //                 Color(0xff214cbd),
+            //                 Color(0xff214cbd),
+            //               ],
+            //             ),
+            //             borderRadius: BorderRadius.only(
+            //               bottomLeft: Radius.circular(15),
+            //               bottomRight: Radius.circular(15),
+            //             )),
+            //         height: context.getScreenHeight * 0.2,
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.stretch,
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             const Text(
+            //               "Rimsha Rashid",
+            //               style: TextStyle(
+            //                   color: AppColor.primaryTextWhiteColor,
+            //                   fontSize: 28,
+            //                   fontWeight: FontWeight.w600),
+            //             ),
+            //             const Text(
+            //               "Director HR & Operations",
+            //               style: TextStyle(
+            //                   color: AppColor.primaryTextWhiteColor,
+            //                   fontSize: 14,
+            //                   fontWeight: FontWeight.w300),
+            //             ),
+            //             SizedBox(
+            //               height: context.getScreenHeight * 0.02,
+            //             ),
+            //             const Row(
+            //               children: [
+            //                 Icon(
+            //                   Icons.flag,
+            //                   color: AppColor.primaryTextWhiteColor,
+            //                 ),
+            //                 Text(
+            //                   "Director HR & Operations",
+            //                   style: TextStyle(
+            //                       color: AppColor.primaryTextWhiteColor,
+            //                       fontSize: 12,
+            //                       fontWeight: FontWeight.w300),
+            //                 ),
+            //               ],
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       Positioned(
+            //         top: context.getScreenHeight * 0.14,
+            //         right: context.getScreenHeight * 0.03,
+            //         child: Container(
+            //           height: context.getScreenHeight * 0.12,
+            //           width: context.getScreenHeight * 0.12,
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //             color: const Color(0xFFd9d9d9),
+            //             border: Border.all(
+            //               color: AppColor.whiteColor,
+            //               width: 3,
+            //             ),
+            //             boxShadow: [
+            //               BoxShadow(
+            //                 spreadRadius: 3,
+            //                 color: Colors.grey.shade200,
+            //                 blurRadius: 2,
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            CustomProfileCard(
+              name: "Rimsha Rashid",
+              title: "Director HR & Operations",
+              icon: Icons.flag,
+              cardHeight: context.getScreenHeight * 0.28,
+              profileImageSize: context.getScreenHeight * 0.11,
+            ),
+
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.getScreenWidth * 0.02),
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xFF0b84c8),
-                          Color(0xff214cbd),
-                          Color(0xff214cbd),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                  height: context.getScreenHeight * 0.2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Rimsha Rashid",
-                        style: TextStyle(
-                            color: AppColor.primaryTextWhiteColor,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const Text(
-                        "Director HR & Operations",
-                        style: TextStyle(
-                            color: AppColor.primaryTextWhiteColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300),
-                      ),
-                      SizedBox(
-                        height: context.getScreenHeight * 0.02,
-                      ),
-                      const Row(
-                        children: [
-                          Icon(
-                            Icons.flag,
-                            color: AppColor.primaryTextWhiteColor,
-                          ),
-                          Text(
-                            "Director HR & Operations",
-                            style: TextStyle(
-                                color: AppColor.primaryTextWhiteColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ],
-                      ),
-                    ],
+                Text(
+                  "Dashboard",
+                  style: TextStyle(
+                    color: AppColor.blackColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Positioned(
-                  top: context.getScreenHeight * 0.14,
-                  right: context.getScreenHeight * 0.03,
-                  child: Container(
-                    height: context.getScreenHeight * 0.12,
-                    width: context.getScreenHeight * 0.12,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: const Color(0xFFd9d9d9),
-                      border: Border.all(
-                        color: AppColor.whiteColor,
-                        width: 3,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          spreadRadius: 3,
-                          color: Colors.grey.shade200,
-                          blurRadius: 2,
-                        ),
-                      ],
-                    ),
+                Text(
+                  "See All",
+                  style: TextStyle(
+                    color: AppColor.blackColor,
+                    fontSize: 12,
                   ),
                 ),
               ],
             ),
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Dashboard",
-                style: TextStyle(
-                  color: AppColor.blackColor,
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                "See All",
-                style: TextStyle(
-                  color: AppColor.secondaryTextColor,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-          Row(
+            SizedBox(height: context.getScreenHeight * 0.01),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
+                5,
+                (index) => IconCard(
+                  iconData: listIcon[index],
+                  iconName: listIconName[index],
+                ),
+              ),
+            ),
+            SizedBox(height: context.getScreenHeight * 0.02),
+            Container(
+              height: context.getScreenHeight * 0.1,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: AppColor.whiteColor,
+                boxShadow: const [
+                  BoxShadow(
+                    spreadRadius: 1,
+                    color: AppColor.secondaryTextColor,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  timeData("Time In", "05:21:09 am"),
+                  Container(width: 1, color: Colors.grey),
+                  timeData("Time Out", "20:34:21 pm"),
+                  Container(width: 1, color: Colors.grey),
+                  timeData("Working Hrs", "20:34:21 pm"),
+                ],
+              ),
+            ),
+            SizedBox(height: context.getScreenHeight * 0.03),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Weekly Attendance",
+                  style: TextStyle(
+                    color: AppColor.blackColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Week 01 September",
+                  style: TextStyle(
+                    color: AppColor.blackColor,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: context.getScreenHeight * 0.03),
+            Container(
+              height: context.getScreenHeight * 0.28,
+              width: context.getScreenWidth * 0.95,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      spreadRadius: 2,
+                      color: AppColor.secondaryTextColor,
+                      blurRadius: 10,
+                    ),
+                  ],
+                  color: AppColor.whiteColor,
+                  borderRadius: BorderRadius.circular(15)),
+              child: const MyBarGraph(
+                monthlySummary: <double>[
+                  2,
                   5,
-                  (index) => IconCard(
-                        iconData: listIcon[index],
-                      )))
-        ],
+                  3,
+                  1,
+                  4,
+                  5,
+                  8,
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Column timeData(String title, String time) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 13.0,
+            color: AppColor.secondaryTextColor,
+          ),
+        ),
+        Text(
+          time,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: AppColor.primaryTextBlackColor,
+          ),
+        ),
+      ],
     );
   }
 }
 
 class IconCard extends StatelessWidget {
   final IconData iconData;
+  final String iconName;
   const IconCard({
     super.key,
     required this.iconData,
+    required this.iconName,
   });
 
   @override
@@ -290,11 +412,123 @@ class IconCard extends StatelessWidget {
                   size: 25,
                 )),
           ),
-          const Text(
-            "Attendance",
+          SizedBox(height: 2),
+          Text(
+            iconName,
             style: TextStyle(
               color: AppColor.secondaryTextColor,
               fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomProfileCard extends StatelessWidget {
+  final String name;
+  final String title;
+  final IconData icon;
+  final double cardHeight;
+  final double profileImageSize;
+
+  const CustomProfileCard({
+    Key? key,
+    required this.name,
+    required this.title,
+    required this.icon,
+    required this.cardHeight,
+    required this.profileImageSize,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: cardHeight,
+      child: Stack(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: cardHeight * 0.03),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xFF0b84c8),
+                  Color(0xff214cbd),
+                  Color(0xff214cbd),
+                ],
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+            ),
+            height: cardHeight * 0.8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                SizedBox(
+                  height: cardHeight * 0.02,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      icon,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: cardHeight * 0.6,
+            right: cardHeight * 0.03,
+            child: Container(
+              height: profileImageSize,
+              width: profileImageSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFFd9d9d9),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 3,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 3,
+                    color: Colors.grey.shade200,
+                    blurRadius: 2,
+                  ),
+                ],
+              ),
             ),
           ),
         ],
