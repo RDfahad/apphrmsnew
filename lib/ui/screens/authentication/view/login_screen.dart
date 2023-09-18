@@ -181,6 +181,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.appBackgroundColor,
       body: Column(
         children: [
           Container(
@@ -238,7 +239,10 @@ class SignInScreen extends StatelessWidget {
                 ),
                 SizedBox(height: context.getScreenHeight * 0.01),
                 CustomTextField(
-                    controller: TextEditingController(), hintText: "Email"),
+                  controller: TextEditingController(),
+                  hintText: "Email",
+                  onChange: (val) {},
+                ),
                 SizedBox(height: context.getScreenHeight * 0.02),
                 const Text(
                   "Password",
@@ -249,6 +253,7 @@ class SignInScreen extends StatelessWidget {
                   controller: TextEditingController(),
                   hintText: "Password",
                   obsecurePassword: passScene,
+                  onChange: (val) {},
                 ),
                 SizedBox(height: context.getScreenHeight * 0.01),
                 Align(
@@ -269,11 +274,11 @@ class SignInScreen extends StatelessWidget {
           ),
           Spacer(),
           RoundElevatedButton(
+            height: context.getScreenHeight * 0.07,
             title: "Sign in Now",
-            
             buttonColor: AppColor.secondaryButtonColor,
             width: double.infinity,
-            borderRadius: 08,
+            borderRadius: 0,
             onPress: () {},
           ),
         ],
