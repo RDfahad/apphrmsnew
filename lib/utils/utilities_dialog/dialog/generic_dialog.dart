@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 typedef DialogOptionBuilder<T> = Map<String, T> Function();
 

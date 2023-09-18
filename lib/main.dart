@@ -30,10 +30,14 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => OnboardingCubit()..init()),
+        BlocProvider(
+            create: (BuildContext context) => OnboardingCubit()..init()),
         BlocProvider(create: (BuildContext context) => BottomNavigationCubit()),
-        BlocProvider(create: (BuildContext context) => AuthenticationCubit(getIt())),
-        BlocProvider(create: (BuildContext context) => DashboardCubit(getIt())..refreshToken()),
+        BlocProvider(
+            create: (BuildContext context) => AuthenticationCubit(getIt())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                DashboardCubit(getIt())..refreshToken()),
       ],
       child: const MyApp(),
     ),
@@ -51,11 +55,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: Typography.blackCupertino,
-        primaryColor: const Color(0xFF1A2980),
+        primaryColor: Color(0xFF4684e2),
         colorScheme: const ColorScheme(
             brightness: Brightness.light,
-            primary: Color(0xFF1A2980),
-            onPrimary: Color(0xFF1A2980),
+            primary: Color(0xFF4684e2),
+            onPrimary: Color(0xFF4684e2),
             secondary: Color(0xFF26D0CE),
             onSecondary: Color(0xFF1A2980),
             error: Color(0xFF1A2980),

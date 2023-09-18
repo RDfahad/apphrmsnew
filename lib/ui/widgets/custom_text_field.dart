@@ -1,78 +1,3 @@
-// import 'package:flutter/material.dart';
-// import '/utils/app_color.dart';
-
-// class CustomTextFormField extends StatelessWidget {
-//   final TextEditingController controller;
-//   final String labelText;
-//   final IconData? suffixIcon;
-//   final IconData preffixIcon;
-//   final String hintText;
-//   final double borderRadius;
-
-//   CustomTextFormField({
-//     required this.controller,
-//     required this.labelText,
-//     this.suffixIcon,
-//     required this.hintText,
-//     this.borderRadius = 8.0,
-//     required this.preffixIcon,
-//   });
-
-//   bool isVisibleSuffixIcons = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextFormField(
-//       controller: controller,
-//       style: TextStyle(color: AppColor.blackColor),
-//       decoration: InputDecoration(
-//         fillColor: AppColor.whiteColor,
-//         filled: true,
-//         labelText: labelText,
-//         labelStyle: const TextStyle(color: AppColor.blackColor, fontSize: 17),
-//         prefixIcon: Icon(
-//           preffixIcon,
-//           size: 25,
-//           color: AppColor.secondaryTextColor,
-//         ),
-//         suffixIcon: suffixIcon != null
-//             ? isVisibleSuffixIcons
-//                 ? Icon(
-//                     suffixIcon,
-//                     size: 25,
-//                     color: AppColor.secondaryTextColor,
-//                   )
-//                 : Icon(
-//                     Icons.visibility_off,
-//                     size: 25,
-//                     color: AppColor.secondaryTextColor,
-//                   )
-//             : null,
-//         hintText: hintText,
-//         hintStyle: const TextStyle(color: Colors.grey),
-//         contentPadding:
-//             const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-//         border: OutlineInputBorder(
-//           // borderSide: const BorderSide(
-//           //   color: AppColor.blackColor,
-//           //   width: 2.0,
-//           // ),
-//           borderRadius: BorderRadius.circular(borderRadius),
-//         ),
-//         focusedBorder: OutlineInputBorder(
-//           borderSide: BorderSide.none,
-//           borderRadius: BorderRadius.circular(borderRadius),
-//         ),
-//         enabledBorder: OutlineInputBorder(
-//           borderSide: BorderSide.none,
-//           borderRadius: BorderRadius.circular(borderRadius),
-//         ),
-//         errorBorder: const OutlineInputBorder(),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
@@ -83,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final IconData? suffixIcon;
-  final IconData preffixIcon;
+  final IconData prefixIcon;
   final String hintText;
   final double borderRadius;
   final Color errorColor;
@@ -97,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     required this.hintText,
     this.borderRadius = 8.0,
-    required this.preffixIcon,
+    required this.prefixIcon,
     this.errorColor = Colors.red,
     required this.onChange,
     required this.isIconColorChange,
@@ -108,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
         width: double.infinity,
+        height: context.getScreenHeight * 0.08,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
@@ -131,7 +57,7 @@ class CustomTextFormField extends StatelessWidget {
               color: AppColor.blackColor,
             ),
             prefixIcon: Icon(
-              preffixIcon,
+              prefixIcon,
               color: isIconColorChange
                   ? AppColor.primaryColor
                   : AppColor.secondaryTextColor,
@@ -162,6 +88,7 @@ class CustomPasswordTextField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
       width: double.infinity,
+      height: context.getScreenHeight * 0.08,
       decoration: BoxDecoration(
         color: AppColor.whiteColor,
         borderRadius: BorderRadius.circular(25),
@@ -176,7 +103,7 @@ class CustomPasswordTextField extends StatelessWidget {
         valueListenable: _obsecurePassword,
         builder: (context, value, child) {
           return TextFormField(
-            style: TextStyle(color: AppColor.blackColor),
+            style: const TextStyle(color: AppColor.blackColor),
             obscureText: _obsecurePassword.value,
             obscuringCharacter: "*",
             controller: controller,

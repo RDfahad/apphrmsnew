@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-enum BottomNavigationTabState {  homeScreen,leaveRequest, leaveRequestScreen ,profile }
+
+enum BottomNavigationTabState { homeScreen, attendance, detailreports, profile }
 
 class BottomNavigationCubit extends Cubit<BottomNavigationTabState> {
   BottomNavigationCubit() : super(BottomNavigationTabState.homeScreen);

@@ -6,7 +6,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit() : super(OnboardingState.init());
 
   init() {
-    emit(state);
     bool onBoardingStatus = state.hiveStorage.getData("onBoardingStatus") ?? false;
     bool isLoggedIn = state.hiveStorage.getData("isLogIn") ?? false;
     if (isLoggedIn) {
@@ -15,10 +14,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
           isLogIn: isLoggedIn, onBoardingStatus: onBoardingStatus));
     }
     emit(state.copyWith(onBoardingStatus: onBoardingStatus));
-  }
-
-  onPageChange({int? index}) {
-    emit(state.copyWith(index: index));
   }
 
   storeOnboardingStatus(){

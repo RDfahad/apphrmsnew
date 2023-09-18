@@ -3,7 +3,7 @@ import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
 
 class RoundButton extends StatelessWidget {
-  RoundButton({
+  const RoundButton({
     Key? key,
     this.buttonColor = AppColor.primaryButtonColor,
     this.textColor,
@@ -23,7 +23,7 @@ class RoundButton extends StatelessWidget {
   final VoidCallback onPress;
 
   final Color? textColor, buttonColor;
-  Color borderColor;
+  final Color borderColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(

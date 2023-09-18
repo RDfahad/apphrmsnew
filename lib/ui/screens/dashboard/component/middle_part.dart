@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/dashboard/component/container_card.dart';
 import '/utils/extension_methods.dart';
 
@@ -34,8 +36,12 @@ class GridViewScreenPart extends StatelessWidget {
               images: "assets/images/${properties.values.elementAt(index)}",
               title: properties.keys.elementAt(index),
               onPressed: () {
-                Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => pageName[index]));
+                index == 01
+                    ? context
+                        .read<BottomNavigationCubit>()
+                        .changeTab(BottomNavigationTabState.attendance)
+                    : Navigator.push(context,
+                        CupertinoPageRoute(builder: (_) => pageName[index]));
               },
             ),
           );

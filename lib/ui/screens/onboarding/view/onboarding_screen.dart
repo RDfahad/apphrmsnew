@@ -53,7 +53,7 @@ class OnboardingScreen extends StatelessWidget {
                       context.read<OnboardingCubit>().storeOnboardingStatus();
                     },
                   ),
-                  SizedBox(height: context.getScreenHeight * 0.05),
+                  SizedBox(height: context.getScreenHeight * 0.1),
                 ],
               ),
 
@@ -65,7 +65,7 @@ class OnboardingScreen extends StatelessWidget {
           return LoginScreen();
         }
         else if(onboardingState.onBoardingStatus && onboardingState.isLogIn){
-          return BottomNavigationScreen();
+          return const BottomNavigationScreen();
         }
         else{
           return Container();
