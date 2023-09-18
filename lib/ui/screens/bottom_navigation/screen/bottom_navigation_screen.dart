@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/attendance/screen/emp_attendance.dart';
+import '../../dashboard/view/leave_request.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/ui/screens/detail/screen/detail_screen.dart';
@@ -60,9 +60,9 @@ class BottomNavigationScreen extends StatelessWidget {
     switch (tab) {
       case BottomNavigationTabState.homeScreen:
         return DashBoardScreen();
-      case BottomNavigationTabState.leaveRequest:
+      case BottomNavigationTabState.attendance:
         return LeaveRequestScreen();
-      case BottomNavigationTabState.leaveRequestScreen:
+      case BottomNavigationTabState.detailReports:
         return DetailScreen();
       case BottomNavigationTabState.profile:
         return Container();
