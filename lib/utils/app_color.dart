@@ -18,9 +18,9 @@ class AppColor {
   static const Color primaryTextBlackColor = Color(0xff121212);
   static const Color primaryTextWhiteColor = Color(0xffffffff);
 
-  static const Color secondaryTextColor = Color(0xff8B9390);
+  static const Color secondaryTextColor = Color(0xff808080);
 
-  static const Color appBackgroundColor = Color(0xfffafafa);
+  static const Color appBackgroundColor = Color(0xfff9f9f9);
 
   // Login AppBar Color
   static const Color loginAppBackgroundColor = Color(0xffe6f4f4);
