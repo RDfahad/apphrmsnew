@@ -23,7 +23,9 @@ class LoginScreen extends StatelessWidget {
           if (state.loginSuccessfull) {
             print('done');
             Navigator.pushReplacement(
-                context, CupertinoPageRoute(builder: (_) => const BottomNavigationScreen()));
+                context,
+                CupertinoPageRoute(
+                    builder: (_) => const BottomNavigationScreen()));
           }
         },
         builder: (context, state) {
@@ -39,7 +41,8 @@ class LoginScreen extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/back_ground.png'),
+                          image:
+                              const AssetImage('assets/images/back_ground.png'),
                           fit: BoxFit.fill,
                           colorFilter: ColorFilter.mode(
                               AppColor.primaryColor.withOpacity(0.5),
@@ -102,33 +105,35 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           // Expanded(child: SizedBox()),
-                          state.error ? Expanded(
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  const Icon(
-                                    Icons.warning_amber,
-                                    size: 30,
-                                    color: AppColor.redColor,
-                                  ),
-                                  SizedBox(
-                                      height:
-                                      context.getScreenHeight * 0.01),
-                                  Center(
-                                    child: Text(
-                                      state.errorMessage.toString(),
-                                      //"There are something wrong with your login\n credentials, please double check and try again.",
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          fontSize: 16,
+                          state.error
+                              ? Expanded(
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        const Icon(
+                                          Icons.warning_amber,
+                                          size: 30,
                                           color: AppColor.redColor,
-                                          fontWeight: FontWeight.w400),
+                                        ),
+                                        SizedBox(
+                                            height:
+                                                context.getScreenHeight * 0.01),
+                                        Center(
+                                          child: Text(
+                                            state.errorMessage.toString(),
+                                            //"There are something wrong with your login\n credentials, please double check and try again.",
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                color: AppColor.redColor,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ) : Container(),
+                                )
+                              : Container(),
                           SizedBox(height: context.getScreenHeight * 0.04),
                         ],
                       ),
@@ -142,14 +147,11 @@ class LoginScreen extends StatelessWidget {
                       title: "Sign In",
                       onPress: state.isButtonEnabled
                           ? () {
-                        context
-                            .read<AuthenticationCubit>()
-                            .loginUser(
-                          email: state.emailController.text,
-                          password:
-                          state.passwordController.text,
-                        );
-                      }
+                              context.read<AuthenticationCubit>().loginUser(
+                                    email: state.emailController.text,
+                                    password: state.passwordController.text,
+                                  );
+                            }
                           : null,
                       width: double.infinity,
                       borderRadius: 25,
@@ -167,6 +169,87 @@ class LoginScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class SignInScreen extends StatelessWidget {
+  SignInScreen({super.key});
+  final ValueNotifier<bool> passScene = ValueNotifier<bool>(true);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.getScreenWidth * 0.02),
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFF0b84c8),
+                      Color(0xff214cbd),
+                      Color(0xff214cbd),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  )),
+              height: context.getScreenHeight * 0.2,
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Sign in with Email",
+                    style: TextStyle(
+                        color: AppColor.primaryTextWhiteColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    "Input your epay account!",
+                    style: TextStyle(
+                        color: AppColor.primaryTextWhiteColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: context.getScreenHeight * 0.05),
+            const Text(
+              "Email",
+              style: TextStyle(
+                  color: AppColor.blackColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: context.getScreenHeight * 0.01),
+            CustomTextField(
+                controller: TextEditingController(), hintText: "Email"),
+            SizedBox(height: context.getScreenHeight * 0.02),
+            const Text(
+              "Password",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: context.getScreenHeight * 0.01),
+            CustomPasswordTextField1(
+              controller: TextEditingController(),
+              hintText: "Password",
+              obsecurePassword: passScene,
+            )
+          ],
+        ),
       ),
     );
   }
