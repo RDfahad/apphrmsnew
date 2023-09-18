@@ -22,27 +22,38 @@ class BottomNavigationScreen extends StatelessWidget {
             // appBar: AppBar(),
             body: _getBodyForTab(selectedTab),
             bottomNavigationBar: BottomNavigationBar(
-              selectedItemColor: AppColor.primaryColor,
-              unselectedItemColor: AppColor.secondaryTextColor,
+              backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
+              selectedItemColor: AppColor.primaryButtonColor,
+              unselectedItemColor: AppColor.whiteColor,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               currentIndex: selectedTab.index,
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.home),
+                  icon: Icon(CupertinoIcons.square_grid_2x2),
                   label: 'Tab 1',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.calendar),
+                  icon: Badge(
+                      label: Text(
+                        "1",
+                        style: TextStyle(color: AppColor.primaryTextWhiteColor),
+                      ),
+                      backgroundColor: AppColor.redColor,
+                      child: Icon(CupertinoIcons.chat_bubble_text)),
                   label: 'Tab 2',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart_rounded),
+                  icon: Icon(Icons.calendar_month_rounded),
                   label: 'Tab 3',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.person),
+                  icon: Icon(Icons.person_pin_rounded),
                   label: 'Tab 4',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  label: 'Tab 5',
                 ),
               ],
               onTap: (index) {
@@ -65,7 +76,9 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.detailReports:
         return DetailScreen();
       case BottomNavigationTabState.profile:
-        return Container();
+        return Container(
+          color: Colors.black,
+        );
       default:
         return Container();
     }

@@ -128,3 +128,177 @@ class DashBoardScreen extends StatelessWidget {
     );
   }
 }
+
+class DashBoardScreenNew extends StatelessWidget {
+  DashBoardScreenNew({super.key});
+  final List listIcon = [
+    Icons.calendar_today_rounded,
+    Icons.layers_outlined,
+    Icons.chat,
+    Icons.warning,
+    Icons.copy,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColor.appBackgroundColor,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: context.getScreenHeight * 0.3,
+            child: Stack(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.getScreenWidth * 0.02),
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Color(0xFF0b84c8),
+                          Color(0xff214cbd),
+                          Color(0xff214cbd),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      )),
+                  height: context.getScreenHeight * 0.2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Rimsha Rashid",
+                        style: TextStyle(
+                            color: AppColor.primaryTextWhiteColor,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const Text(
+                        "Director HR & Operations",
+                        style: TextStyle(
+                            color: AppColor.primaryTextWhiteColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300),
+                      ),
+                      SizedBox(
+                        height: context.getScreenHeight * 0.02,
+                      ),
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.flag,
+                            color: AppColor.primaryTextWhiteColor,
+                          ),
+                          Text(
+                            "Director HR & Operations",
+                            style: TextStyle(
+                                color: AppColor.primaryTextWhiteColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w300),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: context.getScreenHeight * 0.14,
+                  right: context.getScreenHeight * 0.03,
+                  child: Container(
+                    height: context.getScreenHeight * 0.12,
+                    width: context.getScreenHeight * 0.12,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFFd9d9d9),
+                      border: Border.all(
+                        color: AppColor.whiteColor,
+                        width: 3,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          spreadRadius: 3,
+                          color: Colors.grey.shade200,
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Dashboard",
+                style: TextStyle(
+                  color: AppColor.blackColor,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                "See All",
+                style: TextStyle(
+                  color: AppColor.secondaryTextColor,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                  5,
+                  (index) => IconCard(
+                        iconData: listIcon[index],
+                      )))
+        ],
+      ),
+    );
+  }
+}
+
+class IconCard extends StatelessWidget {
+  final IconData iconData;
+  const IconCard({
+    super.key,
+    required this.iconData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(context.getScreenHeight * 0.005),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+                alignment: Alignment.center,
+                height: context.getScreenHeight * 0.06,
+                width: context.getScreenHeight * 0.06,
+                color: AppColor.primaryColor,
+                child: Icon(
+                  iconData,
+                  color: AppColor.whiteColor,
+                  size: 25,
+                )),
+          ),
+          const Text(
+            "Attendance",
+            style: TextStyle(
+              color: AppColor.secondaryTextColor,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
