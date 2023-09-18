@@ -142,7 +142,7 @@ class OnboardingScreen extends StatelessWidget {
           );
         }
         else if(onboardingState.onBoardingStatus && !onboardingState.isLogIn){
-          return LoginScreen();
+          return SignInScreen();
         }
         else if(onboardingState.onBoardingStatus && onboardingState.isLogIn){
           return const BottomNavigationScreen();
