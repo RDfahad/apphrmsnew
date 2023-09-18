@@ -32,8 +32,6 @@ class LeaveRequestScreen extends StatelessWidget {
               color: AppColor.whiteColor,
             )),
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
       backgroundColor: AppColor.appBackgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, kToolbarHeight),

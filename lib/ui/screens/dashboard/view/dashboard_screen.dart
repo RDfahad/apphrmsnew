@@ -71,7 +71,7 @@ class DashBoardScreen extends StatelessWidget {
                         LeaveRequestScreen(),
                         DashBoardScreen(),
                         LeaveRequestScreen(),
-                        DashBoardScreen(),
+                        const Scaffold(),
                       ],
                     ),
                   ),

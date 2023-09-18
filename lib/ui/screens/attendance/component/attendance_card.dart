@@ -28,7 +28,7 @@ class AttendanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.getScreenHeight * 0.27,
+      height: context.getScreenHeight * 0.28,
       margin: EdgeInsets.only(
         top: context.getScreenWidth * 0.03,
         left: context.getScreenWidth * 0.03,
@@ -90,12 +90,12 @@ class AttendanceCard extends StatelessWidget {
               Center(
                 child: TweenAnimationBuilder(
                   tween: Tween<double>(begin: 0, end: endValue),
-                  duration: const Duration(seconds: 2),
+                  duration: const Duration(seconds: 1),
                   builder: (context, value, child) {
                     return CircularProgressIndicator(
                       strokeCap: StrokeCap.round,
                       value: value,
-                      strokeAlign: 10,
+                      strokeAlign: 8,
                       strokeWidth: 6,
                       backgroundColor: AppColor.secondaryTextColor,
                       valueColor: const AlwaysStoppedAnimation<Color>(
