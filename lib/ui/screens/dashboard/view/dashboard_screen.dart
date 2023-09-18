@@ -277,7 +277,7 @@ class DashBoardScreenNew extends StatelessWidget {
               ),
               SizedBox(height: context.getScreenHeight * 0.02),
               Container(
-                height: context.getScreenHeight * 0.2,
+                height: context.getScreenHeight * 0.1,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: AppColor.whiteColor,
