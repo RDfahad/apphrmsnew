@@ -67,7 +67,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: context.getScreenHeight * 0.01),
                 CustomTextField(
-                    controller: TextEditingController(), hintText: "Email"),
+                  controller: TextEditingController(),
+                  hintText: "Email",
+                  onChange: (val) {},
+                ),
                 SizedBox(height: context.getScreenHeight * 0.01),
               ],
             ),

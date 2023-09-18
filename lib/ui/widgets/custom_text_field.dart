@@ -150,12 +150,14 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final int maxLines;
   final TextInputType textType;
+  final Function(String) onChange;
   const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
     this.maxLines = 1,
     this.textType = TextInputType.text,
+    required this.onChange,
   }) : super(key: key);
 
   @override
@@ -173,6 +175,7 @@ class CustomTextField extends StatelessWidget {
               borderSide: BorderSide(
             color: Colors.black38,
           ))),
+      onChanged: onChange,
       validator: (val) {
         if (val == null || val.isEmpty) {
           return 'Enter your $hintText';
@@ -189,6 +192,7 @@ class CustomPasswordTextField1 extends StatelessWidget {
   final String hintText;
   final int maxLines;
   final TextInputType textType;
+  final Function(String) onChange;
 
   const CustomPasswordTextField1({
     super.key,
@@ -197,6 +201,7 @@ class CustomPasswordTextField1 extends StatelessWidget {
     required this.hintText,
     this.maxLines = 1,
     this.textType = TextInputType.text,
+    required this.onChange,
   }) : _obsecurePassword = obsecurePassword;
 
   final ValueNotifier<bool> _obsecurePassword;
@@ -238,6 +243,7 @@ class CustomPasswordTextField1 extends StatelessWidget {
             return null;
           },
           maxLines: maxLines,
+          onChanged: onChange,
         );
       },
     );
