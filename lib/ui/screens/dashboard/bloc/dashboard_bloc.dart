@@ -40,4 +40,6 @@ class DashboardCubit extends Cubit<DashboardState> {
       emit(state.copyWith(isLoading: false));
     }
   }
+
+  void changeTab(BottomNavigationTabState bottomNavigationTabState) => emit(state.copyWith(bottomNavigationTabState: bottomNavigationTabState));
 }

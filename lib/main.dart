@@ -39,7 +39,6 @@ void main() async {
       providers: [
         BlocProvider(
             create: (BuildContext context) => OnboardingCubit()..init()),
-        BlocProvider(create: (BuildContext context) => BottomNavigationCubit()),
         BlocProvider(
             create: (BuildContext context) => AuthenticationCubit(getIt())),
         BlocProvider(
