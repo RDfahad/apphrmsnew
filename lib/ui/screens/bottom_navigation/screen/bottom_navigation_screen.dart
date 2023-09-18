@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../../dashboard/view/leave_request.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
@@ -23,14 +24,22 @@ class BottomNavigationScreen extends StatelessWidget {
             body: _getBodyForTab(selectedTab),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
-              selectedItemColor: AppColor.primaryButtonColor,
+              selectedItemColor: AppColor.whiteColor,
               unselectedItemColor: AppColor.whiteColor,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               currentIndex: selectedTab.index,
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.square_grid_2x2),
+                  icon: Container(
+                    width: context.getScreenWidth * 0.1,
+                    height: context.getScreenHeight * 0.05,
+                    decoration: BoxDecoration(
+                        color: selectedTab.index == 0 ?  AppColor.primaryColor : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(child: Icon(CupertinoIcons.square_grid_2x2,)),
+                  ),
                   label: 'Tab 1',
                 ),
                 BottomNavigationBarItem(
@@ -40,19 +49,54 @@ class BottomNavigationScreen extends StatelessWidget {
                         style: TextStyle(color: AppColor.primaryTextWhiteColor),
                       ),
                       backgroundColor: AppColor.redColor,
-                      child: Icon(CupertinoIcons.chat_bubble_text)),
+                      child: Container(
+                        width: context.getScreenWidth * 0.1,
+                        height: context.getScreenHeight * 0.05,
+                        decoration: BoxDecoration(
+                            color: selectedTab.index == 1 ?  AppColor.primaryColor : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Center(child: Icon(CupertinoIcons.chat_bubble_text)),
+                      ),
+                      ),
                   label: 'Tab 2',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_month_rounded),
+                  icon: Container(
+                    width: context.getScreenWidth * 0.1,
+                    height: context.getScreenHeight * 0.05,
+                    decoration: BoxDecoration(
+                        color: selectedTab.index == 2 ?  AppColor.primaryColor : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(child:  Icon(Icons.calendar_month_rounded)),
+                  ),
                   label: 'Tab 3',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person_pin_rounded),
+                  icon:
+                  Container(
+                    width: context.getScreenWidth * 0.1,
+                    height: context.getScreenHeight * 0.05,
+                    decoration: BoxDecoration(
+                        color: selectedTab.index == 3 ?  AppColor.primaryColor : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(child:  Icon(Icons.person_pin_rounded),),
+                  ),
                   label: 'Tab 4',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
+                  icon:
+                  Container(
+                    width: context.getScreenWidth * 0.1,
+                    height: context.getScreenHeight * 0.05,
+                    decoration: BoxDecoration(
+                        color: selectedTab.index == 4 ?  AppColor.primaryColor : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Center(child:  Icon(Icons.settings),),
+                  ),
                   label: 'Tab 5',
                 ),
               ],
@@ -76,6 +120,10 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.detailReports:
         return DetailScreen();
       case BottomNavigationTabState.profile:
+        return Container(
+          color: Colors.black,
+        );
+        case BottomNavigationTabState.setting:
         return Container(
           color: Colors.black,
         );
