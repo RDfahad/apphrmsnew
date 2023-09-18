@@ -70,7 +70,7 @@ class DashBoardScreen extends StatelessWidget {
                       properties: properties,
                       pageName: [
                         LeaveRequestScreen(),
-                        DashBoardScreen(),
+                        DashBoardScreenNew(),
                         LeaveRequestScreen(),
                         const Scaffold(),
                       ],
@@ -152,102 +152,15 @@ class DashBoardScreenNew extends StatelessWidget {
       backgroundColor: AppColor.appBackgroundColor,
       body: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
+            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
         child: Column(
           children: [
-            // SizedBox(
-            //   height: context.getScreenHeight * 0.28,
-            //   child: Stack(
-            //     children: [
-            //       Container(
-            //         padding: EdgeInsets.symmetric(
-            //             horizontal: context.getScreenWidth * 0.03),
-            //         decoration: const BoxDecoration(
-            //             gradient: LinearGradient(
-            //               begin: Alignment.topLeft,
-            //               end: Alignment.centerRight,
-            //               colors: [
-            //                 Color(0xFF0b84c8),
-            //                 Color(0xff214cbd),
-            //                 Color(0xff214cbd),
-            //               ],
-            //             ),
-            //             borderRadius: BorderRadius.only(
-            //               bottomLeft: Radius.circular(15),
-            //               bottomRight: Radius.circular(15),
-            //             )),
-            //         height: context.getScreenHeight * 0.2,
-            //         child: Column(
-            //           crossAxisAlignment: CrossAxisAlignment.stretch,
-            //           mainAxisAlignment: MainAxisAlignment.center,
-            //           children: [
-            //             const Text(
-            //               "Rimsha Rashid",
-            //               style: TextStyle(
-            //                   color: AppColor.primaryTextWhiteColor,
-            //                   fontSize: 28,
-            //                   fontWeight: FontWeight.w600),
-            //             ),
-            //             const Text(
-            //               "Director HR & Operations",
-            //               style: TextStyle(
-            //                   color: AppColor.primaryTextWhiteColor,
-            //                   fontSize: 14,
-            //                   fontWeight: FontWeight.w300),
-            //             ),
-            //             SizedBox(
-            //               height: context.getScreenHeight * 0.02,
-            //             ),
-            //             const Row(
-            //               children: [
-            //                 Icon(
-            //                   Icons.flag,
-            //                   color: AppColor.primaryTextWhiteColor,
-            //                 ),
-            //                 Text(
-            //                   "Director HR & Operations",
-            //                   style: TextStyle(
-            //                       color: AppColor.primaryTextWhiteColor,
-            //                       fontSize: 12,
-            //                       fontWeight: FontWeight.w300),
-            //                 ),
-            //               ],
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //       Positioned(
-            //         top: context.getScreenHeight * 0.14,
-            //         right: context.getScreenHeight * 0.03,
-            //         child: Container(
-            //           height: context.getScreenHeight * 0.12,
-            //           width: context.getScreenHeight * 0.12,
-            //           decoration: BoxDecoration(
-            //             shape: BoxShape.circle,
-            //             color: const Color(0xFFd9d9d9),
-            //             border: Border.all(
-            //               color: AppColor.whiteColor,
-            //               width: 3,
-            //             ),
-            //             boxShadow: [
-            //               BoxShadow(
-            //                 spreadRadius: 3,
-            //                 color: Colors.grey.shade200,
-            //                 blurRadius: 2,
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             CustomProfileCard(
               name: "Rimsha Rashid",
               title: "Director HR & Operations",
               icon: Icons.flag,
-              cardHeight: context.getScreenHeight * 0.28,
-              profileImageSize: context.getScreenHeight * 0.11,
+              cardHeight: context.getScreenHeight * 0.3,
+              profileImageSize: context.getScreenHeight * 0.14,
             ),
 
             const Row(
@@ -412,10 +325,10 @@ class IconCard extends StatelessWidget {
                   size: 25,
                 )),
           ),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
           Text(
             iconName,
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColor.secondaryTextColor,
               fontSize: 12,
             ),
@@ -449,7 +362,7 @@ class CustomProfileCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: cardHeight * 0.03),
+            padding: EdgeInsets.symmetric(horizontal: cardHeight * 0.1),
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -465,14 +378,14 @@ class CustomProfileCard extends StatelessWidget {
                 bottomRight: Radius.circular(15),
               ),
             ),
-            height: cardHeight * 0.8,
+            height: context.getScreenHeight * 0.25,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 28,
                     fontWeight: FontWeight.w600,
@@ -480,7 +393,7 @@ class CustomProfileCard extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
@@ -497,7 +410,7 @@ class CustomProfileCard extends StatelessWidget {
                     ),
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
                         fontWeight: FontWeight.w300,
@@ -509,8 +422,8 @@ class CustomProfileCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: cardHeight * 0.6,
-            right: cardHeight * 0.03,
+            top: cardHeight * 0.5,
+            right: cardHeight * 0.04,
             child: Container(
               height: profileImageSize,
               width: profileImageSize,
