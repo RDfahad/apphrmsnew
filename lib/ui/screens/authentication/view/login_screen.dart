@@ -181,75 +181,102 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: context.getScreenWidth * 0.02),
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      Color(0xFF0b84c8),
-                      Color(0xff214cbd),
-                      Color(0xff214cbd),
+      body: Column(
+        children: [
+          Container(
+            margin:
+                EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.getScreenWidth * 0.02),
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Color(0xFF0b84c8),
+                          Color(0xff214cbd),
+                          Color(0xff214cbd),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                      )),
+                  height: context.getScreenHeight * 0.2,
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sign in with Email",
+                        style: TextStyle(
+                            color: AppColor.primaryTextWhiteColor,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        "Input your epay account!",
+                        style: TextStyle(
+                            color: AppColor.primaryTextWhiteColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300),
+                      ),
                     ],
                   ),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                  )),
-              height: context.getScreenHeight * 0.2,
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Sign in with Email",
-                    style: TextStyle(
-                        color: AppColor.primaryTextWhiteColor,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: context.getScreenHeight * 0.05),
+                const Text(
+                  "Email",
+                  style: TextStyle(
+                      color: AppColor.blackColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: context.getScreenHeight * 0.01),
+                CustomTextField(
+                    controller: TextEditingController(), hintText: "Email"),
+                SizedBox(height: context.getScreenHeight * 0.02),
+                const Text(
+                  "Password",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: context.getScreenHeight * 0.01),
+                CustomPasswordTextField1(
+                  controller: TextEditingController(),
+                  hintText: "Password",
+                  obsecurePassword: passScene,
+                ),
+                SizedBox(height: context.getScreenHeight * 0.01),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: InkWell(
+                    onTap: () {},
+                    child: const Text(
+                      "Forgot password?",
+                      style: TextStyle(
+                          color: AppColor.primaryButtonColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  Text(
-                    "Input your epay account!",
-                    style: TextStyle(
-                        color: AppColor.primaryTextWhiteColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w300),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(height: context.getScreenHeight * 0.05),
-            const Text(
-              "Email",
-              style: TextStyle(
-                  color: AppColor.blackColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: context.getScreenHeight * 0.01),
-            CustomTextField(
-                controller: TextEditingController(), hintText: "Email"),
-            SizedBox(height: context.getScreenHeight * 0.02),
-            const Text(
-              "Password",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: context.getScreenHeight * 0.01),
-            CustomPasswordTextField1(
-              controller: TextEditingController(),
-              hintText: "Password",
-              obsecurePassword: passScene,
-            )
-          ],
-        ),
+          ),
+          Spacer(),
+          RoundElevatedButton(
+            title: "Sign in Now",
+            
+            buttonColor: AppColor.secondaryButtonColor,
+            width: double.infinity,
+            borderRadius: 08,
+            onPress: () {},
+          ),
+        ],
       ),
     );
   }

@@ -94,7 +94,7 @@ class RoundElevatedButton extends StatelessWidget {
               : Center(
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         // fontWeight: FontWeight.bold,
                         fontStyle:
                             fontStyle != null ? fontStyle : FontStyle.normal,
