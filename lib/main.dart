@@ -7,6 +7,7 @@ import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
+import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: DashBoardScreenNew(),
+      home: MegaMenuScreen(),
     );
   }
 }
