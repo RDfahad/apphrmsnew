@@ -51,6 +51,8 @@ class MyBarGraph extends StatelessWidget {
                     return const Text("4h", style: style);
                   case 6:
                     return const Text("6h", style: style);
+                  case 8:
+                    return const Text("8h", style: style);
                   default:
                     return const Text("");
                 }

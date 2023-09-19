@@ -70,7 +70,7 @@ class BottomNavigationScreen extends StatelessWidget {
   Widget _getBodyForTab(BottomNavigationTabState tab) {
     switch (tab) {
       case BottomNavigationTabState.homeScreen:
-        return DashBoardScreen();
+        return DashBoardScreenNew();
       case BottomNavigationTabState.attendance:
         return AttendanceScreen();
       case BottomNavigationTabState.detailreports:
