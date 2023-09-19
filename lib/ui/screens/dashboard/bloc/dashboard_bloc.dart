@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/domain/entities/authentication_entities/refresh_token.dart';
+import 'package:hr_emp_proj/domain/repository/attendance_repo/attendance_repo.dart';
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../../domain/repository/authentication_repo/authentication_repo.dart';
@@ -11,8 +12,9 @@ import 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
   final AuthenticationRepo authenticationRepo;
+  final AttendanceRepo attendanceRepo;
 
-  DashboardCubit(this.authenticationRepo)
+  DashboardCubit(this.authenticationRepo,this.attendanceRepo)
       : super(DashboardState.init());
 
   Future<void> refreshToken() async {
@@ -36,6 +38,16 @@ class DashboardCubit extends Cubit<DashboardState> {
     }
       emit(state.copyWith(isLoading: false, userData: userData));
     } catch (e) {
+      ExceptionHandler().handleException(e);
+      emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  getAttendance()async{
+    try {
+
+    }
+    catch (e) {
       ExceptionHandler().handleException(e);
       emit(state.copyWith(isLoading: false));
     }

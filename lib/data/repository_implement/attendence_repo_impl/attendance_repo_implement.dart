@@ -19,5 +19,4 @@ class AttendanceRepoImpl implements AttendanceRepo {
       return Future.error(e);
     }
   }
-
 }

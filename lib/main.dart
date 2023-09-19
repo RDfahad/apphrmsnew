@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hr_emp_proj/ui/screens/authentication/view/forgot_password_screen.dart';
-import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
-import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
+import 'package:hr_emp_proj/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
+import 'package:hr_emp_proj/domain/repository/attendance_repo/attendance_repo.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
-import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
-import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
 import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
 import '/ui/screens/onboarding/view/onboarding_screen.dart';
 import 'data/http/http.dart';
 import 'data/repository_implement/authentication_repo_impl/authentication_repo_implement.dart';
 import 'domain/repository/authentication_repo/authentication_repo.dart';
-import 'utils/app_color.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -28,6 +23,8 @@ void main() async {
   getIt.registerSingleton(HTTPRequest());
   getIt.registerSingleton<AuthenticationRepo>(
       AuthenticationRepoImpl(httpRequest: getIt()));
+  getIt.registerSingleton<AttendanceRepo>(
+      AttendanceRepoImpl(httpRequest: getIt()));
 
   //Hive DataBase
 
@@ -43,7 +40,7 @@ void main() async {
             create: (BuildContext context) => AuthenticationCubit(getIt())),
         BlocProvider(
             create: (BuildContext context) =>
-                DashboardCubit(getIt())..refreshToken()),
+                DashboardCubit(getIt(),getIt())..refreshToken()),
       ],
       child: const MyApp(),
     ),
