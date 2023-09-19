@@ -150,6 +150,14 @@ class ProfileScreen extends StatelessWidget {
                       trailing: Icon(Icons.arrow_forward_outlined, color: Colors.grey.shade500,),
                       leading: const Icon(Icons.lock_open, color: AppColor.primaryColor,),
                     ),
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
+                      child: const Divider(
+                        height: 1,
+                        thickness: 0.3,
+                        color: AppColor.secondaryTextColor,
+                      ),
+                    ),
                     ListTile(
                       title: const Text('Logout',style: TextStyle(color: AppColor.blackColor),),
                       trailing: Icon(Icons.arrow_forward_outlined, color: Colors.grey.shade500,),
@@ -189,6 +197,14 @@ class ProfileScreen extends StatelessWidget {
                         onChanged: (bool value) {  },
                       ),
                     ),
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
+                      child: const Divider(
+                        height: 1,
+                        thickness: 0.3,
+                        color: AppColor.secondaryTextColor,
+                      ),
+                    ),
                     ListTile(
                       title: const Text('Announcement Notifications',style: TextStyle(color: AppColor.blackColor),),
                       trailing: Switch(
@@ -200,6 +216,14 @@ class ProfileScreen extends StatelessWidget {
                         value: true,
                         trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
                         onChanged: (bool value) {  },
+                      ),
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
+                      child: const Divider(
+                        height: 1,
+                        thickness: 0.3,
+                        color: AppColor.secondaryTextColor,
                       ),
                     ),
                     ListTile(
