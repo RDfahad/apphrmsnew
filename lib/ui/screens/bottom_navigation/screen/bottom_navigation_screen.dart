@@ -6,7 +6,7 @@ import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../../dashboard/view/leave_request.dart';
-import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
+import '../../profile/view/profile_screen.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/ui/screens/detail/screen/detail_screen.dart';
 import '/utils/app_color.dart';
@@ -125,9 +125,7 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.detailReports:
         return DetailScreen();
       case BottomNavigationTabState.profile:
-        return Container(
-          color: Colors.black,
-        );
+        return const ProfileScreen();
         case BottomNavigationTabState.setting:
         return Container(
           color: Colors.black,
