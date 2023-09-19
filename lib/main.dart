@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: MegaMenuScreen(),
+      home: SignInScreen(),
     );
   }
 }
