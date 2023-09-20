@@ -12,8 +12,9 @@ class AttendanceRepoImpl implements AttendanceRepo {
   @override
   Future<AttendanceRecords> getAttendance() async {
     try {
-      var response = await httpRequest?.post(
-          url: paths.getAttendanceRecord, token: Config.token);
+    //this should be get
+      var response = await httpRequest?.get(
+          url: paths.getAttendanceRecord, token: Config.authorization);
       return AttendanceRecords.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);

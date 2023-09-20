@@ -12,54 +12,78 @@ class ProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
+              EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
           child: Column(
             children: [
-                SizedBox(
-                  width: context.getScreenWidth,
-                  child: Stack(
-                    // fit: StackFit.loose,
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.getScreenWidth * 0.05,vertical: context.getScreenHeight * 0.05),
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.centerRight,
-                              colors: [
-                                Color(0xFF0b84c8),
-                                Color(0xff214cbd),
-                                Color(0xff214cbd),
+              SizedBox(
+                width: context.getScreenWidth,
+                child: Stack(
+                  // fit: StackFit.loose,
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.getScreenWidth * 0.05,
+                          vertical: context.getScreenHeight * 0.05),
+                      decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              Color(0xFF0b84c8),
+                              Color(0xff214cbd),
+                              Color(0xff214cbd),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          )),
+                      height: context.getScreenHeight * 0.2,
+                      width: context.getScreenWidth,
+                      child: const Text(
+                        "Edit\nProfile",
+                        style: TextStyle(
+                            color: AppColor.primaryTextWhiteColor,
+                            fontSize: 28,
+                            height: 1),
+                      ),
+                    ),
+                    Positioned(
+                      top: context.getScreenHeight * 0.1,
+                      right: context.getScreenHeight * 0.05,
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Container(
+                            height: context.getScreenHeight * 0.15,
+                            width: context.getScreenHeight * 0.15,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xFFd9d9d9),
+                              border: Border.all(
+                                color: AppColor.whiteColor,
+                                width: 3,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  spreadRadius: 3,
+                                  color: Colors.grey.shade200,
+                                  blurRadius: 2,
+                                ),
                               ],
                             ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
-                            )),
-                        height: context.getScreenHeight * 0.2,
-                        width: context.getScreenWidth,
-                        child: const Text(
-                          "Edit\nProfile",
-                          style: TextStyle(
-                              color: AppColor.primaryTextWhiteColor,
-                              fontSize: 28,
-                          height: 1),
-                        ),
-                      ),
-                      Positioned(
-                        top: context.getScreenHeight * 0.1,
-                        right: context.getScreenHeight * 0.05,
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            Container(
-                              height: context.getScreenHeight * 0.15,
-                              width: context.getScreenHeight * 0.15,
+                          ),
+                          Positioned(
+                            top: context.getScreenHeight * 0.1,
+                            left: context.getScreenHeight * 0.1,
+                            height: context.getScreenHeight * 0.05,
+                            width: context.getScreenHeight * 0.05,
+                            child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: const Color(0xFFd9d9d9),
+                                color: AppColor.primaryColor,
                                 border: Border.all(
                                   color: AppColor.whiteColor,
                                   width: 3,
@@ -72,41 +96,24 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ),
-                            Positioned(
-                              top: context.getScreenHeight * 0.1,
-                              left: context.getScreenHeight * 0.1,
-                              height: context.getScreenHeight * 0.05,
-                              width: context.getScreenHeight * 0.05,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.primaryColor,
-                                  border: Border.all(
-                                    color: AppColor.whiteColor,
-                                    width: 3,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      spreadRadius: 3,
-                                      color: Colors.grey.shade200,
-                                      blurRadius: 2,
-                                    ),
-                                  ],
-                                ),
-                                child: const Center(
-                                  child: Icon(Icons.edit,color: AppColor.whiteColor,),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.edit,
+                                  color: AppColor.whiteColor,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+              ),
               Padding(
-                padding: EdgeInsets.only(left: context.getScreenWidth * 0.04,top: context.getScreenHeight * 0.02),
+                padding: EdgeInsets.only(
+                    left: context.getScreenWidth * 0.04,
+                    top: context.getScreenHeight * 0.02),
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -146,12 +153,22 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      title: const Text('Change Password',style: TextStyle(color: AppColor.blackColor),),
-                      trailing: Icon(Icons.arrow_forward_outlined, color: Colors.grey.shade500,),
-                      leading: const Icon(Icons.lock_open, color: AppColor.primaryColor,),
+                      title: const Text(
+                        'Change Password',
+                        style: TextStyle(color: AppColor.blackColor),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_outlined,
+                        color: Colors.grey.shade500,
+                      ),
+                      leading: const Icon(
+                        Icons.lock_open,
+                        color: AppColor.primaryColor,
+                      ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.getScreenWidth * 0.05),
                       child: const Divider(
                         height: 1,
                         thickness: 0.3,
@@ -159,11 +176,20 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      title: const Text('Logout',style: TextStyle(color: AppColor.blackColor),),
-                      trailing: Icon(Icons.arrow_forward_outlined, color: Colors.grey.shade500,),
+                      title: const Text(
+                        'Logout',
+                        style: TextStyle(color: AppColor.blackColor),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_outlined,
+                        color: Colors.grey.shade500,
+                      ),
                       leading: Transform.flip(
                           flipX: true,
-                          child: const Icon(Icons.logout, color: AppColor.primaryColor,)),
+                          child: const Icon(
+                            Icons.logout,
+                            color: AppColor.primaryColor,
+                          )),
                     ),
                   ],
                 ),
@@ -185,7 +211,10 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      title: const Text('Request Notifications',style: TextStyle(color: AppColor.blackColor),),
+                      title: const Text(
+                        'Request Notifications',
+                        style: TextStyle(color: AppColor.blackColor),
+                      ),
                       trailing: Switch(
                         activeColor: AppColor.whiteColor,
                         focusColor: AppColor.blackColor,
@@ -193,12 +222,14 @@ class ProfileScreen extends StatelessWidget {
                         inactiveThumbColor: AppColor.whiteColor,
                         inactiveTrackColor: Colors.grey.shade400,
                         value: false,
-                        trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                        onChanged: (bool value) {  },
+                        trackOutlineColor: MaterialStateProperty.all<Color>(
+                            Colors.transparent),
+                        onChanged: (bool value) {},
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.getScreenWidth * 0.05),
                       child: const Divider(
                         height: 1,
                         thickness: 0.3,
@@ -206,7 +237,10 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      title: const Text('Announcement Notifications',style: TextStyle(color: AppColor.blackColor),),
+                      title: const Text(
+                        'Announcement Notifications',
+                        style: TextStyle(color: AppColor.blackColor),
+                      ),
                       trailing: Switch(
                         activeColor: AppColor.whiteColor,
                         focusColor: AppColor.blackColor,
@@ -214,12 +248,14 @@ class ProfileScreen extends StatelessWidget {
                         inactiveThumbColor: AppColor.whiteColor,
                         inactiveTrackColor: Colors.grey.shade400,
                         value: true,
-                        trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                        onChanged: (bool value) {  },
+                        trackOutlineColor: MaterialStateProperty.all<Color>(
+                            Colors.transparent),
+                        onChanged: (bool value) {},
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.getScreenWidth * 0.05),
                       child: const Divider(
                         height: 1,
                         thickness: 0.3,
@@ -227,7 +263,10 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      title: const Text('Touch ID',style: TextStyle(color: AppColor.blackColor),),
+                      title: const Text(
+                        'Touch ID',
+                        style: TextStyle(color: AppColor.blackColor),
+                      ),
                       trailing: Switch(
                         activeColor: AppColor.whiteColor,
                         focusColor: AppColor.blackColor,
@@ -235,8 +274,9 @@ class ProfileScreen extends StatelessWidget {
                         inactiveThumbColor: AppColor.whiteColor,
                         inactiveTrackColor: Colors.grey.shade400,
                         value: true,
-                        trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                        onChanged: (bool value) {  },
+                        trackOutlineColor: MaterialStateProperty.all<Color>(
+                            Colors.transparent),
+                        onChanged: (bool value) {},
                       ),
                     ),
                   ],

@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
+import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
 import '../../../../utils/hive_db/hive_db.dart';
 import '../../../widgets/fl_charts/bar_graph.dart';
+import '../../../widgets/icon-card.dart';
+import '../../../widgets/time_data.dart';
 import '/ui/screens/dashboard/component/head_part.dart';
 import '/ui/screens/dashboard/component/middle_part.dart';
 import '/ui/screens/dashboard/view/leave_request.dart';
@@ -385,71 +388,4 @@ class DashBoardScreenNew extends StatelessWidget {
     )
     );
   }
-
-
 }
-  Column timeData(String title, String time) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 13.0,
-            color: AppColor.secondaryTextColor,
-          ),
-        ),
-        Text(
-          time,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: AppColor.primaryTextBlackColor,
-          ),
-        ),
-      ],
-    );
-}
-
-class IconCard extends StatelessWidget {
-  final IconData iconData;
-  final String iconName;
-  final double iconSize;
-  const IconCard({
-    super.key,
-    required this.iconData,
-    required this.iconName, required this.iconSize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(context.getScreenHeight * 0.005),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-                alignment: Alignment.center,
-                height: context.getScreenHeight * 0.06,
-                width: context.getScreenHeight * 0.06,
-                color: AppColor.primaryColor,
-                child: Icon(
-                  iconData,
-                  color: AppColor.whiteColor,
-                  size: iconSize,
-                )),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            iconName,
-            style: const TextStyle(
-              color: AppColor.secondaryTextColor,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
