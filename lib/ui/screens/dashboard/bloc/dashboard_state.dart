@@ -18,7 +18,7 @@ class DashboardState {
   final hiveStorage = HiveStorage();
   final BottomNavigationTabState bottomNavigationTabState;
 /////Dummy Work ///////////
-  final AttendanceRecords attendanceRecords;
+  final AttendenceObject attendanceRecords;
 
 ////////////////////////////////////////////////////////////////
 
@@ -35,7 +35,7 @@ class DashboardState {
         isLoading: false,
         userData: UserData(),
         bottomNavigationTabState: BottomNavigationTabState.homeScreen,
-        attendanceRecords: AttendanceRecords(),
+        attendanceRecords: AttendenceObject(),
       );
 
   DashboardState copyWith(
@@ -43,7 +43,7 @@ class DashboardState {
       bool? isLoading,
       UserData? userData,
       BottomNavigationTabState? bottomNavigationTabState,
-      AttendanceRecords? attendanceRecords}) {
+        AttendenceObject? attendanceRecords}) {
     return DashboardState(
       token: token ?? this.token,
       isLoading: isLoading ?? this.isLoading,

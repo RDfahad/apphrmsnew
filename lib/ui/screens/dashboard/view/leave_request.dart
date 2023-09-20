@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/domain/entities/attendance/attendance_records.dart';
+import '../../../widgets/attendance_overview.dart';
 import '../../../widgets/status_card.dart';
 import '/ui/widgets/custom_app_bar.dart';
 import '/utils/app_color.dart';
@@ -137,7 +135,7 @@ class LeaveRequestScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
-                    return AttendenceOverview(
+                    return const AttendenceListCard(
                       date: '2023-09-15',
                       timeIn: '2023-09-20',
                       timeOut: 'Approved',
@@ -154,133 +152,6 @@ class LeaveRequestScreen extends StatelessWidget {
       //        ),
       //   ],
       // ),
-    );
-  }
-}
-
-class AttendenceOverview extends StatelessWidget {
-  final String date;
-  final String timeIn;
-  final String timeOut;
-  final String workingHr;
-
-  AttendenceOverview({
-    super.key,
-    required this.date,
-    required this.timeIn,
-    required this.timeOut,
-    required this.workingHr,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: context.getScreenHeight * 0.04,
-      // decoration: BoxDecoration(
-      //   boxShadow: [
-      //     BoxShadow(
-      //       spreadRadius: 5,
-      //       color: Colors.grey.shade300,
-      //       blurRadius: 2,
-      //     ),
-      //   ],
-      color: AppColor.whiteColor,
-      //   borderRadius: BorderRadius.circular(16),
-      // ),
-      padding: EdgeInsets.only(top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            date,
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            timeIn,
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            '$timeOut',
-            style: TextStyle(
-                color: timeOut == "absent"
-                    ? AppColor.redColor
-                    : AppColor.primaryTextBlackColor),
-          ),
-          Text(
-            '$workingHr',
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class AttendenceOverview1 extends StatelessWidget {
-  final AttendenceObject attendanceObject;
-
-  final int index;
-
-  const AttendenceOverview1({
-    super.key,
-    required this.attendanceObject,
-    required this.index,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: context.getScreenHeight * 0.04,
-      // decoration: BoxDecoration(
-      //   boxShadow: [
-      //     BoxShadow(
-      //       spreadRadius: 5,
-      //       color: Colors.grey.shade300,
-      //       blurRadius: 2,
-      //     ),
-      //   ],
-      color: AppColor.whiteColor,
-      //   borderRadius: BorderRadius.circular(16),
-      // ),
-      padding: EdgeInsets.only(top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            attendanceObject.data![index].date.toString(),
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            attendanceObject.data![index].checkInTime.toString(),
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            '${attendanceObject.data?[index].checkOutTime ?? ""}',
-            style: TextStyle(
-                color: attendanceObject.data?[index].checkOutTime == "absent"
-                    ? AppColor.redColor
-                    : AppColor.primaryTextBlackColor),
-          ),
-          Text(
-            '9',
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

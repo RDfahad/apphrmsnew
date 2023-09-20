@@ -48,7 +48,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     try {
       AttendanceRecords response = await attendanceRepo.getAttendance();
       log("From AttendanceRecords response ${response.responseData!.attendenceObject!.data![0].checkInTime}");
-      emit(state.copyWith(attendanceRecords: response));
+      emit(state.copyWith(attendanceRecords: response.responseData?.attendenceObject));
     } catch (e) {
       ExceptionHandler().handleException(e);
     }
