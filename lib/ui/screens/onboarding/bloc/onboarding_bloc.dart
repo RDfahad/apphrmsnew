@@ -21,4 +21,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         "onBoardingStatus",true);
     emit(state.copyWith(onBoardingStatus: true));
   }
+
+  onPageChange({int? index}){
+    emit(state.copyWith(index: index));
+  }
 }

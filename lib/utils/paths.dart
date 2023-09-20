@@ -11,4 +11,6 @@ class Path{
   String get customerLogin => '${defaultUrl['baseUrl']}/${defaultUrl['api_route']}/login';
 
   String get refreshToken => '${defaultUrl['baseUrl']}/${defaultUrl['api_route']}/refresh_token';
+
+  String get getAttendanceRecord => '${defaultUrl['baseUrl']}/${defaultUrl['api_route']}/get_attendance';
 }

@@ -16,7 +16,8 @@ class HTTPRequest {
       var queryParam =
           queryParameters != null ? buildQuery(queryParameters) : '';
       var headers = {
-        'Authorization': token ?? '',
+        'Authorization': token != null ? 'Bearer $token' : '',
+      //  'Authorization': token ?? '',
         'Content-Type': 'application/json'
       };
       log(curl.toCurl(curl.MappedRequest(
@@ -56,8 +57,8 @@ class HTTPRequest {
         body: body,
         headers: headers,
       )));
-      var response = await http.post(Uri.parse(url),
-          body: body, headers: headers);
+      var response =
+          await http.post(Uri.parse(url), body: body, headers: headers);
       log("From Post Http Page ${response.body}");
       var processedResponse = responseHandler?.processResponse(response);
       return returnResponse(processedResponse);

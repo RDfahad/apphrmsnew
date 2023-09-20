@@ -29,6 +29,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   Future<void> loginUser({String? email, String? password}) async {
     try {
+      print('asd');
       emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
       LoginUserModel userLogin =
           await authenticationRepo.loginUser(email: email, password: password);

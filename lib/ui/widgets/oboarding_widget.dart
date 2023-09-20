@@ -1,18 +1,16 @@
 
 import 'package:flutter/material.dart';
+import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../screens/onboarding/bloc/onboarding_state.dart';
 
 class OnboardingWidget{
   Widget buildDots({required BuildContext context, required int index, required OnboardingState onboardingState}) {
     return Container(
-      width: 10,
-      height: 10,
-      margin: const EdgeInsets.only(right: 5),
-      decoration: BoxDecoration(
-          color: onboardingState.index == index
-              ? const Color(0xFFAC4FC6)
-              : const Color(0xFF8194DD),
-          shape: BoxShape.circle),
+      padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth *0.01),
+      margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth *0.01),
+      height: 3,
+      width: context.getScreenWidth * 0.28,
+      color: onboardingState.index == index ? Colors.white : Colors.grey,
     );
   }
 }

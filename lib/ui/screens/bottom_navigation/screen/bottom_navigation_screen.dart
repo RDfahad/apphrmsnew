@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/attendance/screen/emp_attendance.dart';
-import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
+import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
+import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
+import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '../../attendance/screen/attendance_overview.dart';
+import '../../dashboard/view/leave_request.dart';
+import '../../profile/view/profile_screen.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/ui/screens/detail/screen/detail_screen.dart';
 import '/utils/app_color.dart';
@@ -12,54 +17,112 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomNavigationCubit, BottomNavigationTabState>(
+    return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, selectedTab) {
         return WillPopScope(
           onWillPop: () {
             return Future.value(false);
           },
-          child: Scaffold(
-            // appBar: AppBar(),
-            body: _getBodyForTab(selectedTab),
-            bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
-              selectedItemColor: AppColor.primaryButtonColor,
-              unselectedItemColor: AppColor.whiteColor,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              currentIndex: selectedTab.index,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.square_grid_2x2),
-                  label: 'Tab 1',
-                ),
-                BottomNavigationBarItem(
-                  icon: Badge(
-                      label: Text(
+          child: CustomLoaderWidget(
+            isLoading: selectedTab.isLoading,
+            child: Scaffold(
+              body: _getBodyForTab(selectedTab.bottomNavigationTabState),
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
+                selectedItemColor: AppColor.whiteColor,
+                unselectedItemColor: AppColor.whiteColor,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                currentIndex: selectedTab.bottomNavigationTabState.index,
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Container(
+                      width: context.getScreenWidth * 0.1,
+                      height: context.getScreenHeight * 0.05,
+                      decoration: BoxDecoration(
+                          color: selectedTab.bottomNavigationTabState.index == 0
+                              ? AppColor.primaryColor
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                          child: Icon(
+                        CupertinoIcons.square_grid_2x2,
+                      )),
+                    ),
+                    label: 'Tab 1',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Badge(
+                      label: const Text(
                         "1",
                         style: TextStyle(color: AppColor.primaryTextWhiteColor),
                       ),
                       backgroundColor: AppColor.redColor,
-                      child: Icon(CupertinoIcons.chat_bubble_text)),
-                  label: 'Tab 2',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_month_rounded),
-                  label: 'Tab 3',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person_pin_rounded),
-                  label: 'Tab 4',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: 'Tab 5',
-                ),
-              ],
-              onTap: (index) {
-                final selectedTab = BottomNavigationTabState.values[index];
-                context.read<BottomNavigationCubit>().changeTab(selectedTab);
-              },
+                      child: Container(
+                        width: context.getScreenWidth * 0.1,
+                        height: context.getScreenHeight * 0.05,
+                        decoration: BoxDecoration(
+                            color:
+                                selectedTab.bottomNavigationTabState.index == 1
+                                    ? AppColor.primaryColor
+                                    : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: const Center(
+                            child: Icon(CupertinoIcons.chat_bubble_text)),
+                      ),
+                    ),
+                    label: 'Tab 2',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Container(
+                      width: context.getScreenWidth * 0.1,
+                      height: context.getScreenHeight * 0.05,
+                      decoration: BoxDecoration(
+                          color: selectedTab.bottomNavigationTabState.index == 2
+                              ? AppColor.primaryColor
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                          child: Icon(Icons.calendar_month_rounded)),
+                    ),
+                    label: 'Tab 3',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Container(
+                      width: context.getScreenWidth * 0.1,
+                      height: context.getScreenHeight * 0.05,
+                      decoration: BoxDecoration(
+                          color: selectedTab.bottomNavigationTabState.index == 3
+                              ? AppColor.primaryColor
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                        child: Icon(Icons.person_pin_rounded),
+                      ),
+                    ),
+                    label: 'Tab 4',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Container(
+                      width: context.getScreenWidth * 0.1,
+                      height: context.getScreenHeight * 0.05,
+                      decoration: BoxDecoration(
+                          color: selectedTab.bottomNavigationTabState.index == 4
+                              ? AppColor.primaryColor
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                        child: Icon(Icons.settings),
+                      ),
+                    ),
+                    label: 'Tab 5',
+                  ),
+                ],
+                onTap: (index) {
+                  final selectedTab = BottomNavigationTabState.values[index];
+                  context.read<DashboardCubit>().changeTab(selectedTab);
+                },
+              ),
             ),
           ),
         );
@@ -72,10 +135,12 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.homeScreen:
         return DashBoardScreenNew();
       case BottomNavigationTabState.attendance:
-        return AttendanceScreen();
-      case BottomNavigationTabState.detailreports:
+        return AttendanceOverViewScreen();
+      case BottomNavigationTabState.detailReports:
         return DetailScreen();
       case BottomNavigationTabState.profile:
+        return const ProfileScreen();
+      case BottomNavigationTabState.setting:
         return Container(
           color: Colors.black,
         );
@@ -84,3 +149,147 @@ class BottomNavigationScreen extends StatelessWidget {
     }
   }
 }
+
+// class BottomNavigationScreen extends StatelessWidget {
+//   const BottomNavigationScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<DashboardCubit, DashboardState>(
+//       builder: (context, selectedTab) {
+//         return WillPopScope(
+//           onWillPop: () {
+//             return Future.value(false);
+//           },
+//           child: CustomLoaderWidget(
+//             isLoading: selectedTab.isLoading,
+//             child: CupertinoTabScaffold(
+//               tabBar: CupertinoTabBar(
+//                 height: kBottomNavigationBarHeight + 10,
+//                 backgroundColor: CupertinoColors.black,
+//                 activeColor: CupertinoColors.white,
+//                 inactiveColor: CupertinoColors.white,
+//                 iconSize: 24.0,
+//                 items: [
+//                   BottomNavigationBarItem(
+//                     icon: Container(
+//                       width: context.getScreenWidth * 0.1,
+//                       height: context.getScreenHeight * 0.05,
+//                       decoration: BoxDecoration(
+//                           color: selectedTab.bottomNavigationTabState.index == 0
+//                               ? AppColor.primaryColor
+//                               : Colors.transparent,
+//                           borderRadius: BorderRadius.circular(8)),
+//                       child: const Center(
+//                           child: Icon(
+//                         CupertinoIcons.square_grid_2x2,
+//                       )),
+//                     ),
+//                     // label: 'Tab 1',
+//                   ),
+//                   BottomNavigationBarItem(
+//                     icon: Badge(
+//                       label: const Text(
+//                         "1",
+//                         style: TextStyle(color: AppColor.primaryTextWhiteColor),
+//                       ),
+//                       backgroundColor: AppColor.redColor,
+//                       child: Container(
+//                         width: context.getScreenWidth * 0.1,
+//                         height: context.getScreenHeight * 0.05,
+//                         decoration: BoxDecoration(
+//                             color:
+//                                 selectedTab.bottomNavigationTabState.index == 1
+//                                     ? AppColor.primaryColor
+//                                     : Colors.transparent,
+//                             borderRadius: BorderRadius.circular(8)),
+//                         child: const Center(
+//                             child: Icon(CupertinoIcons.chat_bubble_text)),
+//                       ),
+//                     ),
+//                   ),
+//                   BottomNavigationBarItem(
+//                     icon: Container(
+//                       width: context.getScreenWidth * 0.1,
+//                       height: context.getScreenHeight * 0.05,
+//                       decoration: BoxDecoration(
+//                           color: selectedTab.bottomNavigationTabState.index == 2
+//                               ? AppColor.primaryColor
+//                               : Colors.transparent,
+//                           borderRadius: BorderRadius.circular(8)),
+//                       child: const Center(
+//                           child: Icon(Icons.calendar_month_rounded)),
+//                     ),
+//                   ),
+//                   BottomNavigationBarItem(
+//                     icon: Container(
+//                       width: context.getScreenWidth * 0.1,
+//                       height: context.getScreenHeight * 0.05,
+//                       decoration: BoxDecoration(
+//                           color: selectedTab.bottomNavigationTabState.index == 3
+//                               ? AppColor.primaryColor
+//                               : Colors.transparent,
+//                           borderRadius: BorderRadius.circular(8)),
+//                       child: const Center(
+//                         child: Icon(Icons.person_pin_rounded),
+//                       ),
+//                     ),
+//                   ),
+//                   BottomNavigationBarItem(
+//                     icon: Container(
+//                       width: context.getScreenWidth * 0.1,
+//                       height: context.getScreenHeight * 0.05,
+//                       decoration: BoxDecoration(
+//                           color: selectedTab.bottomNavigationTabState.index == 4
+//                               ? AppColor.primaryColor
+//                               : Colors.transparent,
+//                           borderRadius: BorderRadius.circular(8)),
+//                       child: const Center(
+//                         child: Icon(Icons.settings),
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//                 currentIndex: selectedTab.bottomNavigationTabState.index,
+//                 onTap: (index) {
+//                   final selectedTab = BottomNavigationTabState.values[index];
+//                   context.read<DashboardCubit>().changeTab(selectedTab);
+//                 },
+//               ),
+//               tabBuilder: (context, index) {
+//                 switch (selectedTab.bottomNavigationTabState) {
+//                   case BottomNavigationTabState.homeScreen:
+//                     return CupertinoTabView(
+//                       builder: (context) => DashBoardScreenNew(),
+//                     );
+//                   case BottomNavigationTabState.attendance:
+//                     return CupertinoTabView(
+//                       builder: (context) => LeaveRequestScreen(),
+//                     );
+//                   case BottomNavigationTabState.detailReports:
+//                     return CupertinoTabView(
+//                       builder: (context) => DetailScreen(),
+//                     );
+//                   case BottomNavigationTabState.profile:
+//                     return CupertinoTabView(
+//                       builder: (context) => ProfileScreen(),
+//                     );
+//                   case BottomNavigationTabState.setting:
+//                     return CupertinoTabView(
+//                       builder: (context) => Container(
+//                         color: CupertinoColors.black,
+//                       ),
+//                     );
+//                   default:
+//                     return CupertinoTabView(
+//                       builder: (context) => Container(),
+//                     );
+//                 }
+//               },
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
