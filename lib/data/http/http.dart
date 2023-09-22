@@ -8,7 +8,7 @@ import 'curl_base.dart' as curl;
 class HTTPRequest {
   ResponseHandler? responseHandler = GetIt.I<ResponseHandler>();
 
-  get(
+  Future<dynamic> get(
       {required String url,
       Map<String, dynamic>? queryParameters,
       String? token}) async {
@@ -18,7 +18,7 @@ class HTTPRequest {
       var headers = {
         'Authorization': token != null ? 'Bearer $token' : '',
       //  'Authorization': token ?? '',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
       };
       log(curl.toCurl(curl.MappedRequest(
         method: 'GET',
@@ -33,11 +33,11 @@ class HTTPRequest {
       var processedResponse = responseHandler?.processResponse(response);
       return returnResponse(processedResponse);
     } catch (e) {
-      return e;
+      rethrow;
     }
   }
 
-  post(
+  Future<dynamic> post(
       {required String url,
       Map<String, dynamic>? body,
       Map<String, dynamic>? queryParameters,
@@ -103,7 +103,7 @@ class ResponseHandler {
       var decodedRes = json.decode(response.body);
       throw HttpCustomException(
           code: response.statusCode,
-          errorCode: '400',
+          errorCode: parseErrorCode(decodedRes),
           message: parseErrorMessage(decodedRes));
     }
   }
@@ -113,6 +113,6 @@ class ResponseHandler {
   }
 
   parseErrorCode(body) {
-    return body['responseCode'].toString();
+    return body['responseCode'];
   }
 }

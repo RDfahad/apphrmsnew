@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
-import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
+import '../../../../utils/constants.dart';
 import '../../../../utils/hive_db/hive_db.dart';
 import '../../../widgets/fl_charts/bar_graph.dart';
 import '../../../widgets/icon-card.dart';
@@ -39,7 +39,7 @@ class DashBoardScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                HiveStorage().putData("isLogIn", false);
+                HiveStorage().putData(GlobalConstants.isLogIn, false);
                 Config.isLoggedIn = false;
                 Navigator.push(
                     context, CupertinoPageRoute(builder: (_) => LoginScreen()));
@@ -154,7 +154,16 @@ class DashBoardScreenNew extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
-      body: BlocBuilder<DashboardCubit,DashboardState>(
+      body: BlocConsumer<DashboardCubit,DashboardState>(
+        listener: (context, state){
+          if(state.isTokenExpired){
+            context.read<DashboardCubit>().changeExpiryStatus(false);
+            HiveStorage().putData(GlobalConstants.isLogIn, false);
+            Config.isLoggedIn = false;
+            Navigator.pushReplacement(
+                context, CupertinoPageRoute(builder: (_) => SignInScreen()));
+          }
+        },
         builder: (context, state){
           return Padding(
             padding:
