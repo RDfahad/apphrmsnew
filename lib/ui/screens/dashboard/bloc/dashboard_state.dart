@@ -7,24 +7,25 @@ enum BottomNavigationTabState {
   homeScreen,
   attendance,
   detailReports,
-  profile,
-  setting
+  profile
 }
 
 class DashboardState {
   final String token;
   final bool isLoading;
+  final bool isTokenExpired;
   final UserData userData;
   final hiveStorage = HiveStorage();
   final BottomNavigationTabState bottomNavigationTabState;
 /////Dummy Work ///////////
-  final AttendanceRecords attendanceRecords;
+  final AttendenceObject attendanceRecords;
 
 ////////////////////////////////////////////////////////////////
 
   DashboardState({
     required this.token,
     required this.isLoading,
+    required this.isTokenExpired,
     required this.userData,
     required this.bottomNavigationTabState,
     required this.attendanceRecords,
@@ -33,20 +34,23 @@ class DashboardState {
   factory DashboardState.init() => DashboardState(
         token: '',
         isLoading: false,
+        isTokenExpired: false,
         userData: UserData(),
         bottomNavigationTabState: BottomNavigationTabState.homeScreen,
-        attendanceRecords: AttendanceRecords(),
+        attendanceRecords: AttendenceObject(),
       );
 
   DashboardState copyWith(
       {String? token,
       bool? isLoading,
+      bool? isTokenExpired,
       UserData? userData,
       BottomNavigationTabState? bottomNavigationTabState,
-      AttendanceRecords? attendanceRecords}) {
+        AttendenceObject? attendanceRecords}) {
     return DashboardState(
       token: token ?? this.token,
       isLoading: isLoading ?? this.isLoading,
+      isTokenExpired: isTokenExpired ?? this.isTokenExpired,
       userData: userData ?? this.userData,
       bottomNavigationTabState:
           bottomNavigationTabState ?? this.bottomNavigationTabState,

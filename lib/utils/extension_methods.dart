@@ -11,13 +11,11 @@ extension ScreenConfig on BuildContext {
 
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 }
+
 extension DateParsingExtension on String {
   Duration difference(String otherDate) {
     DateTime startDate = DateTime.parse(this);
     DateTime endDate = DateTime.parse(otherDate);
-    return startDate.difference(endDate);
+    return endDate.difference(startDate);
   }
 }
-
-
-

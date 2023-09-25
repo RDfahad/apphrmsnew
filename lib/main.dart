@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hr_emp_proj/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
 import 'package:hr_emp_proj/domain/repository/attendance_repo/attendance_repo.dart';
-import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
+import 'package:hr_emp_proj/ui/screens/attendance/cubit/attendance_cubit.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
@@ -13,15 +13,12 @@ import '/ui/screens/onboarding/view/onboarding_screen.dart';
 import 'data/http/http.dart';
 import 'data/repository_implement/authentication_repo_impl/authentication_repo_implement.dart';
 import 'domain/repository/authentication_repo/authentication_repo.dart';
-import 'ui/screens/attendance/screen/attendance_overview.dart';
-import 'ui/widgets/fl_charts/fl_line_chart/fl_line_chart.dart';
 
 final GetIt getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // HTTPRequest().post(url: 'url');
   getIt.registerSingleton(ResponseHandler());
   getIt.registerSingleton(HTTPRequest());
   getIt.registerSingleton<AuthenticationRepo>(
@@ -43,7 +40,13 @@ void main() async {
             create: (BuildContext context) => AuthenticationCubit(getIt())),
         BlocProvider(
             create: (BuildContext context) =>
-                DashboardCubit(getIt(), getIt())..refreshToken()),
+                DashboardCubit(getIt())..refreshToken()),
+        BlocProvider(
+            create: (BuildContext context) => AttendanceCubit(getIt())),
+
+////Dummy For Testing
+        BlocProvider(
+            create: (BuildContext context) => PaginationCubit(getIt())),
       ],
       child: const MyApp(),
     ),
@@ -76,7 +79,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: const OnboardingScreen(),
+      home: OnboardingScreen(),
     );
   }
 }

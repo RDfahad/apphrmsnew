@@ -1,6 +1,14 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '../../../../domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../../utils/app_color.dart';
+import '../../../../utils/configuration.dart';
+import '../../../../utils/constants.dart';
+import '../../../../utils/hive_db/hive_db.dart';
+import '../../authentication/view/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -176,6 +184,20 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
+                      onTap: () {
+                        HiveStorage().putData(GlobalConstants.isLogIn, false);
+                        //Extra Work////////////////////////////////
+                        HiveStorage().putData(
+                            GlobalConstants.userDate,
+                            jsonEncode(
+                                UserData(user: User(), token: "", tokenType: "")
+                                    .toJson()));
+                        ////////////////////////////////////////////////////////////////
+
+                        Config.isLoggedIn = false;
+                        Navigator.pushReplacement(context,
+                            CupertinoPageRoute(builder: (_) => SignInScreen()));
+                      },
                       title: const Text(
                         'Logout',
                         style: TextStyle(color: AppColor.blackColor),

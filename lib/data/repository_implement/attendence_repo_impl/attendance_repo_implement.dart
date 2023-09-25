@@ -10,11 +10,19 @@ class AttendanceRepoImpl implements AttendanceRepo {
   AttendanceRepoImpl({required this.httpRequest});
 
   @override
-  Future<AttendanceRecords> getAttendance() async {
+  Future<AttendanceRecords> getAttendance(
+      {int? perPage, int? pageNumber}) async {
     try {
-    //this should be get
+      //this should be get
+      var queryParams = {
+        "page": pageNumber ?? 0,
+        "per_page": perPage ?? 6,
+      };
       var response = await httpRequest?.get(
-          url: paths.getAttendanceRecord, token: Config.authorization);
+        url: paths.getAttendanceRecord,
+        token: Config.authorization,
+        queryParameters: queryParams,
+      );
       return AttendanceRecords.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);

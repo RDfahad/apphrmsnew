@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../utils/configuration.dart';
+import '../../../../utils/constants.dart';
 import '/domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/repository/authentication_repo/authentication_repo.dart';
@@ -21,28 +24,32 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
     if (state.emailController.text.isNotEmpty) {
       emit(state.copyWith(isIconFieldColorEnabled: true));
-    }
-    else{
+    } else {
       emit(state.copyWith(isIconFieldColorEnabled: false));
     }
   }
 
   Future<void> loginUser({String? email, String? password}) async {
-    try {
+    if (kDebugMode) {
       print('asd');
-      emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
-      LoginUserModel userLogin =
-          await authenticationRepo.loginUser(email: email, password: password);
+    }
+    emit(state.copyWith(
+        loginLoading: true,
+        loginSuccessfull: false,
+        error: false,
+        errorMessage: ''));
+    await authenticationRepo.loginUser(email: email, password: password).then(
+        (userLogin) {
       if (userLogin.data != null) {
         state.hiveStorage.putData(
-            "userdata",
+            GlobalConstants.userDate,
             jsonEncode(UserData(
                     user: userLogin.data!.user,
                     token: userLogin.data!.token,
                     tokenType: userLogin.data!.tokenType)
                 .toJson()));
-        state.hiveStorage.putData(
-            "isLogIn",true);
+        state.hiveStorage.putData(GlobalConstants.isLogIn, true);
+        Config.authorization = userLogin.data?.token ?? '';
       }
       emit(state.copyWith(
         loginLoading: false,
@@ -50,9 +57,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         loginUserModel: userLogin,
         isIconFieldColorEnabled: false,
       ));
-    } catch (e) {
-      log("Log From Cubit Eror $e");
-
+    }, onError: (e) {
+      log("Log From Cubit Eror ${e.errorCode}");
       ExceptionHandler().handleException(e);
       emit(state.copyWith(
         loginLoading: false,
@@ -61,7 +67,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         loginSuccessfull: false,
         isIconFieldColorEnabled: false,
       ));
-    }
+    });
   }
 
   removeError() {

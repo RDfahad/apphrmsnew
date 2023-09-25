@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/domain/entities/attendance/attendance_records.dart';
+import '../../../widgets/attendance_list_card.dart';
 import '../../../widgets/status_card.dart';
 import '/ui/widgets/custom_app_bar.dart';
 import '/utils/app_color.dart';
@@ -58,7 +56,7 @@ class LeaveRequestScreen extends StatelessWidget {
 
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(height: context.getScreenHeight * 0.02),
             StatusCard(listColor: listColor, listCards: listCards),
@@ -89,64 +87,86 @@ class LeaveRequestScreen extends StatelessWidget {
             ),
             SizedBox(height: context.getScreenHeight * 0.03),
             Container(
-              padding: const EdgeInsets.all(15),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
+              height: context.getScreenHeight * 0.08,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
                 color: AppColor.whiteColor,
+                boxShadow: const [
+                  BoxShadow(
+                    spreadRadius: 1,
+                    color: AppColor.whiteColor,
+                    blurRadius: 5,
+                  ),
+                ],
               ),
+              padding: const EdgeInsets.all(16.0),
               child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Text(
-                      ' From',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: AppColor.blackColor,
-                      ),
+                  Text(
+                    "Date",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.secondaryTextColor,
                     ),
                   ),
-                  Expanded(
-                    child: Text(
-                      'To',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: AppColor.blackColor,
-                      ),
+                  Text(
+                    "Time In",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.secondaryTextColor,
                     ),
                   ),
-                  Expanded(
-                    child: Text(
-                      'Status',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: AppColor.blackColor,
-                      ),
+                  Text(
+                    "Time Out",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.secondaryTextColor,
+                    ),
+                  ),
+                  Text(
+                    "Working Hrs",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.secondaryTextColor,
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                color: AppColor.whiteColor,
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return AttendenceOverview(
+            SizedBox(height: context.getScreenHeight * 0.03),
+            Container(
+              color: AppColor.whiteColor,
+              child: ListView.separated(
+                separatorBuilder: (context, index){
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
+                    child: Divider(
+                      color: Colors.grey.shade300,
+                      thickness: 0.5,
+                    ),
+                  );
+                },
+                shrinkWrap: true,
+                itemCount: 10,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 5),
+                    child: const AttendenceListCard(
                       date: '2023-09-15',
                       timeIn: '2023-09-20',
                       timeOut: 'Approved',
-                      workingHr: "  ",
-                    );
-                  },
-                ),
+                      workingHr: "9",
+                    ),
+                  );
+                },
               ),
-            )
+            ),
+            SizedBox(height: context.getScreenHeight * 0.03),
           ],
         ),
       ),
@@ -154,133 +174,6 @@ class LeaveRequestScreen extends StatelessWidget {
       //        ),
       //   ],
       // ),
-    );
-  }
-}
-
-class AttendenceOverview extends StatelessWidget {
-  final String date;
-  final String timeIn;
-  final String timeOut;
-  final String workingHr;
-
-  AttendenceOverview({
-    super.key,
-    required this.date,
-    required this.timeIn,
-    required this.timeOut,
-    required this.workingHr,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: context.getScreenHeight * 0.04,
-      // decoration: BoxDecoration(
-      //   boxShadow: [
-      //     BoxShadow(
-      //       spreadRadius: 5,
-      //       color: Colors.grey.shade300,
-      //       blurRadius: 2,
-      //     ),
-      //   ],
-      color: AppColor.whiteColor,
-      //   borderRadius: BorderRadius.circular(16),
-      // ),
-      padding: EdgeInsets.only(top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            date,
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            timeIn,
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            '$timeOut',
-            style: TextStyle(
-                color: timeOut == "absent"
-                    ? AppColor.redColor
-                    : AppColor.primaryTextBlackColor),
-          ),
-          Text(
-            '$workingHr',
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class AttendenceOverview1 extends StatelessWidget {
-  final AttendenceObject attendanceObject;
-
-  final int index;
-
-  const AttendenceOverview1({
-    super.key,
-    required this.attendanceObject,
-    required this.index,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: context.getScreenHeight * 0.04,
-      // decoration: BoxDecoration(
-      //   boxShadow: [
-      //     BoxShadow(
-      //       spreadRadius: 5,
-      //       color: Colors.grey.shade300,
-      //       blurRadius: 2,
-      //     ),
-      //   ],
-      color: AppColor.whiteColor,
-      //   borderRadius: BorderRadius.circular(16),
-      // ),
-      padding: EdgeInsets.only(top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            attendanceObject.data![index].date.toString(),
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            attendanceObject.data![index].checkInTime.toString(),
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-          Text(
-            '${attendanceObject.data?[index].checkOutTime ?? ""}',
-            style: TextStyle(
-                color: attendanceObject.data?[index].checkOutTime == "absent"
-                    ? AppColor.redColor
-                    : AppColor.primaryTextBlackColor),
-          ),
-          Text(
-            '9',
-            style: const TextStyle(
-              color: AppColor.primaryTextBlackColor,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

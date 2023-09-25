@@ -2,15 +2,24 @@
 
 Path paths = Path();
 
+enum EnvironmentType{local, live}
+
 class Path{
-  Map<String,String> defaultUrl = {
+
+  Map<String,String> defaultLiveUrl2 = {
     'baseUrl' : 'http://192.168.100.38:8083',
     'api_route' : 'api/app',
   };
 
-  String get customerLogin => '${defaultUrl['baseUrl']}/${defaultUrl['api_route']}/login';
+  Map<String,String> defaultLiveUrl = {
+    'baseUrl' : 'http://hrm.manxel.com',
+    'api_route' : 'api/app',
+  };
 
-  String get refreshToken => '${defaultUrl['baseUrl']}/${defaultUrl['api_route']}/refresh_token';
 
-  String get getAttendanceRecord => '${defaultUrl['baseUrl']}/${defaultUrl['api_route']}/get_attendance';
+  String get customerLogin => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/login';
+
+  String get refreshToken => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/refresh_token';
+
+  String get getAttendanceRecord => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/get_attendance';
 }

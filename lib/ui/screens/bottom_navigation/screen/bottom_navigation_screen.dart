@@ -9,7 +9,6 @@ import '../../attendance/screen/attendance_overview.dart';
 import '../../dashboard/view/leave_request.dart';
 import '../../profile/view/profile_screen.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
-import '/ui/screens/detail/screen/detail_screen.dart';
 import '/utils/app_color.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
@@ -52,24 +51,18 @@ class BottomNavigationScreen extends StatelessWidget {
                     label: 'Tab 1',
                   ),
                   BottomNavigationBarItem(
-                    icon: Badge(
-                      label: const Text(
-                        "1",
-                        style: TextStyle(color: AppColor.primaryTextWhiteColor),
-                      ),
-                      backgroundColor: AppColor.redColor,
-                      child: Container(
-                        width: context.getScreenWidth * 0.1,
-                        height: context.getScreenHeight * 0.05,
-                        decoration: BoxDecoration(
-                            color:
-                                selectedTab.bottomNavigationTabState.index == 1
-                                    ? AppColor.primaryColor
-                                    : Colors.transparent,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: const Center(
-                            child: Icon(CupertinoIcons.chat_bubble_text)),
-                      ),
+                    icon: Container(
+                      width: context.getScreenWidth * 0.1,
+                      height: context.getScreenHeight * 0.05,
+                      decoration: BoxDecoration(
+                          color: selectedTab.bottomNavigationTabState.index == 1
+                              ? AppColor.primaryColor
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                          child: Icon(
+                        Icons.calendar_today_rounded,
+                      )),
                     ),
                     label: 'Tab 2',
                   ),
@@ -82,8 +75,7 @@ class BottomNavigationScreen extends StatelessWidget {
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
-                      child: const Center(
-                          child: Icon(Icons.calendar_month_rounded)),
+                      child: const Center(child: Icon(Icons.layers_outlined)),
                     ),
                     label: 'Tab 3',
                   ),
@@ -102,21 +94,21 @@ class BottomNavigationScreen extends StatelessWidget {
                     ),
                     label: 'Tab 4',
                   ),
-                  BottomNavigationBarItem(
-                    icon: Container(
-                      width: context.getScreenWidth * 0.1,
-                      height: context.getScreenHeight * 0.05,
-                      decoration: BoxDecoration(
-                          color: selectedTab.bottomNavigationTabState.index == 4
-                              ? AppColor.primaryColor
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: const Center(
-                        child: Icon(Icons.settings),
-                      ),
-                    ),
-                    label: 'Tab 5',
-                  ),
+                  // BottomNavigationBarItem(
+                  //   icon: Container(
+                  //     width: context.getScreenWidth * 0.1,
+                  //     height: context.getScreenHeight * 0.05,
+                  //     decoration: BoxDecoration(
+                  //         color: selectedTab.bottomNavigationTabState.index == 4
+                  //             ? AppColor.primaryColor
+                  //             : Colors.transparent,
+                  //         borderRadius: BorderRadius.circular(8)),
+                  //     child: const Center(
+                  //       child: Icon(Icons.settings),
+                  //     ),
+                  //   ),
+                  //   label: 'Tab 5',
+                  // ),
                 ],
                 onTap: (index) {
                   final selectedTab = BottomNavigationTabState.values[index];
@@ -137,15 +129,13 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.attendance:
         return AttendanceOverViewScreen();
       case BottomNavigationTabState.detailReports:
-        return DetailScreen();
+        return LeaveRequestScreen();
       case BottomNavigationTabState.profile:
         return const ProfileScreen();
-      case BottomNavigationTabState.setting:
+      default:
         return Container(
           color: Colors.black,
         );
-      default:
-        return Container();
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../dialog/generic_dialog.dart';
+import 'generic_dialog.dart';
 
 Future<bool> showLogoutDialog(BuildContext context) {
   return showGenericDialog(
