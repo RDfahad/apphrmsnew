@@ -16,30 +16,34 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardCubit, DashboardState>(
-      builder: (context, selectedTab) {
+    return BlocConsumer(
+      bloc: BlocProvider.of<DashboardCubit>(context),
+      listener: (context,DashboardState state){
+
+    },
+      builder: (context,DashboardState state) {
         return WillPopScope(
           onWillPop: () {
             return Future.value(false);
           },
           child: CustomLoaderWidget(
-            isLoading: selectedTab.isLoading,
+            isLoading: state.isLoading,
             child: Scaffold(
-              body: _getBodyForTab(selectedTab.bottomNavigationTabState),
+              body: _getBodyForTab(state.bottomNavigationTabState),
               bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
                 selectedItemColor: AppColor.whiteColor,
                 unselectedItemColor: AppColor.whiteColor,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
-                currentIndex: selectedTab.bottomNavigationTabState.index,
+                currentIndex: state.bottomNavigationTabState.index,
                 items: [
                   BottomNavigationBarItem(
                     icon: Container(
                       width: context.getScreenWidth * 0.1,
                       height: context.getScreenHeight * 0.05,
                       decoration: BoxDecoration(
-                          color: selectedTab.bottomNavigationTabState.index == 0
+                          color: state.bottomNavigationTabState.index == 0
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
@@ -56,7 +60,7 @@ class BottomNavigationScreen extends StatelessWidget {
                       height: context.getScreenHeight * 0.05,
                       decoration: BoxDecoration(
                           color:
-                              selectedTab.bottomNavigationTabState.index == 1
+                          state.bottomNavigationTabState.index == 1
                                   ? AppColor.primaryColor
                                   : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
@@ -70,7 +74,7 @@ class BottomNavigationScreen extends StatelessWidget {
                       width: context.getScreenWidth * 0.1,
                       height: context.getScreenHeight * 0.05,
                       decoration: BoxDecoration(
-                          color: selectedTab.bottomNavigationTabState.index == 2
+                          color: state.bottomNavigationTabState.index == 2
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
@@ -84,7 +88,7 @@ class BottomNavigationScreen extends StatelessWidget {
                       width: context.getScreenWidth * 0.1,
                       height: context.getScreenHeight * 0.05,
                       decoration: BoxDecoration(
-                          color: selectedTab.bottomNavigationTabState.index == 3
+                          color: state.bottomNavigationTabState.index == 3
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),

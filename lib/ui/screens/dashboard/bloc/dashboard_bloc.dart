@@ -38,7 +38,6 @@ class DashboardCubit extends Cubit<DashboardState> {
           }else{
             emit(state.copyWith(isLoading: false));
           }
-
         });
       }
       emit(state.copyWith(isLoading: false, userData: userData));
@@ -49,4 +48,10 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   void changeExpiryStatus(bool expiryStatus) =>
       emit(state.copyWith(isTokenExpired: false));
+
+  // @override
+  // Future<void> close() {
+  //   // TODO: implement close
+  //   return super.close();
+  // }
 }

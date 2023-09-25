@@ -16,8 +16,9 @@ class AttendanceOverViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
-      body: BlocBuilder<AttendanceCubit, AttendanceState>(
-        builder: (context, state) {
+      body: BlocBuilder(
+        bloc: BlocProvider.of<AttendanceCubit>(context)..getAttendance(),
+        builder: (context,AttendanceState state) {
           return Padding(
             padding: EdgeInsets.symmetric(
               horizontal: context.getScreenWidth * 0.05,

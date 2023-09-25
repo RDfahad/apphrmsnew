@@ -8,9 +8,7 @@ import '/ui/screens/attendance/cubit/attendance_state.dart';
 class AttendanceCubit extends Cubit<AttendanceState> {
   final AttendanceRepo attendanceRepo;
 
-  AttendanceCubit(this.attendanceRepo) : super(AttendanceState.init()){
-    getAttendance();
-  }
+  AttendanceCubit(this.attendanceRepo) : super(AttendanceState.init());
 
   getAttendance() async {
     if(!state.loadMore) {
@@ -34,5 +32,12 @@ class AttendanceCubit extends Cubit<AttendanceState> {
         ExceptionHandler().handleException(e);
       }
     }
+  }
+
+  @override
+  Future<void> close() {
+    // TODO: implement close
+    emit(AttendanceState.init());
+    return super.close();
   }
 }
