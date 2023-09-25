@@ -217,7 +217,7 @@ class DashBoardScreenNew extends StatelessWidget {
                                 fontWeight: FontWeight.w600),
                           ),
                           const Text(
-                            "Director HR & Operations",
+                            "Sr Mobile App Developer",
                             style: TextStyle(
                                 color: AppColor.primaryTextWhiteColor,
                                 fontSize: 14,
@@ -233,7 +233,7 @@ class DashBoardScreenNew extends StatelessWidget {
                                 color: AppColor.primaryTextWhiteColor,
                               ),
                               Text(
-                                "Director HR & Operations",
+                                "25-09-2023",
                                 style: TextStyle(
                                     color: AppColor.primaryTextWhiteColor,
                                     fontSize: 12,
