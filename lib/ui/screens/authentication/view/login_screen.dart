@@ -187,7 +187,6 @@ class SignInScreen extends StatelessWidget {
       bloc: BlocProvider.of<AuthenticationCubit>(context)..init(),
         listener: (context,AuthenticationState state) {
           if (state.loginSuccessfull) {
-            print('done');
             context.read<AuthenticationCubit>().removeError();
             Navigator.pushReplacement(
                 context,

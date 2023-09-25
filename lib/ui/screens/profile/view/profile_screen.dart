@@ -202,8 +202,10 @@ class ProfileScreen extends StatelessWidget {
                             HiveStorage().putData(GlobalConstants.isLogIn, false);
                             Config.isLoggedIn = false;
                             context.read<DashboardCubit>().changeTab(BottomNavigationTabState.homeScreen);
-                            Navigator.pushReplacement(
-                                context, CupertinoPageRoute(builder: (_) => SignInScreen()));
+                            // Navigator.pushReplacement(
+                            //     context, CupertinoPageRoute(builder: (_) => SignInScreen()));
+                            Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) =>
+                                SignInScreen()), (Route<dynamic> route) => false);
                           },
                           title: const Text(
                             'Logout',
@@ -316,16 +318,18 @@ class ProfileScreen extends StatelessWidget {
                                       if(isAuthenticated){
                                         HiveStorage().putData(
                                             GlobalConstants.isBiometricEnabled,
-                                            value);
+                                            true);
                                         context.read<ProfileCubit>().changeTouchId(
-                                            value);
+                                            true);
                                       }
-
                                 });
                               }
                               else{
+                                HiveStorage().putData(
+                                    GlobalConstants.isBiometricEnabled,
+                                    false);
                                 context.read<ProfileCubit>().changeTouchId(
-                                    value);
+                                    false);
                               }
                             },
                           ),

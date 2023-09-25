@@ -127,7 +127,7 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.homeScreen:
         return DashBoardScreenNew();
       case BottomNavigationTabState.attendance:
-        return const AttendanceOverViewScreen();
+        return AttendanceOverViewScreen();
       case BottomNavigationTabState.detailReports:
         return LeaveRequestScreen();
       case BottomNavigationTabState.profile:

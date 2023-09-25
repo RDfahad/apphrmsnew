@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/attendance/cubit/attendance_cubit.dart';
 import 'package:hr_emp_proj/ui/screens/attendance/cubit/attendance_state.dart';
 import 'package:hr_emp_proj/ui/widgets/fl_charts/fl_line_chart/fl_line_chart.dart';
-import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../../../../utils/app_color.dart';
 import '../../../../utils/helper.dart';
@@ -11,25 +10,30 @@ import '../../../widgets/attendance_list_card.dart';
 import '../../../widgets/time_data.dart';
 
 class AttendanceOverViewScreen extends StatelessWidget {
-  const AttendanceOverViewScreen({super.key});
+  AttendanceOverViewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: BlocBuilder<AttendanceCubit, AttendanceState>(
-        // listener: (context, state) {
-        //   // TODO: implement listener
-        // },
         builder: (context, state) {
-          return CustomLoaderWidget(
-            isLoading: state.isLoading,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.getScreenWidth * 0.05,
-                // vertical: context.getScreenHeight * 0.02,
-              ),
+          return Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.getScreenWidth * 0.05,
+            ),
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (ScrollNotification notification){
+                if(state.attendanceRecordScrollController.position.pixels ==
+                    state.attendanceRecordScrollController.position.maxScrollExtent &&
+                    !state.attendanceRecordScrollController.position.outOfRange){
+                    context.read<AttendanceCubit>().getAttendance();
+                }
+                // shouldCallAPI = true;
+                return true;
+              },
               child: CustomScrollView(
+                controller: state.attendanceRecordScrollController,
                 slivers: <Widget>[
                   SliverAppBar(
                     backgroundColor: AppColor.appBackgroundColor,
@@ -221,7 +225,7 @@ class AttendanceOverViewScreen extends StatelessWidget {
                     ]),
                   ),
                   SliverToBoxAdapter(
-                    child: Container(
+                    child:state.attendanceRecords.data?.isNotEmpty ?? false ?  Container(
                       // height: 100,
                       padding: const EdgeInsets.only(bottom: 20),
                       margin: const EdgeInsets.only(bottom: 20),
@@ -229,8 +233,7 @@ class AttendanceOverViewScreen extends StatelessWidget {
                         color: AppColor.whiteColor,
                         borderRadius: BorderRadius.circular(12)
                       ),
-                      child: ListView.separated(
-                        controller: attendanceRecordScrollController,
+                      child:  ListView.separated(
                         separatorBuilder: (context, index){
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
@@ -241,8 +244,8 @@ class AttendanceOverViewScreen extends StatelessWidget {
                           );
                         },
                         shrinkWrap: true,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount:  state.attendanceRecords.data?.length ?? 0,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount:  state.attendanceRecords.data!.length-1,
                           itemBuilder: (context, index){
                             return Container(
                               margin: const EdgeInsets.only(bottom: 5),
@@ -254,7 +257,7 @@ class AttendanceOverViewScreen extends StatelessWidget {
                                         ),
                             );
                           }),
-                    ),
+                    ): const Center(child: Text('No Attendance Found')),
                   ),
                 ],
               ),
