@@ -277,7 +277,7 @@ class AttendanceOverViewScreen extends StatelessWidget {
         builder: (context,AttendanceState state) {
           return Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: context.getScreenWidth * 0.05,
+              horizontal: context.getScreenWidth * 0.04,
             ),
             child: NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification notification) {
@@ -288,7 +288,6 @@ class AttendanceOverViewScreen extends StatelessWidget {
                         .attendanceRecordScrollController.position.outOfRange) {
                   context.read<AttendanceCubit>().getAttendance();
                 }
-                // shouldCallAPI = true;
                 return true;
               },
               child: CustomScrollView(

@@ -188,10 +188,8 @@ class SignInScreen extends StatelessWidget {
         listener: (context,AuthenticationState state) {
           if (state.loginSuccessfull) {
             context.read<AuthenticationCubit>().removeError();
-            Navigator.pushReplacement(
-                context,
-                CupertinoPageRoute(
-                    builder: (_) => const BottomNavigationScreen()));
+            Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) =>
+                const BottomNavigationScreen()), (Route<dynamic> route) => false);
           }
         },
         builder: (context,AuthenticationState state){

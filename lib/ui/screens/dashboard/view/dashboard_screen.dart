@@ -152,6 +152,9 @@ class DashBoardScreenNew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myCubit = BlocProvider.of<DashboardCubit>(context);
+    myCubit.refreshToken();
+
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: BlocConsumer<DashboardCubit,DashboardState>(
@@ -277,11 +280,18 @@ class DashBoardScreenNew extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: List.generate(
                                     5,
-                                        (index) => IconCard(
+                                        (index) => InkWell(
+                                          onTap: (){
+                                            if(index == 0){
+                                              context.read<DashboardCubit>().changeTab(BottomNavigationTabState.attendance);
+                                            }
+                                          },
+                                          child: IconCard(
                                       iconData: listIcon[index],
                                       iconName: listIconName[index],
                                       iconSize: 25,
                                     ),
+                                        ),
                                   ),
                                 ),
                                 SizedBox(height: context.getScreenHeight * 0.02),

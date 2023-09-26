@@ -13,6 +13,7 @@ import '../../../../utils/app_color.dart';
 import '../../../../utils/configuration.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/hive_db/hive_db.dart';
+import '../../attendance/cubit/attendance_cubit.dart';
 import '../../authentication/view/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -204,8 +205,10 @@ class ProfileScreen extends StatelessWidget {
                                         .toJson()));
                             HiveStorage().putData(GlobalConstants.isLogIn, false);
                             Config.isLoggedIn = false;
+                            Config.authorization = '';
                             context.read<DashboardCubit>().changeTab(BottomNavigationTabState.homeScreen);
-                            // context.read<DashboardCubit>().close();
+                            context.read<DashboardCubit>().initState();
+                            context.read<AttendanceCubit>().initState();
                             Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) =>
                                 SignInScreen()), (Route<dynamic> route) => false);
                           },
