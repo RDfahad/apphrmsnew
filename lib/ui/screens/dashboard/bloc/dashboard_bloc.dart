@@ -38,7 +38,6 @@ class DashboardCubit extends Cubit<DashboardState> {
           }else{
             emit(state.copyWith(isLoading: false));
           }
-
         });
       }
       emit(state.copyWith(isLoading: false, userData: userData));

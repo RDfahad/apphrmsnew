@@ -42,7 +42,7 @@ class DashBoardScreen extends StatelessWidget {
                 HiveStorage().putData(GlobalConstants.isLogIn, false);
                 Config.isLoggedIn = false;
                 Navigator.push(
-                    context, CupertinoPageRoute(builder: (_) => LoginScreen()));
+                    context, CupertinoPageRoute(builder: (_) => SignInScreen()));
               },
               icon: const Icon(
                 Icons.logout,
@@ -199,7 +199,7 @@ class DashBoardScreenNew extends StatelessWidget {
                             children: List.generate(
                               3,
                                   (index) => Container(
-                                margin: EdgeInsets.only(left: 2),
+                                margin: const EdgeInsets.only(left: 2),
                                 height: 7,
                                 width: 7,
                                 decoration: BoxDecoration(
@@ -209,16 +209,16 @@ class DashBoardScreenNew extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Text(
-                            "Rimsha Rashid",
-                            style: TextStyle(
+                          Text(
+                            state.userData.user?.name ?? '',
+                            style: const TextStyle(
                                 color: AppColor.primaryTextWhiteColor,
                                 fontSize: 28,
                                 fontWeight: FontWeight.w600),
                           ),
-                          const Text(
-                            "Director HR & Operations",
-                            style: TextStyle(
+                          Text(
+                            state.userData.user?.designation ?? '',
+                            style: const TextStyle(
                                 color: AppColor.primaryTextWhiteColor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w300),
@@ -226,15 +226,15 @@ class DashBoardScreenNew extends StatelessWidget {
                           SizedBox(
                             height: context.getScreenHeight * 0.02,
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.flag,
                                 color: AppColor.primaryTextWhiteColor,
                               ),
                               Text(
-                                "Director HR & Operations",
-                                style: TextStyle(
+                                state.userData.user?.joiningDate ?? '',
+                                style: const TextStyle(
                                     color: AppColor.primaryTextWhiteColor,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300),
@@ -251,7 +251,7 @@ class DashBoardScreenNew extends StatelessWidget {
                           SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                SizedBox(height: 20,),
+                                const SizedBox(height: 20,),
                                 const Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -286,7 +286,9 @@ class DashBoardScreenNew extends StatelessWidget {
                                 ),
                                 SizedBox(height: context.getScreenHeight * 0.02),
                                 Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                   height: context.getScreenHeight * 0.1,
+                                  padding: const EdgeInsets.all(16.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     color: AppColor.whiteColor,
@@ -298,7 +300,6 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  padding: const EdgeInsets.all(16.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -335,6 +336,7 @@ class DashBoardScreenNew extends StatelessWidget {
                                 Container(
                                   height: context.getScreenHeight * 0.28,
                                   width: context.getScreenWidth * 0.95,
+                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                   padding: const EdgeInsets.all(20),
                                   decoration: BoxDecoration(
                                       boxShadow: const [
@@ -374,6 +376,10 @@ class DashBoardScreenNew extends StatelessWidget {
                     height: context.getScreenHeight * 0.12,
                     width: context.getScreenHeight * 0.12,
                     decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(state.userData.user?.image ?? ''),
+                          fit: BoxFit.cover
+                      ),
                       shape: BoxShape.circle,
                       color: const Color(0xFFd9d9d9),
                       border: Border.all(

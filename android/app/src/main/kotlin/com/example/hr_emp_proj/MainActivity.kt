@@ -1,4 +1,4 @@
-package com.example.hr_emp_proj
+package com.rocketdigital.hrms.app
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

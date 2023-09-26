@@ -6,7 +6,7 @@ enum EnvironmentType{local, live}
 
 class Path{
 
-  Map<String,String> defaultLiveUrl2 = {
+  Map<String,String> defaultLiveUrl1 = {
     'baseUrl' : 'http://192.168.100.38:8083',
     'api_route' : 'api/app',
   };

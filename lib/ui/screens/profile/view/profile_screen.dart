@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,6 +76,10 @@ class ProfileScreen extends StatelessWidget {
                                 height: context.getScreenHeight * 0.15,
                                 width: context.getScreenHeight * 0.15,
                                 decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(context.read<DashboardCubit>().state.userData.user?.image ?? ''),
+                                      fit: BoxFit.cover
+                                  ),
                                   shape: BoxShape.circle,
                                   color: const Color(0xFFd9d9d9),
                                   border: Border.all(
@@ -131,20 +134,20 @@ class ProfileScreen extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: context.getScreenWidth * 0.04,
                         top: context.getScreenHeight * 0.02),
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Rimsha Rashid",
-                          style: TextStyle(
+                          context.read<DashboardCubit>().state.userData.user?.name ?? '',
+                          style: const TextStyle(
                               color: AppColor.blackColor,
                               fontSize: 20,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          "Director HR & Operations",
-                          style: TextStyle(
+                          context.read<DashboardCubit>().state.userData.user?.designation ?? '',
+                          style: const TextStyle(
                               color: AppColor.blackColor,
                               fontSize: 14,
                               height: 0.4,
@@ -202,8 +205,7 @@ class ProfileScreen extends StatelessWidget {
                             HiveStorage().putData(GlobalConstants.isLogIn, false);
                             Config.isLoggedIn = false;
                             context.read<DashboardCubit>().changeTab(BottomNavigationTabState.homeScreen);
-                            // Navigator.pushReplacement(
-                            //     context, CupertinoPageRoute(builder: (_) => SignInScreen()));
+                            // context.read<DashboardCubit>().close();
                             Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) =>
                                 SignInScreen()), (Route<dynamic> route) => false);
                           },
