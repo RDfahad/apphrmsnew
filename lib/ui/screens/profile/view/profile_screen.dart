@@ -76,6 +76,10 @@ class ProfileScreen extends StatelessWidget {
                                 height: context.getScreenHeight * 0.15,
                                 width: context.getScreenHeight * 0.15,
                                 decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(context.read<DashboardCubit>().state.userData.user?.image ?? ''),
+                                      fit: BoxFit.cover
+                                  ),
                                   shape: BoxShape.circle,
                                   color: const Color(0xFFd9d9d9),
                                   border: Border.all(
@@ -142,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          context.read<DashboardCubit>().state.userData.user?.name ?? '',
+                          context.read<DashboardCubit>().state.userData.user?.designation ?? '',
                           style: const TextStyle(
                               color: AppColor.blackColor,
                               fontSize: 14,

@@ -216,9 +216,9 @@ class DashBoardScreenNew extends StatelessWidget {
                                 fontSize: 28,
                                 fontWeight: FontWeight.w600),
                           ),
-                          const Text(
-                            "Sr Mobile App Developer",
-                            style: TextStyle(
+                          Text(
+                            state.userData.user?.designation ?? '',
+                            style: const TextStyle(
                                 color: AppColor.primaryTextWhiteColor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w300),
@@ -226,15 +226,15 @@ class DashBoardScreenNew extends StatelessWidget {
                           SizedBox(
                             height: context.getScreenHeight * 0.02,
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.flag,
                                 color: AppColor.primaryTextWhiteColor,
                               ),
                               Text(
-                                "25-09-2023",
-                                style: TextStyle(
+                                state.userData.user?.joiningDate ?? '',
+                                style: const TextStyle(
                                     color: AppColor.primaryTextWhiteColor,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300),
@@ -376,6 +376,10 @@ class DashBoardScreenNew extends StatelessWidget {
                     height: context.getScreenHeight * 0.12,
                     width: context.getScreenHeight * 0.12,
                     decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(state.userData.user?.image ?? ''),
+                          fit: BoxFit.cover
+                      ),
                       shape: BoxShape.circle,
                       color: const Color(0xFFd9d9d9),
                       border: Border.all(

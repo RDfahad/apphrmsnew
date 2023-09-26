@@ -50,25 +50,25 @@ class User {
   int? id;
   String? name;
   String? email;
-  String? emailVerifiedAt;
-  String? createdAt;
-  String? updatedAt;
+  String? joiningDate;
+  String? designation;
+  String? image;
 
   User(
       {this.id,
       this.name,
       this.email,
-      this.emailVerifiedAt,
-      this.createdAt,
-      this.updatedAt});
+      this.image,
+      this.joiningDate,
+      this.designation});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    emailVerifiedAt = json['email_verified_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    image = json['image'];
+    joiningDate = json['joining_date'];
+    designation = json['designation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -76,9 +76,9 @@ class User {
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
-    data['email_verified_at'] = emailVerifiedAt;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    data['image'] = image;
+    data['joining_date'] = joiningDate;
+    data['designation'] = designation;
     return data;
   }
 }

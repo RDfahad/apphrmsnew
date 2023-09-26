@@ -73,7 +73,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           isIconFieldColorEnabled: false,
         ));
           },onError: (e){
-        log("Log From Cubit Eror ${e.errorCode}");
+        print('asdajsd');
+        log("Log From Cubit Eror $e");
         ExceptionHandler().handleException(e);
         emit(state.copyWith(
           loginLoading: false,
