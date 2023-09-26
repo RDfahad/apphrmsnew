@@ -6,6 +6,8 @@ import 'package:hr_emp_proj/data/repository_implement/attendence_repo_impl/atten
 import 'package:hr_emp_proj/domain/repository/attendance_repo/attendance_repo.dart';
 import 'package:hr_emp_proj/ui/screens/attendance/cubit/attendance_cubit.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_overview.dart';
+import 'package:hr_emp_proj/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
@@ -46,7 +48,8 @@ void main() async {
 
 ////Dummy For Testing
         BlocProvider(
-            create: (BuildContext context) => PaginationCubit(getIt())),
+            create: (BuildContext context) => AttendanceCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => ProfileCubit()),
       ],
       child: const MyApp(),
     ),
@@ -79,7 +82,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: OnboardingScreen(),
+      home: DocumentOverViewScreen(),
     );
   }
 }

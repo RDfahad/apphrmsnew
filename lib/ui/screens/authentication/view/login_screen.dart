@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
+import 'package:hr_emp_proj/utils/constants.dart';
+import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/authentication/bloc/authentication_state.dart';
 import '/ui/widgets/custom_text_field.dart';
@@ -18,8 +20,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      body: BlocConsumer<AuthenticationCubit, AuthenticationState>(
-        listener: (context, state) {
+      body: BlocConsumer(
+        bloc: BlocProvider.of<AuthenticationCubit>(context)..init(),
+        listener: (context,AuthenticationState state) {
           if (state.loginSuccessfull) {
             print('done');
             Navigator.pushReplacement(
@@ -28,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     builder: (_) => const BottomNavigationScreen()));
           }
         },
-        builder: (context, state) {
+        builder: (context,AuthenticationState state) {
           return CustomLoaderWidget(
             isLoading: state.loginLoading,
             child: Column(
@@ -180,17 +183,18 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationCubit, AuthenticationState>(
-        listener: (context,state){
+    return BlocConsumer(
+      bloc: BlocProvider.of<AuthenticationCubit>(context)..init(),
+        listener: (context,AuthenticationState state) {
           if (state.loginSuccessfull) {
-            print('done');
+            context.read<AuthenticationCubit>().removeError();
             Navigator.pushReplacement(
                 context,
                 CupertinoPageRoute(
                     builder: (_) => const BottomNavigationScreen()));
           }
         },
-        builder: (context, state){
+        builder: (context,AuthenticationState state){
         return Scaffold(
           backgroundColor: AppColor.appBackgroundColor,
           body: CustomLoaderWidget(
@@ -233,7 +237,7 @@ class SignInScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              "Input your epay account!",
+                              "Input your manxel account!",
                               style: TextStyle(
                                   color: AppColor.primaryTextWhiteColor,
                                   fontSize: 14,
@@ -286,6 +290,7 @@ class SignInScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       state.error
                           ? Center(
                         child: Column(
@@ -316,7 +321,26 @@ class SignInScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
+                state.isBiometricEnable ? Center(
+                  child: InkWell(
+                    onTap: ()async{
+                        await state.localAuthenticationService.authenticate().then((value){
+                          if(value){
+                            context.read<AuthenticationCubit>().loginUser(
+                              email: HiveStorage().getData(GlobalConstants.email),
+                              password: HiveStorage().getData(GlobalConstants.password),
+                              isBiometric: true
+                            );
+                          }
+                        });
+                    },
+                    child: state.biometricType == GlobalConstants.touchId ? const Icon(Icons.fingerprint,size: 60,) :
+                    state.biometricType == GlobalConstants.faceId? Image.asset('assets/images/face-id.png',width: context.getScreenWidth * 0.2, height: context.getScreenHeight * 0.1,fit: BoxFit.fill)
+                      : Container(),
+                  ),
+                ) : Container(),
+                const SizedBox(height: 20,),
                 RoundElevatedButton(
                   height: context.getScreenHeight * 0.07,
                   title: "Sign in Now",

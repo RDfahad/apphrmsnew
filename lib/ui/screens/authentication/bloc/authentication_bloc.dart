@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
 import '../../../../utils/configuration.dart';
 import '../../../../utils/constants.dart';
 import '/domain/entities/authentication_entities/login_user_entity.dart';
@@ -14,6 +14,20 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   AuthenticationCubit(this.authenticationRepo)
       : super(AuthenticationState.init());
+
+  init()async{
+    await state.localAuthenticationService.checkBiometrics().then((biometricAvailable)async{
+      emit(state.copyWith(isBiometricAvailable: biometricAvailable));
+      if(biometricAvailable) {
+        await state.localAuthenticationService.getBiometricType().then((
+            biometricType) {
+          emit(state.copyWith(biometricType: biometricType));
+        });
+      }
+    });
+    var biometricEnable = HiveStorage().getData(GlobalConstants.isBiometricEnabled);
+    emit(state.copyWith(isBiometricEnable: biometricEnable));
+  }
 
   checkButtonEnabledDisabled() {
     if (state.emailController.text.isEmpty ||
@@ -29,45 +43,45 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
-  Future<void> loginUser({String? email, String? password}) async {
-    if (kDebugMode) {
-      print('asd');
-    }
-    emit(state.copyWith(
-        loginLoading: true,
-        loginSuccessfull: false,
-        error: false,
-        errorMessage: ''));
-    await authenticationRepo.loginUser(email: email, password: password).then(
-        (userLogin) {
-      if (userLogin.data != null) {
-        state.hiveStorage.putData(
-            GlobalConstants.userDate,
-            jsonEncode(UserData(
-                    user: userLogin.data!.user,
-                    token: userLogin.data!.token,
-                    tokenType: userLogin.data!.tokenType)
-                .toJson()));
-        state.hiveStorage.putData(GlobalConstants.isLogIn, true);
-        Config.authorization = userLogin.data?.token ?? '';
-      }
-      emit(state.copyWith(
-        loginLoading: false,
-        loginSuccessfull: true,
-        loginUserModel: userLogin,
-        isIconFieldColorEnabled: false,
-      ));
-    }, onError: (e) {
-      log("Log From Cubit Eror ${e.errorCode}");
-      ExceptionHandler().handleException(e);
-      emit(state.copyWith(
-        loginLoading: false,
-        error: true,
-        errorMessage: e.toString(),
-        loginSuccessfull: false,
-        isIconFieldColorEnabled: false,
-      ));
-    });
+  Future<void> loginUser({String? email, String? password,bool isBiometric = false}) async {
+     
+      emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
+      await authenticationRepo.loginUser(email: email, password: password).then((userLogin){
+        if (userLogin.data != null) {
+          state.hiveStorage.putData(
+              GlobalConstants.userDate,
+              jsonEncode(UserData(
+                  user: userLogin.data!.user,
+                  token: userLogin.data!.token,
+                  tokenType: userLogin.data!.tokenType)
+                  .toJson()));
+          state.hiveStorage.putData(
+              GlobalConstants.isLogIn,true);
+          Config.authorization = userLogin.data?.token ?? '';
+          if(!isBiometric){
+            state.hiveStorage.putData(
+                GlobalConstants.email, state.emailController.text);
+            state.hiveStorage.putData(
+                GlobalConstants.password, state.passwordController.text);
+          }
+        }
+        emit(state.copyWith(
+          loginLoading: false,
+          loginSuccessfull: true,
+          loginUserModel: userLogin,
+          isIconFieldColorEnabled: false,
+        ));
+          },onError: (e){
+        log("Log From Cubit Eror ${e.errorCode}");
+        ExceptionHandler().handleException(e);
+        emit(state.copyWith(
+          loginLoading: false,
+          error: true,
+          errorMessage: e.toString(),
+          loginSuccessfull: false,
+          isIconFieldColorEnabled: false,
+        ));
+      });
   }
 
   removeError() {
