@@ -40,7 +40,7 @@ void main() async {
         BlocProvider(
             create: (BuildContext context) => AuthenticationCubit(getIt())),
         BlocProvider(
-            create: (BuildContext context) =>DashboardCubit(getIt())..refreshToken()),
+            create: (BuildContext context) =>DashboardCubit(getIt())),
         BlocProvider(
             create: (BuildContext context) =>AttendanceCubit(getIt())),
         BlocProvider(

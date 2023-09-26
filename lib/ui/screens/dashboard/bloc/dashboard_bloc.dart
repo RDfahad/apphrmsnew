@@ -15,6 +15,10 @@ class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit(this.authenticationRepo)
       : super(DashboardState.init());
 
+  initState(){
+    emit(DashboardState.init());
+  }
+
   Future<void> refreshToken() async {
       emit(state.copyWith(isLoading: true));
       var userModel = state.hiveStorage.getData(GlobalConstants.userDate);
@@ -48,4 +52,13 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   void changeExpiryStatus(bool expiryStatus) =>
       emit(state.copyWith(isTokenExpired: false));
+
+  // @override
+  // Future<void> close() {
+  //   // TODO: implement close
+  //   // BlocProvider.of<DashboardCubit>(context).close();
+  //   emit(DashboardState.init());
+  //   return super.close();
+  // }
+
 }

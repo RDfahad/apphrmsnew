@@ -10,6 +10,10 @@ class AttendanceCubit extends Cubit<AttendanceState> {
 
   AttendanceCubit(this.attendanceRepo) : super(AttendanceState.init());
 
+  initState(){
+    emit(AttendanceState.init());
+    }
+
   getAttendance() async {
     if(!state.loadMore) {
       try {

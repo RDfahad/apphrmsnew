@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import '/utils/app_color.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final IconButton leadingIcon;
+  final Widget? leadingIcon;
   final String title;
   final List<Widget> actions;
 
   const CustomAppBar({
     Key? key,
-    required this.leadingIcon,
+    this.leadingIcon,
     required this.title,
     required this.actions,
   }) : super(key: key);
