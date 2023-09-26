@@ -7,11 +7,11 @@ import 'package:hr_emp_proj/domain/repository/attendance_repo/attendance_repo.da
 import 'package:hr_emp_proj/ui/screens/attendance/cubit/attendance_cubit.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_overview.dart';
+import 'package:hr_emp_proj/ui/screens/onboarding/view/onboarding_screen.dart';
 import 'package:hr_emp_proj/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
-import '/ui/screens/onboarding/view/onboarding_screen.dart';
 import 'data/http/http.dart';
 import 'data/repository_implement/authentication_repo_impl/authentication_repo_implement.dart';
 import 'domain/repository/authentication_repo/authentication_repo.dart';
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFF1A2980)),
         useMaterial3: true,
       ),
-      home: DocumentOverViewScreen(),
+      home: OnboardingScreen(),
     );
   }
 }
