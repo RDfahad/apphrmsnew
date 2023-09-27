@@ -135,9 +135,10 @@ class LeaveRequestScreen extends StatelessWidget {
             Container(
               color: AppColor.whiteColor,
               child: ListView.separated(
-                separatorBuilder: (context, index){
+                separatorBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: context.getScreenWidth * 0.02),
                     child: Divider(
                       color: Colors.grey.shade300,
                       thickness: 0.5,

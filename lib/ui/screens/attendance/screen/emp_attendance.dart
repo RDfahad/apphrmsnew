@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/screens/dashboard/bloc/dashboard_bloc.dart';
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';
 
 import '../../dashboard/bloc/dashboard_state.dart';
 import '../component/attendance_card.dart';

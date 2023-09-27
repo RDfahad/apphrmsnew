@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';
 import '../../../widgets/oboarding_widget.dart';
 import '../../authentication/view/login_screen.dart';
 import '../bloc/onboarding_bloc.dart';
@@ -15,8 +15,8 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: BlocProvider.of<OnboardingCubit>(context),
-      builder: (context,OnboardingState onboardingState) {
-        if(!onboardingState.onBoardingStatus) {
+      builder: (context, OnboardingState onboardingState) {
+        if (!onboardingState.onBoardingStatus) {
           return Scaffold(
             backgroundColor: const Color(0xFF1c1e23),
             body: Stack(
@@ -58,7 +58,8 @@ class OnboardingScreen extends StatelessWidget {
                                     fit: BoxFit.fill,
                                   ),
                                 ),
-                              ],),
+                              ],
+                            ),
                           ),
                         ],
                       );
@@ -66,28 +67,30 @@ class OnboardingScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: context.getScreenHeight * 0.03),
+                    padding:
+                        EdgeInsets.only(bottom: context.getScreenHeight * 0.03),
                     width: context.getScreenWidth,
                     height: context.getScreenHeight * 0.5,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: context
-                              .getScreenWidth * 0.05,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.getScreenWidth * 0.05,
                               vertical: context.getScreenHeight * 0.02),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                  children: List.generate(3, (index) =>
-                                      OnboardingWidget().buildDots(
+                                  children: List.generate(
+                                      3,
+                                      (index) => OnboardingWidget().buildDots(
                                           context: context,
                                           index: index,
-                                          onboardingState: onboardingState))
+                                          onboardingState: onboardingState))),
+                              SizedBox(
+                                height: context.getScreenHeight * 0.04,
                               ),
-                              SizedBox(height: context.getScreenHeight * 0.04,),
                               const Text(
                                 'Let’s simplify your HR using our platform !',
                                 style: TextStyle(
@@ -95,26 +98,31 @@ class OnboardingScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     color: AppColor.whiteColor),
                               ),
-                              SizedBox(height: context.getScreenHeight * 0.02,),
+                              SizedBox(
+                                height: context.getScreenHeight * 0.02,
+                              ),
                               Text(
                                 contents[onboardingState.index!].text,
                                 style: const TextStyle(color: Colors.grey),
                               ),
                               const Text(
                                 'Get Started',
-                                style: TextStyle(color: Colors.grey,
+                                style: TextStyle(
+                                    color: Colors.grey,
                                     decoration: TextDecoration.underline,
                                     decorationColor: Colors.white),
                                 textAlign: TextAlign.left,
                               ),
-                            ],),
+                            ],
+                          ),
                         ),
                         Align(
                           child: SizedBox(
                             width: context.getScreenWidth * 0.8,
                             child: ElevatedButton(
                               onPressed: () {
-                                context.read<OnboardingCubit>()
+                                context
+                                    .read<OnboardingCubit>()
                                     .storeOnboardingStatus();
                               },
                               style: ElevatedButton.styleFrom(
@@ -124,7 +132,8 @@ class OnboardingScreen extends StatelessWidget {
                                       8.0), // Adjust the radius as needed
                                 ),
                               ),
-                              child: const Text('Get Started',
+                              child: const Text(
+                                'Get Started',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -140,14 +149,13 @@ class OnboardingScreen extends StatelessWidget {
               ],
             ),
           );
-        }
-        else if(onboardingState.onBoardingStatus && !onboardingState.isLogIn){
+        } else if (onboardingState.onBoardingStatus &&
+            !onboardingState.isLogIn) {
           return SignInScreen();
-        }
-        else if(onboardingState.onBoardingStatus && onboardingState.isLogIn){
+        } else if (onboardingState.onBoardingStatus &&
+            onboardingState.isLogIn) {
           return const BottomNavigationScreen();
-        }
-        else{
+        } else {
           return Container();
         }
       },
@@ -164,14 +172,14 @@ class OnboardingContent {
 List<OnboardingContent> contents = [
   OnboardingContent(
       text:
-      "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
+          "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
       image: 'assets/images/onboarding1.png'),
   OnboardingContent(
       text:
-      "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
+          "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
       image: 'assets/images/onboarding2.png'),
   OnboardingContent(
       text:
-      "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
+          "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
       image: 'assets/images/onboarding3.png'),
 ];

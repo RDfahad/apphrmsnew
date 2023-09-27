@@ -10,37 +10,38 @@ class AttendanceCubit extends Cubit<AttendanceState> {
 
   AttendanceCubit(this.attendanceRepo) : super(AttendanceState.init());
 
-  initState(){
+  initState() {
     emit(AttendanceState.init());
-    }
+  }
 
   getAttendance() async {
-    if(!state.loadMore) {
-      try {
-        emit(state.copyWith(loadMore: true));
-        AttendanceRecords response = await attendanceRepo.getAttendance(
-            pageNumber: state.pageNumber, perPage: state.perPageQuantity);
-        log("From AttendanceRecords response ${response.responseData!
-            .attendenceObject!.data![0].checkInTime}");
-        response.responseData?.attendenceObject?.data?.addAll(
-            state.attendanceRecords.data ?? []);
-        response.responseData?.attendenceObject?.data?.sort((a, b) => a.date!.compareTo(b.date!));
+    if (!state.loadMore) {
+      emit(state.copyWith(loadMore: true));
+      await attendanceRepo
+          .getAttendance(
+              pageNumber: state.pageNumber, perPage: state.perPageQuantity)
+          .then((response) {
+        log("From AttendanceRecords response ${response.responseData!.attendenceObject!.data![0].checkInTime}");
+        response.responseData?.attendenceObject?.data
+            ?.addAll(state.attendanceRecords.data ?? []);
+        response.responseData?.attendenceObject?.data
+            ?.sort((a, b) => a.date!.compareTo(b.date!));
         // shouldCallAPI = true;
-        emit(state.copyWith(loadMore: false,
+        emit(state.copyWith(
+            loadMore: false,
             attendanceRecords: response.responseData?.attendenceObject,
             pageNumber: state.pageNumber + 1,
             perPageQuantity: state.perPageQuantity));
-      } catch (e) {
-        // shouldCallAPI = true;
-        emit(state.copyWith(loadMore: false));
+      }, onError: (e) {
+        log('From Attens ${e.errorCode}');
         ExceptionHandler().handleException(e);
-      }
+        emit(state.copyWith(loadMore: false, errorMessage: e.errorCode));
+      });
     }
   }
 
   @override
   Future<void> close() {
-    // TODO: implement close
     emit(AttendanceState.init());
     return super.close();
   }

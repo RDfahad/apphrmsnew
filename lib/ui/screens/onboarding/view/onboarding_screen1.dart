@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/utils/extension_methods.dart';
+import '/utils/extension_methods.dart';
 import '../../../widgets/round_button.dart';
 import '../../bottom_navigation/screen/bottom_navigation_screen.dart';
 import '../../authentication/view/login_screen.dart';
@@ -13,12 +13,12 @@ class OnboardingScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnboardingCubit, OnboardingState>(
-      builder: (context,OnboardingState onboardingState){
-        if(!onboardingState.  onBoardingStatus){
+      builder: (context, OnboardingState onboardingState) {
+        if (!onboardingState.onBoardingStatus) {
           return Scaffold(
             body: Container(
-              padding:
-              EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.06),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.getScreenWidth * 0.06),
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/back_ground.png'),
@@ -56,25 +56,18 @@ class OnboardingScreen1 extends StatelessWidget {
                   SizedBox(height: context.getScreenHeight * 0.1),
                 ],
               ),
-
-
             ),
           );
-        }
-        else if(onboardingState.onBoardingStatus && !onboardingState.isLogIn){
+        } else if (onboardingState.onBoardingStatus &&
+            !onboardingState.isLogIn) {
           return SignInScreen();
-        }
-        else if(onboardingState.onBoardingStatus && onboardingState.isLogIn){
+        } else if (onboardingState.onBoardingStatus &&
+            onboardingState.isLogIn) {
           return const BottomNavigationScreen();
-        }
-        else{
+        } else {
           return Container();
         }
       },
-
     );
   }
 }
-
-
-

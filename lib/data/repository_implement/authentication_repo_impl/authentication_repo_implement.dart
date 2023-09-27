@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:hr_emp_proj/domain/entities/authentication_entities/refresh_token.dart';
+import '/domain/entities/authentication_entities/refresh_token.dart';
 import '/utils/configuration.dart';
 import '../../../domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../domain/repository/authentication_repo/authentication_repo.dart';
@@ -25,7 +25,8 @@ class AuthenticationRepoImpl implements AuthenticationRepo {
   @override
   Future<RefreshToken> refreshToken() async {
     try {
-      var response = await httpRequest?.post(url: paths.refreshToken, token: Config.authorization);
+      var response = await httpRequest?.post(
+          url: paths.refreshToken, token: Config.authorization);
       return RefreshToken.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);

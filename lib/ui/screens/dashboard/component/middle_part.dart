@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/dashboard_screen.dart';
+import '/ui/screens/bottom_navigation/cubit/bottom_navigation_cubit.dart';
+import '/ui/screens/dashboard/bloc/dashboard_bloc.dart';
+import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '../bloc/dashboard_state.dart';
 import '/ui/screens/dashboard/component/container_card.dart';
 import '/utils/extension_methods.dart';
