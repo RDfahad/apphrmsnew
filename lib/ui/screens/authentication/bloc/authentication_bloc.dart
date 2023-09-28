@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
 import '../../../../utils/configuration.dart';
@@ -74,6 +75,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           loginSuccessfull: true,
           loginUserModel: userLogin,
           isIconFieldColorEnabled: false,
+          emailController: TextEditingController(text: ''),
+          passwordController: TextEditingController(text: '')
         ));
           },onError: (e){
         print('asdajsd');
