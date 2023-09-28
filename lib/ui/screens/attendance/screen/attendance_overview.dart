@@ -160,13 +160,13 @@ class AttendanceOverViewScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: context.getScreenHeight * 0.02),
-                    InkWell(
-                      onTap: () {
-                        nextScreen(context, AttendanceRecordsScreen());
-                      },
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: Text(
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: InkWell(
+                        onTap: state.attendanceRecords.data!.isEmpty? null : () {
+                          nextScreen(context, const AttendanceRecordsScreen());
+                        },
+                        child: const Text(
                           "See All   ",
                           style: TextStyle(
                             fontSize: 14,

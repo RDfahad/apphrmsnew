@@ -58,7 +58,7 @@ class DashBoardScreenNew extends StatelessWidget {
         builder: (context, state){
           return Padding(
             padding:
-            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
+            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
             child: Stack(
               children: [
                 Column(
@@ -80,7 +80,7 @@ class DashBoardScreenNew extends StatelessWidget {
                             bottomLeft: Radius.circular(15),
                             bottomRight: Radius.circular(15),
                           )),
-                      height: context.getScreenHeight * 0.2,
+                      height: context.getScreenHeight * 0.22,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -179,6 +179,7 @@ class DashBoardScreenNew extends StatelessWidget {
                                   SizedBox(
                                       height: context.getScreenHeight * 0.01),
                                   Row(
+                                    // direction: Axis.horizontal,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: List.generate(

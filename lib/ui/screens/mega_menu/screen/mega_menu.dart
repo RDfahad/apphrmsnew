@@ -71,7 +71,7 @@ class MegaMenuScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(right: 10.0,top: 15),
+                      padding: EdgeInsets.only(right: 10.0,top: context.getScreenHeight*0.03),
                       child: Align(
                           alignment: Alignment.topRight,
                           child: Image.asset('assets/images/cancel_icon.png')),
