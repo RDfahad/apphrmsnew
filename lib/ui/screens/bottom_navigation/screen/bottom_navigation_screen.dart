@@ -17,7 +17,15 @@ class BottomNavigationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-      bloc: BlocProvider.of<DashboardCubit>(context),
+      bloc: BlocProvider.of<DashboardCubit>(context)..refreshToken(),
+      // buildWhen: (DashboardState previous,DashboardState current) {
+      //   if(current.userData.token?.isEmpty ?? true && !current.isLoading){
+      //     return true;
+      //   }
+      //   else{
+      //     return false;
+      //   }
+      // },
       listener: (context,DashboardState state){
 
     },

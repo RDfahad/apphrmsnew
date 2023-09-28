@@ -25,6 +25,7 @@ class DashBoardScreen extends StatelessWidget {
     'Salary': 'salary.png',
     'Training': 'training.png',
   };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,7 +134,7 @@ class DashBoardScreen extends StatelessWidget {
   }
 }
 
-class DashBoardScreenNew extends StatelessWidget {
+class DashBoardScreenNew extends StatelessWidget with WidgetsBindingObserver {
   DashBoardScreenNew({super.key});
   final List listIcon = [
     Icons.calendar_today_rounded,
@@ -152,12 +153,20 @@ class DashBoardScreenNew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myCubit = BlocProvider.of<DashboardCubit>(context);
-    myCubit.refreshToken();
+    // final myCubit = BlocProvider.of<DashboardCubit>(context);
+    // myCubit.refreshToken();
 
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: BlocConsumer<DashboardCubit,DashboardState>(
+        listenWhen: (DashboardState previous,DashboardState current) {
+          if(current.userData.token?.isEmpty ?? true && !current.isLoading){
+            return true;
+          }
+          else{
+            return false;
+          }
+        },
         listener: (context, state){
           if(state.isTokenExpired){
             context.read<DashboardCubit>().changeExpiryStatus(false);

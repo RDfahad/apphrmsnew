@@ -48,6 +48,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       print('asd');
       emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
       await authenticationRepo.loginUser(email: email, password: password).then((userLogin){
+        if( HiveStorage().getData(GlobalConstants.email) != email){
+          HiveStorage().putData(GlobalConstants.isBiometricEnabled,false);
+        }
         if (userLogin.data != null) {
           state.hiveStorage.putData(
               GlobalConstants.userDate,
