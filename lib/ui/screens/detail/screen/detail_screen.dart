@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/ui/screens/detail/component/report_screen.dart';
-import 'package:hr_emp_proj/ui/widgets/round_button.dart';
+import '/ui/screens/detail/component/report_screen.dart';
+import '/ui/widgets/round_button.dart';
 import '/ui/widgets/custom_app_bar.dart';
 import '/ui/widgets/fl_charts/bar_graph.dart';
 import '/utils/app_color.dart';

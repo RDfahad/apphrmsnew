@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hr_emp_proj/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
-import 'package:hr_emp_proj/utils/constants.dart';
-import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
+import '/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
+import '/utils/constants.dart';
+import '/utils/hive_db/hive_db.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/authentication/bloc/authentication_state.dart';
 import '/ui/widgets/custom_text_field.dart';
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: AppColor.whiteColor,
       body: BlocConsumer(
         bloc: BlocProvider.of<AuthenticationCubit>(context)..init(),
-        listener: (context,AuthenticationState state) {
+        listener: (context, AuthenticationState state) {
           if (state.loginSuccessfull) {
             print('done');
             Navigator.pushReplacement(
@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     builder: (_) => const BottomNavigationScreen()));
           }
         },
-        builder: (context,AuthenticationState state) {
+        builder: (context, AuthenticationState state) {
           return CustomLoaderWidget(
             isLoading: state.loginLoading,
             child: Column(
@@ -184,180 +184,203 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-      bloc: BlocProvider.of<AuthenticationCubit>(context)..init(),
-        listener: (context,AuthenticationState state) {
+        bloc: BlocProvider.of<AuthenticationCubit>(context)..init(),
+        listener: (context, AuthenticationState state) {
           if (state.loginSuccessfull) {
             context.read<AuthenticationCubit>().removeError();
-            Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) =>
-                const BottomNavigationScreen()), (Route<dynamic> route) => false);
+            Navigator.of(context).pushAndRemoveUntil(
+                CupertinoPageRoute(
+                    builder: (context) => const BottomNavigationScreen()),
+                (Route<dynamic> route) => false);
           }
         },
-        builder: (context,AuthenticationState state){
-        return Scaffold(
-          backgroundColor: AppColor.appBackgroundColor,
-          body: CustomLoaderWidget(
-            isLoading: state.loginLoading,
-            child: Column(
-              children: [
-                Container(
-                  margin:
-                  EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: context.getScreenWidth * 0.02),
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.centerRight,
-                              colors: [
-                                Color(0xFF0b84c8),
-                                Color(0xff214cbd),
-                                Color(0xff214cbd),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
-                            )),
-                        height: context.getScreenHeight * 0.2,
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Sign in with Email",
-                              style: TextStyle(
-                                  color: AppColor.primaryTextWhiteColor,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "Input your manxel account!",
-                              style: TextStyle(
-                                  color: AppColor.primaryTextWhiteColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: context.getScreenHeight * 0.05),
-                      const Text(
-                        "Email",
-                        style: TextStyle(
-                            color: AppColor.blackColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: context.getScreenHeight * 0.01),
-                      CustomTextField(
-                        controller: state.emailController,
-                        hintText: "Email",
-                        onChange: (val) {
-                          context.read<AuthenticationCubit>().checkButtonEnabledDisabled();
-                        },
-                      ),
-                      SizedBox(height: context.getScreenHeight * 0.02),
-                      const Text(
-                        "Password",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: context.getScreenHeight * 0.01),
-                      CustomPasswordTextField1(
-                        controller: state.passwordController,
-                        hintText: "Password",
-                        obsecurePassword: passScene,
-                        onChange: (val) {
-                          context.read<AuthenticationCubit>().checkButtonEnabledDisabled();
-                        },
-                      ),
-                      SizedBox(height: context.getScreenHeight * 0.01),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: InkWell(
-                          onTap: () {},
-                          child: const Text(
-                            "Forgot password?",
-                            style: TextStyle(
-                                color: AppColor.primaryButtonColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
+        builder: (context, AuthenticationState state) {
+          return Scaffold(
+            backgroundColor: AppColor.appBackgroundColor,
+            body: CustomLoaderWidget(
+              isLoading: state.loginLoading,
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: context.getScreenWidth * 0.04),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.getScreenWidth * 0.02),
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Color(0xFF0b84c8),
+                                  Color(0xff214cbd),
+                                  Color(0xff214cbd),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              )),
+                          height: context.getScreenHeight * 0.2,
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Sign in with Email",
+                                style: TextStyle(
+                                    color: AppColor.primaryTextWhiteColor,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "Input your manxel account!",
+                                style: TextStyle(
+                                    color: AppColor.primaryTextWhiteColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-
-                      state.error
-                          ? Center(
-                        child: Column(
-                          children: [
-                            const Icon(
-                              Icons.warning_amber,
-                              size: 30,
-                              color: AppColor.redColor,
-                            ),
-                            SizedBox(
-                                height:
-                                context.getScreenHeight * 0.01),
-                            Center(
-                              child: Text(
-                                state.errorMessage.toString(),
-                                //"There are something wrong with your login\n credentials, please double check and try again.",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: AppColor.redColor,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                          ],
+                        SizedBox(height: context.getScreenHeight * 0.05),
+                        const Text(
+                          "Email",
+                          style: TextStyle(
+                              color: AppColor.blackColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
                         ),
-                      )
-                          : Container(),
-                    ],
+                        SizedBox(height: context.getScreenHeight * 0.01),
+                        CustomTextField(
+                          controller: state.emailController,
+                          hintText: "Email",
+                          onChange: (val) {
+                            context
+                                .read<AuthenticationCubit>()
+                                .checkButtonEnabledDisabled();
+                          },
+                        ),
+                        SizedBox(height: context.getScreenHeight * 0.02),
+                        const Text(
+                          "Password",
+                          style: TextStyle(
+                              color: AppColor.blackColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: context.getScreenHeight * 0.01),
+                        CustomPasswordTextField1(
+                          controller: state.passwordController,
+                          hintText: "Password",
+                          obsecurePassword: passScene,
+                          onChange: (val) {
+                            context
+                                .read<AuthenticationCubit>()
+                                .checkButtonEnabledDisabled();
+                          },
+                        ),
+                        SizedBox(height: context.getScreenHeight * 0.01),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Text(
+                              "Forgot password?",
+                              style: TextStyle(
+                                  color: AppColor.primaryButtonColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        state.error
+                            ? Center(
+                                child: Column(
+                                  children: [
+                                    const Icon(
+                                      Icons.warning_amber,
+                                      size: 30,
+                                      color: AppColor.redColor,
+                                    ),
+                                    SizedBox(
+                                        height: context.getScreenHeight * 0.01),
+                                    Center(
+                                      child: Text(
+                                        state.errorMessage.toString(),
+                                        //"There are something wrong with your login\n credentials, please double check and try again.",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            color: AppColor.redColor,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+                      ],
+                    ),
                   ),
-                ),
-                const Spacer(),
-                state.isBiometricEnable ? Center(
-                  child: InkWell(
-                    onTap: ()async{
-                        await state.localAuthenticationService.authenticate().then((value){
-                          if(value){
-                            context.read<AuthenticationCubit>().loginUser(
-                              email: HiveStorage().getData(GlobalConstants.email),
-                              password: HiveStorage().getData(GlobalConstants.password),
-                              isBiometric: true
-                            );
-                          }
-                        });
-                    },
-                    child: state.biometricType == GlobalConstants.touchId ? const Icon(Icons.fingerprint,size: 60,) :
-                    state.biometricType == GlobalConstants.faceId? Image.asset('assets/images/face-id.png',width: context.getScreenWidth * 0.2, height: context.getScreenHeight * 0.1,fit: BoxFit.fill)
+                  const Spacer(),
+                  state.isBiometricEnable
+                      ? Center(
+                          child: InkWell(
+                            onTap: () async {
+                              await state.localAuthenticationService
+                                  .authenticate()
+                                  .then((value) {
+                                if (value) {
+                                  context.read<AuthenticationCubit>().loginUser(
+                                      email: HiveStorage()
+                                          .getData(GlobalConstants.email),
+                                      password: HiveStorage()
+                                          .getData(GlobalConstants.password),
+                                      isBiometric: true);
+                                }
+                              });
+                            },
+                            child: state.biometricType ==
+                                    GlobalConstants.touchId
+                                ? const Icon(
+                                    Icons.fingerprint,
+                                    size: 60,
+                                  )
+                                : state.biometricType == GlobalConstants.faceId
+                                    ? Image.asset('assets/images/face-id.png',
+                                        width: context.getScreenWidth * 0.2,
+                                        height: context.getScreenHeight * 0.1,
+                                        fit: BoxFit.fill)
+                                    : Container(),
+                          ),
+                        )
                       : Container(),
+                  const SizedBox(
+                    height: 20,
                   ),
-                ) : Container(),
-                const SizedBox(height: 20,),
-                RoundElevatedButton(
-                  height: context.getScreenHeight * 0.07,
-                  title: "Sign in Now",
-                  buttonColor: AppColor.secondaryButtonColor,
-                  width: double.infinity,
-                  borderRadius: 0,
-                  onPress: state.isButtonEnabled
-                      ? () {
-                    context.read<AuthenticationCubit>().loginUser(
-                      email: state.emailController.text,
-                      password: state.passwordController.text,
-                    );
-                  }
-                      : null,
-                ),
-              ],
+                  RoundElevatedButton(
+                    height: context.getScreenHeight * 0.07,
+                    title: "Sign in Now",
+                    buttonColor: AppColor.secondaryButtonColor,
+                    width: double.infinity,
+                    borderRadius: 0,
+                    onPress: state.isButtonEnabled
+                        ? () {
+                            context.read<AuthenticationCubit>().loginUser(
+                                  email: state.emailController.text,
+                                  password: state.passwordController.text,
+                                );
+                          }
+                        : null,
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-    });
+          );
+        });
   }
 }

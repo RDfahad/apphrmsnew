@@ -1,14 +1,9 @@
-import 'package:hr_emp_proj/domain/entities/attendance/attendance_records.dart';
+import '/domain/entities/attendance/attendance_records.dart';
 
 import '../../../../domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../../utils/hive_db/hive_db.dart';
 
-enum BottomNavigationTabState {
-  homeScreen,
-  attendance,
-  detailReports,
-  profile
-}
+enum BottomNavigationTabState { homeScreen, attendance, detailReports, profile }
 
 class DashboardState {
   final String token;
@@ -46,7 +41,7 @@ class DashboardState {
       bool? isTokenExpired,
       UserData? userData,
       BottomNavigationTabState? bottomNavigationTabState,
-        AttendenceObject? attendanceRecords}) {
+      AttendenceObject? attendanceRecords}) {
     return DashboardState(
       token: token ?? this.token,
       isLoading: isLoading ?? this.isLoading,
