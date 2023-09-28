@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../data/http/exception_handler.dart';
-import '../../../../domain/entities/attendance/attendance_records.dart';
 import '../../../../domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_state.dart';
 
@@ -15,7 +14,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   }
 
   getAttendance() async {
-    if (!state.loadMore) {
+    if (!state.loadMore && state.errorCode != '995') {
       emit(state.copyWith(loadMore: true));
       await attendanceRepo
           .getAttendance(
@@ -35,7 +34,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       }, onError: (e) {
         log('From Attens ${e.errorCode}');
         ExceptionHandler().handleException(e);
-        emit(state.copyWith(loadMore: false, errorMessage: e.errorCode));
+        emit(state.copyWith(loadMore: false, errorCode: e.errorCode));
       });
     }
   }

@@ -7,18 +7,18 @@ class AttendanceState {
   int pageNumber;
   int perPageQuantity;
   ScrollController attendanceRecordScrollController = ScrollController();
-  final String? errorMessage;
+  final String? errorCode;
 
   AttendanceState({
     required this.loadMore,
     required this.attendanceRecords,
     required this.pageNumber,
     required this.perPageQuantity,
-    required this.errorMessage,
+    required this.errorCode,
   });
 
   factory AttendanceState.init() => AttendanceState(
-      errorMessage: null,
+      errorCode: null,
       loadMore: false,
       attendanceRecords: AttendenceObject(data: <AttendenceData>[]),
       pageNumber: 1,
@@ -29,14 +29,14 @@ class AttendanceState {
     AttendenceObject? attendanceRecords,
     int? pageNumber,
     int? perPageQuantity,
-    String? errorMessage,
+    String? errorCode,
   }) {
     return AttendanceState(
       loadMore: loadMore ?? this.loadMore,
       attendanceRecords: attendanceRecords ?? this.attendanceRecords,
       pageNumber: pageNumber ?? this.pageNumber,
       perPageQuantity: perPageQuantity ?? this.perPageQuantity,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorCode: errorCode ?? this.errorCode,
     );
   }
 }

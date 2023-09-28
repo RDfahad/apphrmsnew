@@ -37,18 +37,25 @@ class DocumentOverViewScreen extends StatelessWidget {
                           bottomRight: Radius.circular(15),
                         )),
                     height: context.getScreenHeight * 0.2,
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                    width: context.getScreenWidth,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        IconButton(
+                            icon: const Icon(Icons.arrow_back,color: AppColor.whiteColor,),
+                          onPressed: () {
+                              Navigator.pop(context);
+                            },),
+                        const SizedBox(height: 15,),
+                        const Text(
                           "Document",
                           style: TextStyle(
                               color: AppColor.primaryTextWhiteColor,
                               fontSize: 23,
                               fontWeight: FontWeight.w300),
                         ),
-                        Text(
+                        const Text(
                           "Overview",
                           style: TextStyle(
                               color: AppColor.primaryTextWhiteColor,

@@ -1,19 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
-import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
+import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_overview.dart';
+import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/hive_db/hive_db.dart';
 import '../../../widgets/fl_charts/bar_graph.dart';
 import '../../../widgets/icon-card.dart';
 import '../../../widgets/time_data.dart';
-import '/ui/screens/dashboard/component/head_part.dart';
-import '/ui/screens/dashboard/component/middle_part.dart';
-import '/ui/screens/dashboard/view/leave_request.dart';
 import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
 
@@ -86,17 +85,25 @@ class DashBoardScreenNew extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: List.generate(
-                              3,
-                                  (index) => Container(
-                                margin: const EdgeInsets.only(left: 2),
-                                height: 7,
-                                width: 7,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: AppColor.whiteColor),
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (_) => const MegaMenuScreen()));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: List.generate(
+                                3,
+                                    (index) => Container(
+                                  margin: const EdgeInsets.only(left: 2),
+                                  height: 7,
+                                  width: 7,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: AppColor.whiteColor),
+                                  ),
                                 ),
                               ),
                             ),
@@ -135,6 +142,7 @@ class DashBoardScreenNew extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
                       SizedBox(
                         height: context.getScreenHeight * 0.02,
                       ),
@@ -183,6 +191,17 @@ class DashBoardScreenNew extends StatelessWidget {
                                                 .changeTab(
                                                     BottomNavigationTabState
                                                         .attendance);
+                                          }
+                                          if (index == 1) {
+                                            context
+                                                .read<DashboardCubit>()
+                                                .changeTab(
+                                                    BottomNavigationTabState
+                                                        .detailReports);
+                                          }
+                                          if(index == 4){
+                                            Navigator.push(
+                                                context, CupertinoPageRoute(builder: (_) => DocumentOverViewScreen()));
                                           }
                                         },
                                         child: IconCard(
