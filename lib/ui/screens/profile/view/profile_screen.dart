@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -70,80 +71,201 @@ class ProfileScreen extends StatelessWidget {
                           Positioned(
                             top: context.getScreenHeight * 0.1,
                             right: context.getScreenHeight * 0.03,
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                CachedNetworkImage(
-                                  height: context.getScreenHeight * 0.15,
-                                  width: context.getScreenHeight * 0.15,
-                                  imageUrl: context
-                                          .read<DashboardCubit>()
-                                          .state
-                                          .userData
-                                          .user
-                                          ?.image ??
-                                      '',
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: const Color(0xFFd9d9d9),
-                                      border: Border.all(
-                                        color: AppColor.whiteColor,
-                                        width: 3,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          spreadRadius: 3,
-                                          color: Colors.grey.shade200,
-                                          blurRadius: 2,
+                            child: GestureDetector(
+                              onTap: () {
+                                // Handle the circular image tap here
+                                log("Circular image tapped ${state.image}");
+                                context.read<ProfileCubit>().getGalleryImage();
+                              },
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  state.image != null
+                                      ? Container(
+                                          height:
+                                              context.getScreenHeight * 0.15,
+                                          width: context.getScreenHeight * 0.15,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: const Color(0xFFd9d9d9),
+                                            border: Border.all(
+                                              color: AppColor.whiteColor,
+                                              width: 3,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                spreadRadius: 3,
+                                                color: Colors.grey.shade200,
+                                                blurRadius: 2,
+                                              ),
+                                            ],
+                                            image: DecorationImage(
+                                              image: FileImage(
+                                                  state.image!.absolute),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        )
+                                      : CachedNetworkImage(
+                                          height:
+                                              context.getScreenHeight * 0.15,
+                                          width: context.getScreenHeight * 0.15,
+                                          imageUrl: context
+                                                  .read<DashboardCubit>()
+                                                  .state
+                                                  .userData
+                                                  .user
+                                                  ?.image ??
+                                              '',
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: const Color(0xFFd9d9d9),
+                                              border: Border.all(
+                                                color: AppColor.whiteColor,
+                                                width: 3,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  spreadRadius: 3,
+                                                  color: Colors.grey.shade200,
+                                                  blurRadius: 2,
+                                                ),
+                                              ],
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) =>
+                                              Container(
+                                            height:
+                                                context.getScreenHeight * 0.08,
+                                            width:
+                                                context.getScreenHeight * 0.08,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
                                         ),
-                                      ],
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) => Container(
-                                      height: context.getScreenHeight * 0.08,
-                                      width: context.getScreenHeight * 0.08,
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) => Icon(Icons
-                                      .error), // You can use any error widget here
-                                ),
-                                Positioned(
-                                  top: context.getScreenHeight * 0.1,
-                                  left: context.getScreenHeight * 0.1,
-                                  height: context.getScreenHeight * 0.05,
-                                  width: context.getScreenHeight * 0.05,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColor.primaryColor,
-                                      border: Border.all(
-                                        color: AppColor.whiteColor,
-                                        width: 3,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          spreadRadius: 3,
-                                          color: Colors.grey.shade200,
-                                          blurRadius: 2,
+                                  Positioned(
+                                    top: context.getScreenHeight * 0.1,
+                                    left: context.getScreenHeight * 0.1,
+                                    height: context.getScreenHeight * 0.05,
+                                    width: context.getScreenHeight * 0.05,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColor.primaryColor,
+                                        border: Border.all(
+                                          color: AppColor.whiteColor,
+                                          width: 3,
                                         ),
-                                      ],
-                                    ),
-                                    child: const Center(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            spreadRadius: 3,
+                                            color: Colors.grey.shade200,
+                                            blurRadius: 2,
+                                          ),
+                                        ],
+                                      ),
                                       child: Icon(
                                         Icons.edit,
                                         color: AppColor.whiteColor,
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
+
+                          // Positioned(
+                          //   top: context.getScreenHeight * 0.1,
+                          //   right: context.getScreenHeight * 0.03,
+                          //   child: GestureDetector(
+                          //     onTap: () {
+                          //       log("Circular image tapped ${state.image}");
+                          //       context.read<ProfileCubit>().getGalleryImage();
+                          //     },
+                          //     child: Stack(
+                          //       clipBehavior: Clip.none,
+                          //       children: [
+                          //         CachedNetworkImage(
+                          //           height: context.getScreenHeight * 0.15,
+                          //           width: context.getScreenHeight * 0.15,
+                          //           imageUrl: context
+                          //                   .read<DashboardCubit>()
+                          //                   .state
+                          //                   .userData
+                          //                   .user
+                          //                   ?.image ??
+                          //               '',
+                          //           imageBuilder: (context, imageProvider) =>
+                          //               Container(
+                          //             decoration: BoxDecoration(
+                          //               shape: BoxShape.circle,
+                          //               color: const Color(0xFFd9d9d9),
+                          //               border: Border.all(
+                          //                 color: AppColor.whiteColor,
+                          //                 width: 3,
+                          //               ),
+                          //               boxShadow: [
+                          //                 BoxShadow(
+                          //                   spreadRadius: 3,
+                          //                   color: Colors.grey.shade200,
+                          //                   blurRadius: 2,
+                          //                 ),
+                          //               ],
+                          //               image: DecorationImage(
+                          //                 image: imageProvider,
+                          //                 fit: BoxFit.cover,
+                          //               ),
+                          //             ),
+                          //           ),
+                          //           placeholder: (context, url) => Container(
+                          //               height: context.getScreenHeight * 0.08,
+                          //               width: context.getScreenHeight * 0.08,
+                          //               child: CircularProgressIndicator()),
+                          //           errorWidget: (context, url, error) => Icon(Icons
+                          //               .error), // You can use any error widget here
+                          //         ),
+                          //         Positioned(
+                          //           top: context.getScreenHeight * 0.1,
+                          //           left: context.getScreenHeight * 0.1,
+                          //           height: context.getScreenHeight * 0.05,
+                          //           width: context.getScreenHeight * 0.05,
+                          //           child: Container(
+                          //             decoration: BoxDecoration(
+                          //               shape: BoxShape.circle,
+                          //               color: AppColor.primaryColor,
+                          //               border: Border.all(
+                          //                 color: AppColor.whiteColor,
+                          //                 width: 3,
+                          //               ),
+                          //               boxShadow: [
+                          //                 BoxShadow(
+                          //                   spreadRadius: 3,
+                          //                   color: Colors.grey.shade200,
+                          //                   blurRadius: 2,
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //             child: const Center(
+                          //               child: Icon(
+                          //                 Icons.edit,
+                          //                 color: AppColor.whiteColor,
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -203,6 +325,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           ListTile(
+                            onTap: () {},
                             title: const Text(
                               'Change Password',
                               style: TextStyle(color: AppColor.blackColor),

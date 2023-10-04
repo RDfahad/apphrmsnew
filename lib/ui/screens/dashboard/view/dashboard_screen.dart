@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
+import 'package:hr_emp_proj/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/hive_db/hive_db.dart';
@@ -197,10 +198,10 @@ class DashBoardScreenNew extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: AppColor.whiteColor,
-                                      boxShadow: const [
+                                      boxShadow: [
                                         BoxShadow(
                                           spreadRadius: 1,
-                                          color: AppColor.secondaryTextColor,
+                                          color: Colors.grey.shade100,
                                           blurRadius: 5,
                                         ),
                                       ],
@@ -249,10 +250,10 @@ class DashBoardScreenNew extends StatelessWidget {
                                         horizontal: 10),
                                     padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
-                                        boxShadow: const [
+                                        boxShadow: [
                                           BoxShadow(
                                             spreadRadius: 2,
-                                            color: AppColor.secondaryTextColor,
+                                            color: Colors.grey.shade100,
                                             blurRadius: 10,
                                           ),
                                         ],
@@ -281,48 +282,76 @@ class DashBoardScreenNew extends StatelessWidget {
                       ),
                     ],
                   ),
-                 
                   Positioned(
                     top: context.getScreenHeight * 0.13,
                     right: context.getScreenHeight * 0.025,
-                    child: CachedNetworkImage(
-                      height: context.getScreenHeight * 0.12,
-                      width: context.getScreenHeight * 0.12,
-                      imageUrl: state.userData.user?.image ?? '',
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: const Color(0xFFd9d9d9),
-                          border: Border.all(
-                            color: AppColor.whiteColor,
-                            width: 3,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 3,
-                              color: Colors.grey.shade200,
-                              blurRadius: 2,
+                    child: context.read<ProfileCubit>().state.image != null
+                        ? Container(
+                            height: context.getScreenHeight * 0.15,
+                            width: context.getScreenHeight * 0.15,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xFFd9d9d9),
+                              border: Border.all(
+                                color: AppColor.whiteColor,
+                                width: 3,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  spreadRadius: 3,
+                                  color: Colors.grey.shade100,
+                                  blurRadius: 2,
+                                ),
+                              ],
+                              image: DecorationImage(
+                                image: FileImage(context
+                                    .read<ProfileCubit>()
+                                    .state
+                                    .image!
+                                    .absolute),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ],
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
+                          )
+                        : CachedNetworkImage(
+                            height: context.getScreenHeight * 0.15,
+                            width: context.getScreenHeight * 0.15,
+                            imageUrl: context
+                                    .read<DashboardCubit>()
+                                    .state
+                                    .userData
+                                    .user
+                                    ?.image ??
+                                '',
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0xFFd9d9d9),
+                                border: Border.all(
+                                  color: AppColor.whiteColor,
+                                  width: 3,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    spreadRadius: 3,
+                                    color: Colors.grey.shade100,
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            placeholder: (context, url) => Container(
+                              height: context.getScreenHeight * 0.08,
+                              width: context.getScreenHeight * 0.08,
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
-                        ),
-                      ),
-                      placeholder: (context, url) => Container(
-                        height: context.getScreenHeight * 0.08,
-                        width: context.getScreenHeight * 0.08,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/blank_pic.png"),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => const Icon(
-                          Icons.error), // You can use any error widget here
-                    ),
                   ),
                 ],
               ),
