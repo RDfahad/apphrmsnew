@@ -43,6 +43,7 @@ dependencies:
   hive_flutter: ^1.1.0
   local_auth: ^1.1.9
   cached_network_image: ^3.3.0
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:

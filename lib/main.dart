@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hr_emp_proj/data/repository_implement/profile_repo_impl/profile_repo_impl.dart';
+import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
 import '/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
 import '/domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_cubit.dart';
@@ -27,6 +29,7 @@ void main() async {
       AuthenticationRepoImpl(httpRequest: getIt()));
   getIt.registerSingleton<AttendanceRepo>(
       AttendanceRepoImpl(httpRequest: getIt()));
+  getIt.registerSingleton<ProfileRepo>(ProfileRepoImpl(httpRequest: getIt()));
 
   //Hive DataBase
 
@@ -47,7 +50,7 @@ void main() async {
 ////Dummy For Testing
         BlocProvider(
             create: (BuildContext context) => AttendanceCubit(getIt())),
-        BlocProvider(create: (BuildContext context) => ProfileCubit()),
+        BlocProvider(create: (BuildContext context) => ProfileCubit(getIt())),
       ],
       child: const MyApp(),
     ),

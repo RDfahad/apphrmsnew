@@ -81,4 +81,21 @@ class User {
     data['designation'] = designation;
     return data;
   }
+
+  User copyWith({
+    int? id,
+    String? name,
+    String? email,
+    String? joiningDate,
+    String? designation,
+    String? image,
+  }) {
+    return User(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        joiningDate: joiningDate ?? this.joiningDate,
+        designation: designation ?? this.designation,
+        image: image ?? this.image);
+  }
 }
