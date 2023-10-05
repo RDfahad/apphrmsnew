@@ -283,7 +283,7 @@ class DashBoardScreenNew extends StatelessWidget {
                     ],
                   ),
                   Positioned(
-                    top: context.getScreenHeight * 0.13,
+                    top: context.getScreenHeight * 0.11,
                     right: context.getScreenHeight * 0.025,
                     child: context.read<ProfileCubit>().state.image != null
                         ? Container(
