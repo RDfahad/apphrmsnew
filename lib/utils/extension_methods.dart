@@ -10,6 +10,8 @@ extension ScreenConfig on BuildContext {
   Color get getSecondaryColor => Theme.of(this).colorScheme.secondary;
 
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
+  
+  TextTheme get getFontText => Theme.of(this).textTheme;
 }
 
 extension DateParsingExtension on String {

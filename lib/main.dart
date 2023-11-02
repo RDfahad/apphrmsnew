@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hr_emp_proj/data/repository_implement/profile_repo_impl/profile_repo_impl.dart';
 import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
+import 'package:hr_emp_proj/ui/screens/leave_overview/screen/leave_overview.dart';
+import 'package:hr_emp_proj/ui/screens/offence/screen/offence_overview.dart';
 import '/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
 import '/domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_cubit.dart';
@@ -25,10 +27,8 @@ void main() async {
 
   getIt.registerSingleton(ResponseHandler());
   getIt.registerSingleton(HTTPRequest());
-  getIt.registerSingleton<AuthenticationRepo>(
-      AuthenticationRepoImpl(httpRequest: getIt()));
-  getIt.registerSingleton<AttendanceRepo>(
-      AttendanceRepoImpl(httpRequest: getIt()));
+  getIt.registerSingleton<AuthenticationRepo>(AuthenticationRepoImpl(httpRequest: getIt()));
+  getIt.registerSingleton<AttendanceRepo>(AttendanceRepoImpl(httpRequest: getIt()));
   getIt.registerSingleton<ProfileRepo>(ProfileRepoImpl(httpRequest: getIt()));
 
   //Hive DataBase
@@ -39,17 +39,13 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (BuildContext context) => OnboardingCubit()..init()),
-        BlocProvider(
-            create: (BuildContext context) => AuthenticationCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => OnboardingCubit()..init()),
+        BlocProvider(create: (BuildContext context) => AuthenticationCubit(getIt())),
         BlocProvider(create: (BuildContext context) => DashboardCubit(getIt())),
-        BlocProvider(
-            create: (BuildContext context) => AttendanceCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => AttendanceCubit(getIt())),
 
 ////Dummy For Testing
-        BlocProvider(
-            create: (BuildContext context) => AttendanceCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => AttendanceCubit(getIt())),
         BlocProvider(create: (BuildContext context) => ProfileCubit(getIt())),
       ],
       child: const MyApp(),
@@ -86,7 +82,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: OnboardingScreen(),
+      home: OffenceOverViewScreen(),
     );
   }
 }

@@ -235,7 +235,7 @@ class SignInScreen extends StatelessWidget {
                                     color: AppColor.primaryTextWhiteColor,
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600),
-                              ),
+                              ),  
                               Text(
                                 "Input your manxel account!",
                                 style: TextStyle(

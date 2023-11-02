@@ -106,51 +106,51 @@ class ProfileScreen extends StatelessWidget {
                                             ),
                                           ),
                                         )
-                                      : CachedNetworkImage(
-                                          height:
-                                              context.getScreenHeight * 0.15,
-                                          width: context.getScreenHeight * 0.15,
-                                          imageUrl: context
-                                                  .read<DashboardCubit>()
-                                                  .state
-                                                  .userData
-                                                  .user
-                                                  ?.image ??
-                                              '',
-                                          imageBuilder:
-                                              (context, imageProvider) =>
-                                                  Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: const Color(0xFFd9d9d9),
-                                              border: Border.all(
-                                                color: AppColor.whiteColor,
-                                                width: 3,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  spreadRadius: 3,
-                                                  color: Colors.grey.shade200,
-                                                  blurRadius: 2,
+                                        : CachedNetworkImage(
+                                            height:
+                                                context.getScreenHeight * 0.15,
+                                            width: context.getScreenHeight * 0.15,
+                                            imageUrl: context 
+                                                    .read<DashboardCubit>()
+                                                    .state
+                                                    .userData
+                                                    .user
+                                                    ?.image ??
+                                                '',
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: const Color(0xFFd9d9d9),
+                                                border: Border.all(
+                                                  color: AppColor.whiteColor,
+                                                  width: 3,
                                                 ),
-                                              ],
-                                              image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    spreadRadius: 3,
+                                                    color: Colors.grey.shade200,
+                                                    blurRadius: 2,
+                                                  ),
+                                                ],
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
+                                            placeholder: (context, url) =>
+                                                Container(
+                                              height:
+                                                  context.getScreenHeight * 0.08,
+                                              width:
+                                                  context.getScreenHeight * 0.08,
+                                              child: CircularProgressIndicator(),
+                                            ),
+                                            errorWidget: (context, url, error) =>
+                                                Icon(Icons.error),
                                           ),
-                                          placeholder: (context, url) =>
-                                              Container(
-                                            height:
-                                                context.getScreenHeight * 0.08,
-                                            width:
-                                                context.getScreenHeight * 0.08,
-                                            child: CircularProgressIndicator(),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(Icons.error),
-                                        ),
                                   Positioned(
                                     top: context.getScreenHeight * 0.1,
                                     left: context.getScreenHeight * 0.1,
