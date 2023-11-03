@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/authentication/view/forgot_password_screen.dart';
 import '/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
 import '/utils/constants.dart';
 import '/utils/hive_db/hive_db.dart';
@@ -26,9 +27,7 @@ class LoginScreen extends StatelessWidget {
           if (state.loginSuccessfull) {
             print('done');
             Navigator.pushReplacement(
-                context,
-                CupertinoPageRoute(
-                    builder: (_) => const BottomNavigationScreen()));
+                context, CupertinoPageRoute(builder: (_) => const BottomNavigationScreen()));
           }
         },
         builder: (context, AuthenticationState state) {
@@ -38,18 +37,15 @@ class LoginScreen extends StatelessWidget {
               children: [
                 SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.getScreenWidth * 0.06),
+                    padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.06),
                     height: context.getScreenHeight * 0.25,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image:
-                              const AssetImage('assets/images/back_ground.png'),
+                          image: const AssetImage('assets/images/back_ground.png'),
                           fit: BoxFit.fill,
-                          colorFilter: ColorFilter.mode(
-                              AppColor.primaryColor.withOpacity(0.5),
-                              BlendMode.lighten)),
+                          colorFilter:
+                              ColorFilter.mode(AppColor.primaryColor.withOpacity(0.5), BlendMode.lighten)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -73,8 +69,7 @@ class LoginScreen extends StatelessWidget {
                 Flexible(
                     flex: 6,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.getScreenWidth * 0.03),
+                      padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
                       child: Column(
                         children: [
                           CustomTextFormField(
@@ -85,9 +80,7 @@ class LoginScreen extends StatelessWidget {
                             hintText: "Email",
                             borderRadius: 25,
                             onChange: (value) {
-                              context
-                                  .read<AuthenticationCubit>()
-                                  .checkButtonEnabledDisabled();
+                              context.read<AuthenticationCubit>().checkButtonEnabledDisabled();
                             },
                           ),
                           SizedBox(height: context.getScreenHeight * 0.02),
@@ -102,9 +95,7 @@ class LoginScreen extends StatelessWidget {
                             child: Text(
                               "Forgot Password?",
                               style: TextStyle(
-                                  fontSize: 15,
-                                  color: AppColor.primaryColor,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 15, color: AppColor.primaryColor, fontWeight: FontWeight.w500),
                             ),
                           ),
                           // Expanded(child: SizedBox()),
@@ -118,9 +109,7 @@ class LoginScreen extends StatelessWidget {
                                           size: 30,
                                           color: AppColor.redColor,
                                         ),
-                                        SizedBox(
-                                            height:
-                                                context.getScreenHeight * 0.01),
+                                        SizedBox(height: context.getScreenHeight * 0.01),
                                         Center(
                                           child: Text(
                                             state.errorMessage.toString(),
@@ -144,8 +133,7 @@ class LoginScreen extends StatelessWidget {
                 Flexible(
                   flex: 1,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.getScreenWidth * 0.04),
+                    padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
                     child: RoundElevatedButton(
                       title: "Sign In",
                       onPress: state.isButtonEnabled
@@ -162,9 +150,7 @@ class LoginScreen extends StatelessWidget {
                       buttonColor: (state.isButtonEnabled)
                           ? AppColor.primaryButtonColor
                           : AppColor.secondaryButtonColor,
-                      textColor: (state.isButtonEnabled)
-                          ? AppColor.whiteColor
-                          : AppColor.secondaryTextColor,
+                      textColor: (state.isButtonEnabled) ? AppColor.whiteColor : AppColor.secondaryTextColor,
                     ),
                   ),
                 )
@@ -189,8 +175,7 @@ class SignInScreen extends StatelessWidget {
           if (state.loginSuccessfull) {
             context.read<AuthenticationCubit>().removeError();
             Navigator.of(context).pushAndRemoveUntil(
-                CupertinoPageRoute(
-                    builder: (context) => const BottomNavigationScreen()),
+                CupertinoPageRoute(builder: (context) => const BottomNavigationScreen()),
                 (Route<dynamic> route) => false);
           }
         },
@@ -202,14 +187,12 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: context.getScreenWidth * 0.04),
+                    margin: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: context.getScreenWidth * 0.02),
+                          padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
                           decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                 begin: Alignment.topLeft,
@@ -235,7 +218,7 @@ class SignInScreen extends StatelessWidget {
                                     color: AppColor.primaryTextWhiteColor,
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600),
-                              ),  
+                              ),
                               Text(
                                 "Input your manxel account!",
                                 style: TextStyle(
@@ -250,27 +233,21 @@ class SignInScreen extends StatelessWidget {
                         const Text(
                           "Email",
                           style: TextStyle(
-                              color: AppColor.blackColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              color: AppColor.blackColor, fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: context.getScreenHeight * 0.01),
                         CustomTextField(
                           controller: state.emailController,
                           hintText: "Email",
                           onChange: (val) {
-                            context
-                                .read<AuthenticationCubit>()
-                                .checkButtonEnabledDisabled();
+                            context.read<AuthenticationCubit>().checkButtonEnabledDisabled();
                           },
                         ),
                         SizedBox(height: context.getScreenHeight * 0.02),
                         const Text(
                           "Password",
                           style: TextStyle(
-                              color: AppColor.blackColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              color: AppColor.blackColor, fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: context.getScreenHeight * 0.01),
                         CustomPasswordTextField1(
@@ -278,16 +255,16 @@ class SignInScreen extends StatelessWidget {
                           hintText: "Password",
                           obsecurePassword: passScene,
                           onChange: (val) {
-                            context
-                                .read<AuthenticationCubit>()
-                                .checkButtonEnabledDisabled();
+                            context.read<AuthenticationCubit>().checkButtonEnabledDisabled();
                           },
                         ),
                         SizedBox(height: context.getScreenHeight * 0.01),
                         Align(
                           alignment: Alignment.bottomRight,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              nextScreenCupertino(context, ForgotPasswordScreen());
+                            },
                             child: const Text(
                               "Forgot password?",
                               style: TextStyle(
@@ -306,8 +283,7 @@ class SignInScreen extends StatelessWidget {
                                       size: 30,
                                       color: AppColor.redColor,
                                     ),
-                                    SizedBox(
-                                        height: context.getScreenHeight * 0.01),
+                                    SizedBox(height: context.getScreenHeight * 0.01),
                                     Center(
                                       child: Text(
                                         state.errorMessage.toString(),
@@ -331,21 +307,16 @@ class SignInScreen extends StatelessWidget {
                       ? Center(
                           child: InkWell(
                             onTap: () async {
-                              await state.localAuthenticationService
-                                  .authenticate()
-                                  .then((value) {
+                              await state.localAuthenticationService.authenticate().then((value) {
                                 if (value) {
                                   context.read<AuthenticationCubit>().loginUser(
-                                      email: HiveStorage()
-                                          .getData(GlobalConstants.email),
-                                      password: HiveStorage()
-                                          .getData(GlobalConstants.password),
+                                      email: HiveStorage().getData(GlobalConstants.email),
+                                      password: HiveStorage().getData(GlobalConstants.password),
                                       isBiometric: true);
                                 }
                               });
                             },
-                            child: state.biometricType ==
-                                    GlobalConstants.touchId
+                            child: state.biometricType == GlobalConstants.touchId
                                 ? const Icon(
                                     Icons.fingerprint,
                                     size: 60,

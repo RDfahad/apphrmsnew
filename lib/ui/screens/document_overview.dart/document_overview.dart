@@ -197,7 +197,7 @@ Widget buildInfoRow(String label, String value) {
     children: [
       Text(
         label,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w800,
           fontSize: 12,
           color: AppColor.secondaryTextColor,
@@ -206,7 +206,7 @@ Widget buildInfoRow(String label, String value) {
       Text(
         value,
         style: const TextStyle(
-          fontSize: 20,
+          fontSize: 12,
           color: AppColor.secondaryTextColor,
         ),
       ),

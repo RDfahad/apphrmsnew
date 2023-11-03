@@ -6,6 +6,7 @@ import 'package:hr_emp_proj/data/repository_implement/profile_repo_impl/profile_
 import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
 import 'package:hr_emp_proj/ui/screens/leave_overview/screen/leave_overview.dart';
 import 'package:hr_emp_proj/ui/screens/offence/screen/offence_overview.dart';
+import 'package:hr_emp_proj/ui/screens/request_overview/screen/custom_steeper.dart';
 import '/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
 import '/domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_cubit.dart';
@@ -19,6 +20,9 @@ import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
 import 'data/http/http.dart';
 import 'data/repository_implement/authentication_repo_impl/authentication_repo_implement.dart';
 import 'domain/repository/authentication_repo/authentication_repo.dart';
+import 'ui/screens/authentication/view/reset_screen.dart';
+import 'ui/screens/request_overview/cubit/request_overview_cubit.dart';
+import 'ui/screens/request_overview/screen/request_overview.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -47,6 +51,7 @@ void main() async {
 ////Dummy For Testing
         BlocProvider(create: (BuildContext context) => AttendanceCubit(getIt())),
         BlocProvider(create: (BuildContext context) => ProfileCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => RequestOverviewCubit()),
       ],
       child: const MyApp(),
     ),
@@ -63,9 +68,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "Poppins",
+        //fontFamily: "Poppins",
         focusColor: AppColor.blackColor,
-        // textTheme: Typography.blackRedwoodCity,
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: AppColor.primaryTextBlackColor,
+              displayColor: AppColor.primaryTextBlackColor,
+              fontFamily: "Poppins",
+              
+            ),
         // primaryColor: Color(0xFF4684e2),
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
@@ -82,7 +92,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: OffenceOverViewScreen(),
+      home: OnboardingScreen(),
     );
   }
 }

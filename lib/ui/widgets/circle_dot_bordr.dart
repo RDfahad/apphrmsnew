@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 
@@ -16,13 +15,13 @@ class CircularDotsProgress extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Container(
-            width: context.getScreenWidth * 0.15,
-            height: context.getScreenWidth * 0.15,
+            width: context.getScreenWidth * 0.14,
+            height: context.getScreenWidth * 0.14,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: AppColor.primaryColor.withOpacity(0.12),
-                width: 6,
+                width: 5,
               ),
             ),
           ),
