@@ -30,6 +30,8 @@ class BottomNavigationScreen extends StatelessWidget {
             child: Scaffold(
               body: _getBodyForTab(state.bottomNavigationTabState),
               bottomNavigationBar: BottomNavigationBar(
+                useLegacyColorScheme: false,
+
                 backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
                 selectedItemColor: AppColor.whiteColor,
                 unselectedItemColor: AppColor.whiteColor,

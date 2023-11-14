@@ -1,12 +1,9 @@
 import 'dart:developer';
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/request_overview/cubit/request_overview_state.dart';
 import 'package:hr_emp_proj/ui/screens/request_overview/screen/custom_steeper.dart';
 import '../../../widgets/circle_dot_bordr.dart';
-import '../../document_overview.dart/document_overview.dart';
 import '../cubit/request_overview_cubit.dart';
 import '/utils/extension_methods.dart';
 
@@ -17,7 +14,6 @@ class RequestOverViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int currentStep = 0;
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: SingleChildScrollView(
@@ -141,7 +137,10 @@ class RequestOverViewScreen extends StatelessWidget {
                     height: context.getScreenHeight * 0.042,
                     child: ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(backgroundColor: AppColor.primaryButtonColor),
-                        onPressed: () {},
+                        onPressed: () {
+                          log("Working on");
+                          context.read<RequestOverviewCubit>().getRequestOverview();
+                        },
                         icon: Image.asset("assets/icons/filter_icon1.png"),
                         label: const Text(
                           " Filter ",
@@ -249,13 +248,16 @@ class RequestOverViewScreen extends StatelessWidget {
               //       ));
               // }),
               BlocBuilder<RequestOverviewCubit, RequestOverviewState>(builder: (context, state) {
+                log("state.requestModel.responseData?.reqests?.length   ${state.requestModel.responseData?.reqests?.length}");
+                final cubitValue = state.requestModel.responseData?.reqests;
                 return Column(
-                  children: [
-                    RequestOverviewCard(
-                      title: '', // Pass the title
-                      date: '', // Pass the date
-                      category: '', // Pass the category
-                      status: 'pending', // Pass the status
+                  children: List.generate(
+                    state.requestModel.responseData?.reqests?.length ?? 0,
+                    (index) => RequestOverviewCard(
+                      title: cubitValue?[index].requestSubject ?? '',
+                      date: cubitValue?[index].applyDate ?? '',
+                      category: cubitValue?[index].category ?? '',
+                      status: cubitValue?[index].requestStatus ?? '',
                       isExpanded: state.isCheckheight[1],
                       onDetailsPressed: () {
                         log('context.getScreenHeight ${state.isCheckheight[2]}');
@@ -268,22 +270,26 @@ class RequestOverViewScreen extends StatelessWidget {
                         CustomSteeperCard(title: "HR Manager", status: "Pending"),
                       ],
                     ),
-                    RequestOverviewCard(
-                      title: '', // Pass the title
-                      date: '', // Pass the date
-                      category: '', // Pass the category
-                      status: 'Approved', // Pass the status
-                      isExpanded: state.isCheckheight[2],
-                      onDetailsPressed: () {
-                        log('context.getScreenHeight ${state.isCheckheight[2]}');
-                        context.read<RequestOverviewCubit>().updateIsCheckValue(2);
-                      },
-                      columnWidget: const [
-                        CustomSteeperCard(title: 'Team Lead', status: "Approved"),
-                        CustomSteeperCard(title: "HR Manager", status: "Pending"),
-                      ],
-                    ),
-                  ],
+                  ),
+                  // children: [
+
+                  //   // RequestOverviewCard(
+                  //   //   title: '',
+                  //   //   date: '',
+                  //   //   category: '',
+                  //   //   status: 'Approved',
+                  //   //   isExpanded: state.isCheckheight[2],
+                  //   //   onDetailsPressed: () {
+                  //   //     log('context.getScreenHeight ${state.isCheckheight[2]}');
+                  //   //     context.read<RequestOverviewCubit>().updateIsCheckValue(2);
+                  //   //   },
+                  //   //   columnWidget: const [
+                  //   //     CustomSteeperCard(title: 'Team Lead', status: "Approved"),
+                  //   //     CustomSteeperCard(title: "HR Manager", status: "Pending"),
+                  //   //   ],
+                  //   // ),
+
+                  // ],
                 );
               }),
 
@@ -322,10 +328,11 @@ class RequestOverviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: context.getScreenHeight * 0.02),
-      height: isExpanded
-          ? context.getScreenHeight * (0.2 + (columnWidget.length * 0.14))
-          : context.getScreenHeight * 0.2,
-      padding: EdgeInsets.all(context.getScreenHeight * 0.02),
+      // height: isExpanded
+      //     ? context.getScreenHeight * (0.2 + (columnWidget.length * 0.14))
+      //     : context.getScreenHeight * 0.2,
+      padding:
+          EdgeInsets.all(context.getScreenHeight * 0.02).copyWith(bottom: context.getScreenHeight * 0.02),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -359,8 +366,8 @@ class RequestOverviewCard extends StatelessWidget {
               ),
             ],
           ),
-          buildInfoRow("Date:", date), // Pass the date here
-          buildInfoRow("Category:", category), // Pass the category here
+          buildInfoRow("Date:  ", date), // Pass the date here
+          buildInfoRow("Category:   ", category), // Pass the category here
           SizedBox(height: context.getScreenHeight * 0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

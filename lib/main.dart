@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hr_emp_proj/data/repository_implement/profile_repo_impl/profile_repo_impl.dart';
+import 'package:hr_emp_proj/data/repository_implement/request_repo_impl/request_repo_impl.dart';
 import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
+import 'package:hr_emp_proj/domain/repository/request_repo/request_repo.dart';
 import 'package:hr_emp_proj/ui/screens/leave_overview/screen/leave_overview.dart';
 import 'package:hr_emp_proj/ui/screens/offence/screen/offence_overview.dart';
 import 'package:hr_emp_proj/ui/screens/request_overview/screen/custom_steeper.dart';
@@ -20,6 +22,7 @@ import '/ui/screens/onboarding/bloc/onboarding_bloc.dart';
 import 'data/http/http.dart';
 import 'data/repository_implement/authentication_repo_impl/authentication_repo_implement.dart';
 import 'domain/repository/authentication_repo/authentication_repo.dart';
+import 'ui/screens/authentication/view/mood_detector.dart';
 import 'ui/screens/authentication/view/reset_screen.dart';
 import 'ui/screens/request_overview/cubit/request_overview_cubit.dart';
 import 'ui/screens/request_overview/screen/request_overview.dart';
@@ -34,6 +37,7 @@ void main() async {
   getIt.registerSingleton<AuthenticationRepo>(AuthenticationRepoImpl(httpRequest: getIt()));
   getIt.registerSingleton<AttendanceRepo>(AttendanceRepoImpl(httpRequest: getIt()));
   getIt.registerSingleton<ProfileRepo>(ProfileRepoImpl(httpRequest: getIt()));
+  getIt.registerSingleton<RequestRepo>(RequestRepoImpl(httpRequest: getIt()));
 
   //Hive DataBase
 
@@ -51,7 +55,7 @@ void main() async {
 ////Dummy For Testing
         BlocProvider(create: (BuildContext context) => AttendanceCubit(getIt())),
         BlocProvider(create: (BuildContext context) => ProfileCubit(getIt())),
-        BlocProvider(create: (BuildContext context) => RequestOverviewCubit()),
+        BlocProvider(create: (BuildContext context) => RequestOverviewCubit(getIt())),
       ],
       child: const MyApp(),
     ),
@@ -74,7 +78,6 @@ class MyApp extends StatelessWidget {
               bodyColor: AppColor.primaryTextBlackColor,
               displayColor: AppColor.primaryTextBlackColor,
               fontFamily: "Poppins",
-              
             ),
         // primaryColor: Color(0xFF4684e2),
         colorScheme: const ColorScheme(

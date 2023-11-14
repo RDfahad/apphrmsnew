@@ -30,8 +30,7 @@ class ProfileScreen extends StatelessWidget {
           builder: (context, ProfileState state) {
             return SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.getScreenWidth * 0.03),
+                padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
                 child: Column(
                   children: [
                     SizedBox(
@@ -62,10 +61,8 @@ class ProfileScreen extends StatelessWidget {
                             width: context.getScreenWidth,
                             child: const Text(
                               "Edit\nProfile",
-                              style: TextStyle(
-                                  color: AppColor.primaryTextWhiteColor,
-                                  fontSize: 28,
-                                  height: 1),
+                              style:
+                                  TextStyle(color: AppColor.primaryTextWhiteColor, fontSize: 28, height: 1),
                             ),
                           ),
                           Positioned(
@@ -82,8 +79,7 @@ class ProfileScreen extends StatelessWidget {
                                 children: [
                                   state.image != null
                                       ? Container(
-                                          height:
-                                              context.getScreenHeight * 0.15,
+                                          height: context.getScreenHeight * 0.15,
                                           width: context.getScreenHeight * 0.15,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
@@ -100,57 +96,44 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ],
                                             image: DecorationImage(
-                                              image: FileImage(
-                                                  state.image!.absolute),
+                                              image: FileImage(state.image!.absolute),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
                                         )
-                                        : CachedNetworkImage(
-                                            height:
-                                                context.getScreenHeight * 0.15,
-                                            width: context.getScreenHeight * 0.15,
-                                            imageUrl: context 
-                                                    .read<DashboardCubit>()
-                                                    .state
-                                                    .userData
-                                                    .user
-                                                    ?.image ??
-                                                '',
-                                            imageBuilder:
-                                                (context, imageProvider) =>
-                                                    Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: const Color(0xFFd9d9d9),
-                                                border: Border.all(
-                                                  color: AppColor.whiteColor,
-                                                  width: 3,
+                                      : CachedNetworkImage(
+                                          height: context.getScreenHeight * 0.15,
+                                          width: context.getScreenHeight * 0.15,
+                                          imageUrl:
+                                              context.read<DashboardCubit>().state.userData.user?.image ?? '',
+                                          imageBuilder: (context, imageProvider) => Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: const Color(0xFFd9d9d9),
+                                              border: Border.all(
+                                                color: AppColor.whiteColor,
+                                                width: 3,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  spreadRadius: 3,
+                                                  color: Colors.grey.shade200,
+                                                  blurRadius: 2,
                                                 ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    spreadRadius: 3,
-                                                    color: Colors.grey.shade200,
-                                                    blurRadius: 2,
-                                                  ),
-                                                ],
-                                                image: DecorationImage(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                              ],
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                            placeholder: (context, url) =>
-                                                Container(
-                                              height:
-                                                  context.getScreenHeight * 0.08,
-                                              width:
-                                                  context.getScreenHeight * 0.08,
-                                              child: CircularProgressIndicator(),
-                                            ),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(Icons.error),
                                           ),
+                                          placeholder: (context, url) => Container(
+                                            height: context.getScreenHeight * 0.08,
+                                            width: context.getScreenHeight * 0.08,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                          errorWidget: (context, url, error) => Icon(Icons.error),
+                                        ),
                                   Positioned(
                                     top: context.getScreenHeight * 0.1,
                                     left: context.getScreenHeight * 0.1,
@@ -271,33 +254,22 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: context.getScreenWidth * 0.04,
-                          top: context.getScreenHeight * 0.02),
+                          left: context.getScreenWidth * 0.04, top: context.getScreenHeight * 0.02),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            context
-                                    .read<DashboardCubit>()
-                                    .state
-                                    .userData
-                                    .user
-                                    ?.name ??
-                                '',
+                            context.read<DashboardCubit>().state.userData.user?.name ?? '',
                             style: const TextStyle(
-                                color: AppColor.blackColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
+                              color: AppColor.blackColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                          SizedBox(height: 5),
                           Text(
-                            context
-                                    .read<DashboardCubit>()
-                                    .state
-                                    .userData
-                                    .user
-                                    ?.designation ??
-                                '',
+                            context.read<DashboardCubit>().state.userData.user?.designation ?? '',
                             style: const TextStyle(
                                 color: AppColor.blackColor,
                                 fontSize: 14,
@@ -309,8 +281,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Container(
                       width: context.getScreenWidth * 0.9,
-                      margin:
-                          EdgeInsets.only(top: context.getScreenHeight * 0.07),
+                      margin: EdgeInsets.only(top: context.getScreenHeight * 0.07),
                       decoration: BoxDecoration(
                         color: AppColor.whiteColor,
                         borderRadius: BorderRadius.circular(12),
@@ -340,8 +311,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.getScreenWidth * 0.05),
+                            padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
                             child: const Divider(
                               height: 1,
                               thickness: 0.3,
@@ -350,24 +320,16 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           ListTile(
                             onTap: () {
-                              HiveStorage().putData(
-                                  GlobalConstants.userDate,
-                                  jsonEncode(UserData(
-                                          user: User(),
-                                          token: "",
-                                          tokenType: "")
-                                      .toJson()));
-                              HiveStorage()
-                                  .putData(GlobalConstants.isLogIn, false);
+                              HiveStorage().putData(GlobalConstants.userDate,
+                                  jsonEncode(UserData(user: User(), token: "", tokenType: "").toJson()));
+                              HiveStorage().putData(GlobalConstants.isLogIn, false);
                               Config.isLoggedIn = false;
                               Config.authorization = '';
-                              context.read<DashboardCubit>().changeTab(
-                                  BottomNavigationTabState.homeScreen);
+                              context.read<DashboardCubit>().changeTab(BottomNavigationTabState.homeScreen);
                               context.read<DashboardCubit>().initState();
                               context.read<AttendanceCubit>().initState();
                               Navigator.of(context).pushAndRemoveUntil(
-                                  CupertinoPageRoute(
-                                      builder: (context) => SignInScreen()),
+                                  CupertinoPageRoute(builder: (context) => SignInScreen()),
                                   (Route<dynamic> route) => false);
                             },
                             title: const Text(
@@ -390,8 +352,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Container(
                       width: context.getScreenWidth * 0.9,
-                      margin:
-                          EdgeInsets.only(top: context.getScreenHeight * 0.07),
+                      margin: EdgeInsets.only(top: context.getScreenHeight * 0.07),
                       decoration: BoxDecoration(
                         color: AppColor.whiteColor,
                         borderRadius: BorderRadius.circular(12),
@@ -417,15 +378,12 @@ class ProfileScreen extends StatelessWidget {
                               inactiveThumbColor: AppColor.whiteColor,
                               inactiveTrackColor: Colors.grey.shade400,
                               value: false,
-                              trackOutlineColor:
-                                  MaterialStateProperty.all<Color>(
-                                      Colors.transparent),
+                              trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               onChanged: (bool value) {},
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.getScreenWidth * 0.05),
+                            padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
                             child: const Divider(
                               height: 1,
                               thickness: 0.3,
@@ -444,15 +402,12 @@ class ProfileScreen extends StatelessWidget {
                               inactiveThumbColor: AppColor.whiteColor,
                               inactiveTrackColor: Colors.grey.shade400,
                               value: true,
-                              trackOutlineColor:
-                                  MaterialStateProperty.all<Color>(
-                                      Colors.transparent),
+                              trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               onChanged: (bool value) {},
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.getScreenWidth * 0.05),
+                            padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.05),
                             child: const Divider(
                               height: 1,
                               thickness: 0.3,
@@ -471,9 +426,7 @@ class ProfileScreen extends StatelessWidget {
                               inactiveThumbColor: AppColor.whiteColor,
                               inactiveTrackColor: Colors.grey.shade400,
                               value: state.touchId,
-                              trackOutlineColor:
-                                  MaterialStateProperty.all<Color>(
-                                      Colors.transparent),
+                              trackOutlineColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               onChanged: (bool value) {
                                 if (value) {
                                   context
@@ -483,21 +436,13 @@ class ProfileScreen extends StatelessWidget {
                                       .authenticate()
                                       .then((isAuthenticated) {
                                     if (isAuthenticated) {
-                                      HiveStorage().putData(
-                                          GlobalConstants.isBiometricEnabled,
-                                          true);
-                                      context
-                                          .read<ProfileCubit>()
-                                          .changeTouchId(true);
+                                      HiveStorage().putData(GlobalConstants.isBiometricEnabled, true);
+                                      context.read<ProfileCubit>().changeTouchId(true);
                                     }
                                   });
                                 } else {
-                                  HiveStorage().putData(
-                                      GlobalConstants.isBiometricEnabled,
-                                      false);
-                                  context
-                                      .read<ProfileCubit>()
-                                      .changeTouchId(false);
+                                  HiveStorage().putData(GlobalConstants.isBiometricEnabled, false);
+                                  context.read<ProfileCubit>().changeTouchId(false);
                                 }
                               },
                             ),

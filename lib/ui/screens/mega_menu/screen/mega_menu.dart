@@ -29,8 +29,7 @@ class MegaMenuScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
+        padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,8 +40,7 @@ class MegaMenuScreen extends StatelessWidget {
                   Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.symmetric(
-                        horizontal: context.getScreenWidth * 0.03,
-                        vertical: context.getScreenHeight * 0.02),
+                        horizontal: context.getScreenWidth * 0.03, vertical: context.getScreenHeight * 0.02),
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -62,9 +60,7 @@ class MegaMenuScreen extends StatelessWidget {
                     child: const Text(
                       "Mega Menu",
                       style: TextStyle(
-                          color: AppColor.primaryTextWhiteColor,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600),
+                          color: AppColor.primaryTextWhiteColor, fontSize: 28, fontWeight: FontWeight.w600),
                     ),
                   ),
                   Positioned(

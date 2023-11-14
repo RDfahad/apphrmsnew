@@ -24,4 +24,6 @@ class Path {
 
   String get forgotPasswordUrl =>
       '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/password/forgot';
+
+  String get getRequestUrl => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/requests/get';
 }

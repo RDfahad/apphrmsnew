@@ -70,7 +70,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             ),
           ),
           Spacer(),
-          RoundElevatedButton(
+          RoundElevatedButton(  
             title: "Reset Password",
             buttonColor: AppColor.secondaryButtonColor,
             width: double.infinity,
