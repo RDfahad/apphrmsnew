@@ -257,7 +257,7 @@ class AttendanceOverViewScreen extends StatelessWidget {
                               itemCount: state.attendanceRecords.data!.length >
                                       6
                                   ? 6
-                                  : state.attendanceRecords.data!.length - 1,
+                                  : state.attendanceRecords.data!.length,
                               itemBuilder: (context, index) {
                                 return Container(
                                   margin: const EdgeInsets.only(bottom: 5),

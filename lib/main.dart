@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hr_emp_proj/data/repository_implement/document_management_implementation/document_management_impl.dart';
 import 'package:hr_emp_proj/data/repository_implement/profile_repo_impl/profile_repo_impl.dart';
+import 'package:hr_emp_proj/domain/repository/document_management/document_management_repo.dart';
 import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
+import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_bloc/document_bloc.dart';
 import '/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
 import '/domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_cubit.dart';
 import '/ui/screens/dashboard/bloc/dashboard_bloc.dart';
-import '/ui/screens/document_overview.dart/document_overview.dart';
 import '/ui/screens/onboarding/view/onboarding_screen.dart';
 import '/ui/screens/profile/bloc/profile_bloc.dart';
 import '/utils/app_color.dart';
@@ -22,7 +24,6 @@ final GetIt getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   getIt.registerSingleton(ResponseHandler());
   getIt.registerSingleton(HTTPRequest());
   getIt.registerSingleton<AuthenticationRepo>(
@@ -30,6 +31,7 @@ void main() async {
   getIt.registerSingleton<AttendanceRepo>(
       AttendanceRepoImpl(httpRequest: getIt()));
   getIt.registerSingleton<ProfileRepo>(ProfileRepoImpl(httpRequest: getIt()));
+  getIt.registerSingleton<DocumentManagementRepo>(DocumentManagementRepoImpl(httpRequest: getIt()));
 
   //Hive DataBase
 
@@ -47,10 +49,10 @@ void main() async {
         BlocProvider(
             create: (BuildContext context) => AttendanceCubit(getIt())),
 
-////Dummy For Testing
         BlocProvider(
             create: (BuildContext context) => AttendanceCubit(getIt())),
         BlocProvider(create: (BuildContext context) => ProfileCubit(getIt())),
+        BlocProvider(create: (BuildContext context) => DocumentCubit(getIt())..getDocument()),
       ],
       child: const MyApp(),
     ),

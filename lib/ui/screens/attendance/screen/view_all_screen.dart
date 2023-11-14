@@ -178,7 +178,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount:
-                                    state.attendanceRecords.data!.length - 1,
+                                    state.attendanceRecords.data!.length ,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     margin: const EdgeInsets.only(bottom: 5),

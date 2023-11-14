@@ -24,7 +24,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
         response.responseData?.attendenceObject?.data
             ?.addAll(state.attendanceRecords.data ?? []);
         response.responseData?.attendenceObject?.data
-            ?.sort((a, b) => a.date!.compareTo(b.date!));
+            ?.sort((a, b) => b.date!.compareTo(a.date!));
         // shouldCallAPI = true;
         emit(state.copyWith(
             loadMore: false,

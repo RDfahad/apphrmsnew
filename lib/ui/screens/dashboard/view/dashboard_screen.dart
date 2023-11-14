@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
-import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_overview.dart';
+import 'package:hr_emp_proj/ui/screens/document_overview.dart/view/document_overview.dart';
 import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
@@ -37,113 +37,114 @@ class DashBoardScreenNew extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.appBackgroundColor,
-      body: BlocConsumer<DashboardCubit,DashboardState>(
-        listenWhen: (DashboardState previous,DashboardState current) {
-          if(current.userData.token?.isEmpty ?? true && !current.isLoading){
-            return true;
-          }
-          else{
-            return false;
-          }
-        },
-        listener: (context, state){
-          if(state.isTokenExpired){
-            context.read<DashboardCubit>().changeExpiryStatus(false);
-            HiveStorage().putData(GlobalConstants.isLogIn, false);
-            Config.isLoggedIn = false;
-            Navigator.pushReplacement(
-                context, CupertinoPageRoute(builder: (_) => SignInScreen()));
-          }
-        },
-        builder: (context, state){
-          return Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.getScreenWidth * 0.03),
-                      decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Color(0xFF0b84c8),
-                              Color(0xff214cbd),
-                              Color(0xff214cbd),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          )),
-                      height: context.getScreenHeight * 0.22,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (_) => const MegaMenuScreen()));
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: List.generate(
-                                3,
-                                    (index) => Container(
-                                  margin: const EdgeInsets.only(left: 2),
-                                  height: 7,
-                                  width: 7,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: AppColor.whiteColor),
+        backgroundColor: AppColor.appBackgroundColor,
+        body: BlocConsumer<DashboardCubit, DashboardState>(
+          listenWhen: (DashboardState previous, DashboardState current) {
+            if (current.userData.token?.isEmpty ?? true && !current.isLoading) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          listener: (context, state) {
+            if (state.isTokenExpired) {
+              context.read<DashboardCubit>().changeExpiryStatus(false);
+              HiveStorage().putData(GlobalConstants.isLogIn, false);
+              Config.isLoggedIn = false;
+              Navigator.pushReplacement(
+                  context, CupertinoPageRoute(builder: (_) => SignInScreen()));
+            }
+          },
+          builder: (context, state) {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.getScreenWidth * 0.02),
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.getScreenWidth * 0.03),
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Color(0xFF0b84c8),
+                                Color(0xff214cbd),
+                                Color(0xff214cbd),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            )),
+                        height: context.getScreenHeight * 0.22,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (_) =>
+                                            const MegaMenuScreen()));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: List.generate(
+                                  3,
+                                  (index) => Container(
+                                    margin: const EdgeInsets.only(left: 2),
+                                    height: 7,
+                                    width: 7,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: AppColor.whiteColor),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Text(
-                            state.userData.user?.name ?? '',
-                            style: const TextStyle(
-                                color: AppColor.primaryTextWhiteColor,
-                                fontSize: 28,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            state.userData.user?.designation ?? '',
-                            style: const TextStyle(
-                                color: AppColor.primaryTextWhiteColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w300),
-                          ),
-                          SizedBox(
-                            height: context.getScreenHeight * 0.02,
-                          ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.flag,
-                                color: AppColor.primaryTextWhiteColor,
-                              ),
-                              Text(
-                                state.userData.user?.joiningDate ?? '',
-                                style: const TextStyle(
-                                    color: AppColor.primaryTextWhiteColor,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300),
-                              ),
-                            ],
-                          ),
-                        ],
+                            Text(
+                              state.userData.user?.name ?? '',
+                              style: const TextStyle(
+                                  color: AppColor.primaryTextWhiteColor,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              state.userData.user?.designation ?? '',
+                              style: const TextStyle(
+                                  color: AppColor.primaryTextWhiteColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                            SizedBox(
+                              height: context.getScreenHeight * 0.02,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.flag,
+                                  color: AppColor.primaryTextWhiteColor,
+                                ),
+                                Text(
+                                  state.userData.user?.joiningDate ?? '',
+                                  style: const TextStyle(
+                                      color: AppColor.primaryTextWhiteColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                       SizedBox(
                         height: context.getScreenHeight * 0.02,
                       ),
@@ -200,9 +201,12 @@ class DashBoardScreenNew extends StatelessWidget {
                                                     BottomNavigationTabState
                                                         .detailReports);
                                           }
-                                          if(index == 4){
+                                          if (index == 4) {
                                             Navigator.push(
-                                                context, CupertinoPageRoute(builder: (_) => DocumentOverViewScreen()));
+                                                context,
+                                                CupertinoPageRoute(
+                                                    builder: (_) =>
+                                                        DocumentOverViewScreen()));
                                           }
                                         },
                                         child: IconCard(
@@ -372,7 +376,13 @@ class DashBoardScreenNew extends StatelessWidget {
                             placeholder: (context, url) => Container(
                               height: context.getScreenHeight * 0.08,
                               width: context.getScreenHeight * 0.08,
-                              child: CircularProgressIndicator(),
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/blank_pic.png"),
+                                    fit: BoxFit.cover),
+                                shape: BoxShape.circle,
+                              ),
                             ),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),

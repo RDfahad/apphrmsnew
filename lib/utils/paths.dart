@@ -24,4 +24,7 @@ class Path {
 
   String get editProfileImage =>
       '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/store_dp';
+
+  String get getDocument =>
+      '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/get_documents';
 }
