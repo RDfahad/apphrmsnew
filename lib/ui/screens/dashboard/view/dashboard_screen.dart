@@ -43,7 +43,7 @@ class DashBoardScreenNew extends StatelessWidget {
     LeaveOverViewScreen(),
     RequestOverViewScreen(),
     OffenceOverViewScreen(),
-    DocumentOverViewScreen(),
+   DocumentOverViewScreen()
   ];
 
   @override
@@ -90,6 +90,9 @@ class DashBoardScreenNew extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            SizedBox(
+                              height: context.getScreenHeight * 0.03,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: List.generate(
@@ -341,7 +344,11 @@ class DashBoardScreenNew extends StatelessWidget {
                             placeholder: (context, url) => Container(
                               height: context.getScreenHeight * 0.08,
                               width: context.getScreenHeight * 0.08,
-                              child: CircularProgressIndicator(),
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage("assets/images/blank_pic.png"), fit: BoxFit.cover),
+                                shape: BoxShape.circle,
+                              ),
                             ),
                             errorWidget: (context, url, error) => Icon(Icons.error),
                           ),

@@ -163,7 +163,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                                 color: AppColor.whiteColor,
                                 borderRadius: BorderRadius.circular(12)),
                             child: ListView.separated(
-                                reverse: true,
+                                // reverse: true,
                                 separatorBuilder: (context, index) {
                                   return Padding(
                                     padding: EdgeInsets.symmetric(

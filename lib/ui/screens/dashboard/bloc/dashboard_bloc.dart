@@ -27,7 +27,7 @@ class DashboardCubit extends Cubit<DashboardState> {
           ? UserData.fromJson(jsonDecode(userModel ?? ''))
           : null;
       Config.authorization = userData?.token ?? '';
-      if (Config.isLoggedIn) {
+      if (Config.isLoggedIn && Config.authorization.isEmpty) {
         await authenticationRepo.refreshToken().then((tokenData){
           Config.authorization = tokenData.data?.token ?? '';
           userData = UserData(
@@ -52,13 +52,5 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   void changeExpiryStatus(bool expiryStatus) =>
       emit(state.copyWith(isTokenExpired: false));
-
-  // @override
-  // Future<void> close() {
-  //   // TODO: implement close
-  //   // BlocProvider.of<DashboardCubit>(context).close();
-  //   emit(DashboardState.init());
-  //   return super.close();
-  // }
 
 }

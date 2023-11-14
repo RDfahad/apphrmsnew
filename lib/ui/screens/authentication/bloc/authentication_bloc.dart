@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/reset_screen.dart';
-import 'package:hr_emp_proj/utils/helper.dart';
-import '/utils/hive_db/hive_db.dart';
+import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
 import '../../../../utils/configuration.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/extension_methods.dart';
+import '../../../../utils/helper.dart';
 import '/domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/repository/authentication_repo/authentication_repo.dart';
@@ -44,6 +45,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> loginUser({String? email, String? password, bool isBiometric = false}) async {
+    print('asd');
     emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
     await authenticationRepo.loginUser(email: email, password: password).then((userLogin) {
       if (HiveStorage().getData(GlobalConstants.email) != email) {
@@ -65,16 +67,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         }
       }
       emit(state.copyWith(
-        loginLoading: false,
-        loginSuccessfull: true,
-        loginUserModel: userLogin,
-        isIconFieldColorEnabled: false,
-      ));
+          loginLoading: false,
+          loginSuccessfull: true,
+          loginUserModel: userLogin,
+          isIconFieldColorEnabled: false,
+          emailController: TextEditingController(text: ''),
+          passwordController: TextEditingController(text: '')));
     }, onError: (e) {
       print('asdajsd');
       log("Log From Cubit Eror $e");
       ExceptionHandler().handleException(e);
-      emit(state.copyWith(
+    emit(state.copyWith(
         loginLoading: false,
         error: true,
         errorMessage: e.toString(),
