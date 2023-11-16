@@ -1,12 +1,12 @@
-class ForgotPasswordModel {
+class ForgotAndUpdatePasswordModel {
   bool? success;
   String? responseMessage;
   String? responseCode;
   List<Null>? data;
 
-  ForgotPasswordModel({this.success, this.responseMessage, this.responseCode, this.data});
+  ForgotAndUpdatePasswordModel({this.success, this.responseMessage, this.responseCode, this.data});
 
-  ForgotPasswordModel.fromJson(Map<String, dynamic> json) {
+  ForgotAndUpdatePasswordModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     responseMessage = json['responseMessage'];
     responseCode = json['responseCode'];

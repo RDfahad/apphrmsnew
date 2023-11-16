@@ -14,6 +14,7 @@ class RequestOverViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<RequestOverviewCubit>().getRequestOverview();
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: SingleChildScrollView(
@@ -249,48 +250,55 @@ class RequestOverViewScreen extends StatelessWidget {
               // }),
               BlocBuilder<RequestOverviewCubit, RequestOverviewState>(builder: (context, state) {
                 log("state.requestModel.responseData?.reqests?.length   ${state.requestModel.responseData?.reqests?.length}");
-                final cubitValue = state.requestModel.responseData?.reqests;
-                return Column(
-                  children: List.generate(
-                    state.requestModel.responseData?.reqests?.length ?? 0,
-                    (index) => RequestOverviewCard(
-                      title: cubitValue?[index].requestSubject ?? '',
-                      date: cubitValue?[index].applyDate ?? '',
-                      category: cubitValue?[index].category ?? '',
-                      status: cubitValue?[index].requestStatus ?? '',
-                      isExpanded: state.isCheckheight[1],
-                      onDetailsPressed: () {
-                        log('context.getScreenHeight ${state.isCheckheight[2]}');
-                        context.read<RequestOverviewCubit>().updateIsCheckValue(1);
-                      },
-                      columnWidget: const [
-                        CustomSteeperCard(title: 'Team Lead', status: "Approved"),
-                        CustomSteeperCard(title: "HR Manager", status: "Pending"),
-                        CustomSteeperCard(title: "HR Manager", status: "Pending"),
-                        CustomSteeperCard(title: "HR Manager", status: "Pending"),
-                      ],
-                    ),
-                  ),
-                  // children: [
+                final requestModel = state.requestModel.responseData?.reqests;
+                return state.isLoading
+                    ? const CircularProgressIndicator()
+                    : Column(
+                        children: List.generate(
+                          state.requestModel.responseData?.reqests?.length ?? 0,
+                          (index) => RequestOverviewCard(
+                            title: requestModel?[index].requestSubject ?? '',
+                            date: requestModel?[index].applyDate ?? '',
+                            category: requestModel?[index].category ?? '',
+                            status: requestModel?[index].requestStatus ?? '',
+                            isExpanded: state.isCheckheight[1],
+                            onDetailsPressed: () {
+                              log('context.getScreenHeight ${state.isCheckheight[2]}');
+                              context.read<RequestOverviewCubit>().updateIsCheckValue(1);
+                            },
+                            columnWidget:const [
+                               CustomSteeperCard(title: 'Team Lead', status: "Approved"),
+                              // CustomSteeperCard(
+                              //     title:
+                              //         state.requestDetailModel.responseData?.reqestDetails?.requestSubject ??
+                              //             "Subject NA",
+                              //     status:
+                              //         "${state.requestDetailModel.responseData?.reqestDetails?.requestStatus}"),
+                              const CustomSteeperCard(title: "HR Manager", status: "Pending"),
+                              const CustomSteeperCard(title: "HR Manager", status: "Pending"),
+                            ],
+                          ),
+                        ),
+                        // children: [
 
-                  //   // RequestOverviewCard(
-                  //   //   title: '',
-                  //   //   date: '',
-                  //   //   category: '',
-                  //   //   status: 'Approved',
-                  //   //   isExpanded: state.isCheckheight[2],
-                  //   //   onDetailsPressed: () {
-                  //   //     log('context.getScreenHeight ${state.isCheckheight[2]}');
-                  //   //     context.read<RequestOverviewCubit>().updateIsCheckValue(2);
-                  //   //   },
-                  //   //   columnWidget: const [
-                  //   //     CustomSteeperCard(title: 'Team Lead', status: "Approved"),
-                  //   //     CustomSteeperCard(title: "HR Manager", status: "Pending"),
-                  //   //   ],
-                  //   // ),
+                        //   // RequestOverviewCard(
+                        //   //   title: '',
+                        //   //   date: '',
+                        //   //   category: '',
+                        //   //   status: 'Approved',
+                        //   //   isExpanded: state.isCheckheight[2],
+                        //   //   onDetailsPressed: () {
+                        //   //     log('context.getScreenHeight ${state.isCheckheight[2]}');
+                        //   //     context.read<RequestOverviewCubit>().updateIsCheckValue(2);
+                        //   //   },
+                        //   //   columnWidget: const [
+                        //   //     CustomSteeperCard(title: 'Team Lead', status: "Approved"),
+                        //   //     CustomSteeperCard(title: "HR Manager", status: "Pending"),
+                        //   //   ],
+                        //   // ),
 
-                  // ],
-                );
+                        // ],
+                      );
               }),
 
               const SizedBox(

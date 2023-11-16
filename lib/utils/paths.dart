@@ -22,8 +22,16 @@ class Path {
 
   String get editProfileImage => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/store_dp';
 
+  String get getDocument => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/get_documents';
+
   String get forgotPasswordUrl =>
       '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/password/forgot';
 
   String get getRequestUrl => '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/requests/get';
+
+  String get getRequestDetailUrl =>
+      '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/requests/details';
+
+  String get changePasswordUrl =>
+      '${defaultLiveUrl['baseUrl']}/${defaultLiveUrl['api_route']}/password/update';
 }

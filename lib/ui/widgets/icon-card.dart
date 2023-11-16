@@ -35,8 +35,8 @@ class IconCard extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             iconName,
-            style: const TextStyle(
-              color: AppColor.secondaryTextColor,
+            style: TextStyle(
+              color: AppColor.blackColor.withOpacity(0.7),
               fontSize: 12,
             ),
           ),

@@ -7,7 +7,7 @@ import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 import '../../attendance/screen/attendance_overview.dart';
 import '../../dashboard/view/leave_request.dart';
-import '../../document_overview.dart/document_overview.dart';
+import '../../document_overview.dart/view/document_overview.dart';
 import '../../profile/view/profile_screen.dart';
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/utils/app_color.dart';

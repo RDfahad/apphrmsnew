@@ -34,11 +34,11 @@ class AuthenticationRepoImpl implements AuthenticationRepo {
   }
 
   @override
-  Future<ForgotPasswordModel> forgotPassword({String? email}) async {
+  Future<ForgotAndUpdatePasswordModel> forgotPassword({String? email}) async {
     try {
       var body = {"email": email};
       var response = await httpRequest?.post(url: paths.forgotPasswordUrl, body: body, token: Config.token);
-      return ForgotPasswordModel.fromJson(json.decode(response.content) ?? {});
+      return ForgotAndUpdatePasswordModel.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);
     }

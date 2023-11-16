@@ -28,7 +28,7 @@ class HTTPRequest {
       var response = await http.get(
         Uri.parse('$url?$queryParam'),
         headers: headers,
-      );
+      ).timeout(const Duration(seconds: 15));
       print(response.body);
       var processedResponse = responseHandler?.processResponse(response);
       return returnResponse(processedResponse);
@@ -58,7 +58,7 @@ class HTTPRequest {
         headers: headers,
       )));
       var response =
-          await http.post(Uri.parse(url), body: body, headers: headers);
+          await http.post(Uri.parse(url), body: body, headers: headers).timeout(const Duration(seconds: 15));
       log("From Post Http Page ${response.body}");
       var processedResponse = responseHandler?.processResponse(response);
       return returnResponse(processedResponse);

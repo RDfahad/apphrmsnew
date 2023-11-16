@@ -345,6 +345,7 @@ class SignInScreen extends StatelessWidget {
                                   email: state.emailController.text,
                                   password: state.passwordController.text,
                                 );
+                            FocusManager.instance.primaryFocus?.unfocus();
                           }
                         : null,
                   ),

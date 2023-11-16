@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/profile/view/change_password.dart';
+import 'package:hr_emp_proj/utils/helper.dart';
 import '/ui/screens/authentication/bloc/authentication_bloc.dart';
 import '/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import '/ui/screens/dashboard/bloc/dashboard_state.dart';
@@ -127,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          placeholder: (context, url) => Container(
+                                          placeholder: (context, url) => SizedBox(
                                             height: context.getScreenHeight * 0.08,
                                             width: context.getScreenHeight * 0.08,
                                             child: CircularProgressIndicator(),
@@ -254,20 +256,30 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: context.getScreenWidth * 0.04, top: context.getScreenHeight * 0.02),
+                        top: context.getScreenHeight * 0.02,
+                        left: context.getScreenWidth * 0.04,
+                      ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            context.read<DashboardCubit>().state.userData.user?.name ?? '',
-                            style: const TextStyle(
-                              color: AppColor.blackColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: SizedBox(
+                              width: context.getScreenWidth * 0.6,
+                              child: Text(
+                                context.read<DashboardCubit>().state.userData.user?.name ?? '',
+                                style: const TextStyle(
+                                  color: AppColor.blackColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  height: 01.1,
+                                ),
+                                maxLines: 2,
+                              ),
                             ),
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(height: 10),
                           Text(
                             context.read<DashboardCubit>().state.userData.user?.designation ?? '',
                             style: const TextStyle(
@@ -296,7 +308,9 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              nextScreen(context, ChangedPasswordScreen());
+                            },
                             title: const Text(
                               'Change Password',
                               style: TextStyle(color: AppColor.blackColor),
@@ -325,12 +339,13 @@ class ProfileScreen extends StatelessWidget {
                               HiveStorage().putData(GlobalConstants.isLogIn, false);
                               Config.isLoggedIn = false;
                               Config.authorization = '';
-                              context.read<DashboardCubit>().changeTab(BottomNavigationTabState.homeScreen);
-                              context.read<DashboardCubit>().initState();
-                              context.read<AttendanceCubit>().initState();
+                              // context.read<DashboardCubit>().changeTab(BottomNavigationTabState.homeScreen);
+                              // context.read<DashboardCubit>().initState();
+
                               Navigator.of(context).pushAndRemoveUntil(
                                   CupertinoPageRoute(builder: (context) => SignInScreen()),
                                   (Route<dynamic> route) => false);
+                              context.read<ProfileCubit>().resetAllCubitStates(context);
                             },
                             title: const Text(
                               'Logout',

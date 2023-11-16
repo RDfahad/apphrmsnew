@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
+import 'package:hr_emp_proj/ui/screens/document_overview.dart/view/document_overview.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/view/leave_request.dart';
-import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_overview.dart';
 import 'package:hr_emp_proj/ui/screens/leave_overview/screen/leave_overview.dart';
 import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/ui/screens/offence/screen/offence_overview.dart';
@@ -43,7 +43,7 @@ class DashBoardScreenNew extends StatelessWidget {
     LeaveOverViewScreen(),
     RequestOverViewScreen(),
     OffenceOverViewScreen(),
-   DocumentOverViewScreen()
+    DocumentOverViewScreen()
   ];
 
   @override
@@ -54,6 +54,13 @@ class DashBoardScreenNew extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColor.appBackgroundColor,
         body: BlocConsumer<DashboardCubit, DashboardState>(
+          listenWhen: (DashboardState previous, DashboardState current) {
+            if (current.userData.token?.isEmpty ?? true && !current.isLoading) {
+              return true;
+            } else {
+              return false;
+            }
+          },
           listener: (context, state) {
             if (state.isTokenExpired) {
               context.read<DashboardCubit>().changeExpiryStatus(false);
@@ -64,7 +71,7 @@ class DashBoardScreenNew extends StatelessWidget {
           },
           builder: (context, state) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
+              padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
               child: Stack(
                 children: [
                   Column(
@@ -85,23 +92,22 @@ class DashBoardScreenNew extends StatelessWidget {
                               bottomLeft: Radius.circular(15),
                               bottomRight: Radius.circular(15),
                             )),
-                        height: context.getScreenHeight * 0.2,
+                        height: context.getScreenHeight * 0.22,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: context.getScreenHeight * 0.03,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: List.generate(
-                                3,
-                                (index) => InkWell(
-                                  onTap: () {
-                                    nextScreenCupertino(context, MegaMenuScreen());
-                                  },
-                                  child: Container(
+                            SizedBox(height: context.getScreenHeight * 0.03),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context, CupertinoPageRoute(builder: (_) => const MegaMenuScreen()));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: List.generate(
+                                  3,
+                                  (index) => Container(
                                     margin: const EdgeInsets.only(left: 2),
                                     height: 7,
                                     width: 7,
@@ -115,9 +121,10 @@ class DashBoardScreenNew extends StatelessWidget {
                             ),
                             Text(
                               state.userData.user?.name ?? '',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: AppColor.primaryTextWhiteColor,
-                                  fontSize: 25,
+                                  fontSize: context.getFontText.headlineSmall!.fontSize,
+                                  // fontSize: context.getFontText.headlineSmall!.fontSize,
                                   fontWeight: FontWeight.w600),
                             ),
                             Text(
@@ -182,6 +189,7 @@ class DashBoardScreenNew extends StatelessWidget {
                                   ),
                                   SizedBox(height: context.getScreenHeight * 0.01),
                                   Row(
+                                    // direction: Axis.horizontal,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: List.generate(
                                       5,
@@ -217,9 +225,9 @@ class DashBoardScreenNew extends StatelessWidget {
                                       color: AppColor.whiteColor,
                                       boxShadow: [
                                         BoxShadow(
-                                          spreadRadius: 1,
+                                          spreadRadius: 0.2,
                                           color: Colors.grey.shade100,
-                                          blurRadius: 5,
+                                          blurRadius: 3,
                                         ),
                                       ],
                                     ),
@@ -330,7 +338,7 @@ class DashBoardScreenNew extends StatelessWidget {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    spreadRadius: 3,
+                                    spreadRadius: 1,
                                     color: Colors.grey.shade100,
                                     blurRadius: 2,
                                   ),
