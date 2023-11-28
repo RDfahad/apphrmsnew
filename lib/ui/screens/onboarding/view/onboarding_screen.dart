@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '/ui/screens/bottom_navigation/screen/bottom_navigation_screen.dart';
 import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
@@ -16,6 +17,7 @@ class OnboardingScreen extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<OnboardingCubit>(context),
       builder: (context, OnboardingState onboardingState) {
+        // print(!onboardingState.onBoardingStatus);
         if (!onboardingState.onBoardingStatus) {
           return Scaffold(
             backgroundColor: const Color(0xFF1c1e23),
@@ -135,9 +137,10 @@ class OnboardingScreen extends StatelessWidget {
                               child: const Text(
                                 'Get Started',
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -166,6 +169,7 @@ class OnboardingScreen extends StatelessWidget {
 class OnboardingContent {
   String text;
   String image;
+
   OnboardingContent({required this.text, required this.image});
 }
 
@@ -179,7 +183,8 @@ List<OnboardingContent> contents = [
           "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
       image: 'assets/images/onboarding2.png'),
   OnboardingContent(
-      text:
-          "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
-      image: 'assets/images/onboarding3.png'),
+    text:
+        "Unlock the Power of People with Manxel: Your HRMS Solution for a Brighter Workplace!.",
+    image: 'assets/images/onboarding3.png',
+  ),
 ];

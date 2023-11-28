@@ -5,12 +5,12 @@ import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
-import '../../attendance/screen/attendance_overview.dart';
-import '../../dashboard/view/leave_request.dart';
-import '../../document_overview.dart/view/document_overview.dart';
-import '../../profile/view/profile_screen.dart';
+
 import '/ui/screens/dashboard/view/dashboard_screen.dart';
 import '/utils/app_color.dart';
+import '../../attendance/screen/attendance_overview.dart';
+import '../../document_overview.dart/view/document_overview.dart';
+import '../../profile/view/profile_screen.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
   const BottomNavigationScreen({super.key});
@@ -32,7 +32,8 @@ class BottomNavigationScreen extends StatelessWidget {
               bottomNavigationBar: BottomNavigationBar(
                 useLegacyColorScheme: false,
 
-                backgroundColor: Colors.black, // AppColor.secondaryButtonColor,
+                backgroundColor: Colors.black,
+                // AppColor.secondaryButtonColor,
                 selectedItemColor: AppColor.whiteColor,
                 unselectedItemColor: AppColor.whiteColor,
                 showSelectedLabels: false,
@@ -134,7 +135,7 @@ class BottomNavigationScreen extends StatelessWidget {
       case BottomNavigationTabState.attendance:
         return const AttendanceOverViewScreen();
       case BottomNavigationTabState.detailReports:
-        return DocumentOverViewScreen();
+        return const DocumentOverViewScreen();
       case BottomNavigationTabState.profile:
         return const ProfileScreen();
       default:
