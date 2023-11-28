@@ -6,23 +6,24 @@ import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
 import 'package:hr_emp_proj/ui/screens/document_overview.dart/view/document_overview.dart';
-import 'package:hr_emp_proj/ui/screens/dashboard/view/leave_request.dart';
 import 'package:hr_emp_proj/ui/screens/leave_overview/screen/leave_overview.dart';
 import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/ui/screens/offence/screen/offence_overview.dart';
 import 'package:hr_emp_proj/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/request_overview/screen/request_overview.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
+
+import '/utils/app_color.dart';
+import '/utils/extension_methods.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/hive_db/hive_db.dart';
 import '../../../widgets/fl_charts/bar_graph.dart';
 import '../../../widgets/icon-card.dart';
 import '../../../widgets/time_data.dart';
-import '/utils/app_color.dart';
-import '/utils/extension_methods.dart';
 
 class DashBoardScreenNew extends StatelessWidget {
   DashBoardScreenNew({super.key});
+
   final List listIcon = [
     Icons.calendar_today_rounded,
     Icons.layers_outlined,
@@ -40,10 +41,10 @@ class DashBoardScreenNew extends StatelessWidget {
 
   final List navigateScreens = [
     "Attendance",
-    LeaveOverViewScreen(),
-    RequestOverViewScreen(),
-    OffenceOverViewScreen(),
-    DocumentOverViewScreen()
+    const LeaveOverViewScreen(),
+    const RequestOverViewScreen(),
+    const OffenceOverViewScreen(),
+    const DocumentOverViewScreen()
   ];
 
   @override
@@ -66,18 +67,21 @@ class DashBoardScreenNew extends StatelessWidget {
               context.read<DashboardCubit>().changeExpiryStatus(false);
               HiveStorage().putData(GlobalConstants.isLogIn, false);
               Config.isLoggedIn = false;
-              Navigator.pushReplacement(context, CupertinoPageRoute(builder: (_) => SignInScreen()));
+              Navigator.pushReplacement(
+                  context, CupertinoPageRoute(builder: (_) => SignInScreen()));
             }
           },
           builder: (context, state) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.02),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.getScreenWidth * 0.02),
               child: Stack(
                 children: [
                   Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.03),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.getScreenWidth * 0.03),
                         decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
@@ -101,7 +105,10 @@ class DashBoardScreenNew extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 Navigator.push(
-                                    context, CupertinoPageRoute(builder: (_) => const MegaMenuScreen()));
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (_) =>
+                                            const MegaMenuScreen()));
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -113,7 +120,8 @@ class DashBoardScreenNew extends StatelessWidget {
                                     width: 7,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      border: Border.all(color: AppColor.whiteColor),
+                                      border: Border.all(
+                                          color: AppColor.whiteColor),
                                     ),
                                   ),
                                 ),
@@ -123,7 +131,8 @@ class DashBoardScreenNew extends StatelessWidget {
                               state.userData.user?.name ?? '',
                               style: TextStyle(
                                   color: AppColor.primaryTextWhiteColor,
-                                  fontSize: context.getFontText.headlineSmall!.fontSize,
+                                  fontSize: context
+                                      .getFontText.headlineSmall!.fontSize,
                                   // fontSize: context.getFontText.headlineSmall!.fontSize,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -168,7 +177,8 @@ class DashBoardScreenNew extends StatelessWidget {
                                     height: 20,
                                   ),
                                   const Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         "Dashboard",
@@ -187,10 +197,12 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: context.getScreenHeight * 0.01),
+                                  SizedBox(
+                                      height: context.getScreenHeight * 0.01),
                                   Row(
                                     // direction: Axis.horizontal,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: List.generate(
                                       5,
                                       (index) => InkWell(
@@ -198,13 +210,18 @@ class DashBoardScreenNew extends StatelessWidget {
                                           if (index == 0) {
                                             context
                                                 .read<DashboardCubit>()
-                                                .changeTab(BottomNavigationTabState.attendance);
+                                                .changeTab(
+                                                    BottomNavigationTabState
+                                                        .attendance);
                                           } else if (index == 4) {
                                             context
                                                 .read<DashboardCubit>()
-                                                .changeTab(BottomNavigationTabState.detailReports);
+                                                .changeTab(
+                                                    BottomNavigationTabState
+                                                        .detailReports);
                                           } else {
-                                            nextScreenCupertino(context, navigateScreens[index]);
+                                            nextScreenCupertino(context,
+                                                navigateScreens[index]);
                                           }
                                         },
                                         child: IconCard(
@@ -215,9 +232,11 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: context.getScreenHeight * 0.02),
+                                  SizedBox(
+                                      height: context.getScreenHeight * 0.02),
                                   Container(
-                                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     height: context.getScreenHeight * 0.1,
                                     padding: const EdgeInsets.all(16.0),
                                     decoration: BoxDecoration(
@@ -232,7 +251,8 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ],
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         timeData("Time In", "05:21:09 am"),
                                         Container(width: 1, color: Colors.grey),
@@ -242,9 +262,11 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: context.getScreenHeight * 0.03),
+                                  SizedBox(
+                                      height: context.getScreenHeight * 0.03),
                                   const Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         "Weekly Attendance",
@@ -263,19 +285,25 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: context.getScreenHeight * 0.03),
+                                  SizedBox(
+                                      height: context.getScreenHeight * 0.03),
                                   Container(
                                     height: context.getScreenHeight * 0.28,
                                     width: context.getScreenWidth * 0.95,
-                                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     padding: const EdgeInsets.all(20),
-                                    decoration: BoxDecoration(boxShadow: [
-                                      BoxShadow(
-                                        spreadRadius: 2,
-                                        color: Colors.grey.shade100,
-                                        blurRadius: 10,
-                                      ),
-                                    ], color: AppColor.whiteColor, borderRadius: BorderRadius.circular(15)),
+                                    decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            spreadRadius: 2,
+                                            color: Colors.grey.shade100,
+                                            blurRadius: 10,
+                                          ),
+                                        ],
+                                        color: AppColor.whiteColor,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
                                     child: const MyBarGraph(
                                       monthlySummary: <double>[
                                         2,
@@ -288,7 +316,8 @@ class DashBoardScreenNew extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: context.getScreenHeight * 0.03),
+                                  SizedBox(
+                                      height: context.getScreenHeight * 0.03),
                                 ],
                               ),
                             ),
@@ -319,7 +348,11 @@ class DashBoardScreenNew extends StatelessWidget {
                                 ),
                               ],
                               image: DecorationImage(
-                                image: FileImage(context.read<ProfileCubit>().state.image!.absolute),
+                                image: FileImage(context
+                                    .read<ProfileCubit>()
+                                    .state
+                                    .image!
+                                    .absolute),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -327,7 +360,13 @@ class DashBoardScreenNew extends StatelessWidget {
                         : CachedNetworkImage(
                             height: context.getScreenHeight * 0.15,
                             width: context.getScreenHeight * 0.15,
-                            imageUrl: context.read<DashboardCubit>().state.userData.user?.image ?? '',
+                            imageUrl: context
+                                    .read<DashboardCubit>()
+                                    .state
+                                    .userData
+                                    .user
+                                    ?.image ??
+                                '',
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -349,16 +388,17 @@ class DashBoardScreenNew extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            placeholder: (context, url) => Container(
-                              height: context.getScreenHeight * 0.08,
-                              width: context.getScreenHeight * 0.08,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage("assets/images/blank_pic.png"), fit: BoxFit.cover),
-                                shape: BoxShape.circle,
+                            placeholder: (context, url) => SizedBox(
+                              height: context.getScreenHeight * 0.002,
+                              width: context.getScreenHeight * 0.002,
+                              child: const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColor.whiteColor,
+                                ),
                               ),
                             ),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                   ),
                 ],

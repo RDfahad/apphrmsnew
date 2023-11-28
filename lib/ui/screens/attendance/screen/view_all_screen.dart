@@ -112,42 +112,51 @@ class AttendanceRecordsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        padding: const EdgeInsets.all(16.0),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Row(
                           children: [
-                            Text(
+                            const Spacer(),
+                            const Text(
                               "Date",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
-                            Text(
+                            SizedBox(
+                              width: context.getScreenWidth * 0.15,
+                            ),
+                            const Text(
                               "Time In",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
-                            Text(
+                            SizedBox(
+                              width: context.getScreenWidth * 0.1,
+                            ),
+                            const Text(
                               "Time Out",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
-                            Text(
+                            SizedBox(
+                              width: context.getScreenWidth * 0.06,
+                            ),
+                            const Text(
                               "Working Hrs",
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
+                            const Spacer(),
                           ],
                         ),
                       ),
@@ -177,8 +186,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                                 },
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount:
-                                    state.attendanceRecords.data!.length ,
+                                itemCount: state.attendanceRecords.data!.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     margin: const EdgeInsets.only(bottom: 5),

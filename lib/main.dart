@@ -8,6 +8,7 @@ import 'package:hr_emp_proj/data/repository_implement/request_repo_impl/request_
 import 'package:hr_emp_proj/domain/repository/document_management/document_management_repo.dart';
 import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
 import 'package:hr_emp_proj/domain/repository/request_repo/request_repo.dart';
+import 'package:hr_emp_proj/ui/screens/chat/screens/chat_screen.dart';
 import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_bloc/document_bloc.dart';
 
 import '/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
@@ -101,7 +102,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const OnboardingScreen(),
+      home: const ChatScreen(),
     );
   }
 }
