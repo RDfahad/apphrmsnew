@@ -16,11 +16,15 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   getAttendance() async {
     if (!state.loadMore && state.errorCode != '995') {
       emit(state.copyWith(loadMore: true));
-      await attendanceRepo.getAttendance(pageNumber: state.pageNumber, perPage: state.perPageQuantity).then(
-          (response) {
+      await attendanceRepo
+          .getAttendance(
+              pageNumber: state.pageNumber, perPage: state.perPageQuantity)
+          .then((response) {
         log("From AttendanceRecords response ${response.responseData!.attendenceObject!.data![0].checkInTime}");
-        response.responseData?.attendenceObject?.data?.addAll(state.attendanceRecords.data ?? []);
-        response.responseData?.attendenceObject?.data?.sort((a, b) => b.date!.compareTo(a.date!));
+        response.responseData?.attendenceObject?.data
+            ?.addAll(state.attendanceRecords.data ?? []);
+        response.responseData?.attendenceObject?.data
+            ?.sort((a, b) => b.date!.compareTo(a.date!));
         // shouldCallAPI = true;
         emit(state.copyWith(
             loadMore: false,

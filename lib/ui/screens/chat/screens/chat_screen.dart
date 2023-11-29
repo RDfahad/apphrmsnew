@@ -67,37 +67,205 @@ class ChatScreen extends StatelessWidget {
           vertical: 24,
           horizontal: 16,
         ),
-        child: Column(children: [
-          Container(
-            height: 55,
-            width: context.getScreenWidth * 0.55,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-            ),
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          children: [
+            Row(
               children: [
-                const Text(
-                  'Please wait there',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  '08:30 AM',
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.45),
+                Container(
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Please wait there',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(
+                        width: context.getScreenWidth * 0.02,
+                      ),
+                      Text(
+                        '08:30 AM',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.45),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-        ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    top: context.getScreenHeight * 0.03,
+                  ),
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '08:30 AM ',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.8),
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(
+                        width: context.getScreenWidth * 0.02,
+                      ),
+                      const Text(
+                        'Okay 👍🏻',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    top: context.getScreenHeight * 0.015,
+                  ),
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '08:30 AM ',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.8),
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(
+                        width: context.getScreenWidth * 0.02,
+                      ),
+                      const Text(
+                        'Pick me up there',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Thanks',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(
+                        width: context.getScreenWidth * 0.02,
+                      ),
+                      Text(
+                        '08:30 AM',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.45),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    top: context.getScreenHeight * 0.015,
+                  ),
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '08:30 AM ',
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.8),
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(
+                        width: context.getScreenWidth * 0.02,
+                      ),
+                      const Text(
+                        'I’ll be right back',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
-        height: context.getScreenHeight * 0.1,
+        height: context.getScreenHeight * 0.07,
         width: double.infinity,
         color: Colors.white,
         padding: const EdgeInsets.only(
@@ -108,21 +276,26 @@ class ChatScreen extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image.asset('assets/icons/emoji.png'),
+            Image.asset(
+              'assets/icons/emoji.png',
+              height: 24,
+            ),
             SizedBox(
-              width: context.getScreenWidth * 0.08,
+              width: context.getScreenWidth * 0.04,
             ),
             Expanded(
               child: TextField(
+                textAlign: TextAlign.justify,
                 decoration: InputDecoration(
+                  constraints: const BoxConstraints(maxHeight: 40),
                   fillColor: const Color(0xFFF2F2F2),
                   filled: true,
                   prefixIcon: Image.asset('assets/icons/camera.png'),
                   suffixIcon: Image.asset('assets/icons/send.png'),
                   hintText: 'Type Message',
                   hintStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(

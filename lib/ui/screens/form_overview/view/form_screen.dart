@@ -9,8 +9,8 @@ import '/utils/extension_methods.dart';
 
 import '../../../../utils/app_color.dart';
 
-class DocumentOverViewScreen extends StatelessWidget {
-  const DocumentOverViewScreen({super.key});
+class FormScreen extends StatelessWidget {
+  const FormScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,8 @@ class DocumentOverViewScreen extends StatelessWidget {
                 Container(
                   width: context.getScreenWidth,
                   padding: EdgeInsets.symmetric(
-                      horizontal: context.getScreenWidth * 0.02),
+                    horizontal: context.getScreenWidth * 0.02,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,30 +66,35 @@ class DocumentOverViewScreen extends StatelessWidget {
                               height: 15,
                             ),
                             const Text(
-                              "Document",
+                              "Form & Policies",
                               style: TextStyle(
-                                  color: AppColor.primaryTextWhiteColor,
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w300),
+                                color: AppColor.primaryTextWhiteColor,
+                                fontSize: 23,
+                                fontWeight: FontWeight.w300,
+                              ),
                             ),
                             const Text(
                               "Overview",
                               style: TextStyle(
-                                  color: AppColor.primaryTextWhiteColor,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w500),
+                                color: AppColor.primaryTextWhiteColor,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: context.getScreenHeight * 0.03),
+                      SizedBox(
+                        height: context.getScreenHeight * 0.03,
+                      ),
                       Row(
                         children: [
                           Flexible(
-                              child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: TextField(
-                              decoration: InputDecoration(
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: TextField(
+                                decoration: InputDecoration(
                                   prefixIcon: const Icon(Icons.search),
                                   prefixIconColor: AppColor.secondaryTextColor
                                       .withOpacity(0.5),
@@ -96,22 +102,24 @@ class DocumentOverViewScreen extends StatelessWidget {
                                   hintStyle: TextStyle(
                                     color: AppColor.secondaryTextColor
                                         .withOpacity(0.5),
-                                  )),
+                                  ),
+                                ),
+                              ),
                             ),
-                          )),
+                          ),
                           SizedBox(
                             height: context.getScreenHeight * 0.045,
                             child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        AppColor.primaryButtonColor),
-                                onPressed: () {},
-                                icon: Image.asset(
-                                    "assets/icons/filter_icon1.png"),
-                                label: const Text(
-                                  " Filter ",
-                                  style: TextStyle(color: AppColor.whiteColor),
-                                )),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.primaryButtonColor),
+                              onPressed: () {},
+                              icon:
+                                  Image.asset("assets/icons/filter_icon1.png"),
+                              label: const Text(
+                                " Filter ",
+                                style: TextStyle(color: AppColor.whiteColor),
+                              ),
+                            ),
                           )
                         ],
                       ),

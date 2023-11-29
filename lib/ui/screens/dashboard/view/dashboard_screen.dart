@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/models/working_hours_models.dart';
 import 'package:hr_emp_proj/ui/screens/authentication/view/login_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
@@ -12,6 +16,7 @@ import 'package:hr_emp_proj/ui/screens/offence/screen/offence_overview.dart';
 import 'package:hr_emp_proj/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/request_overview/screen/request_overview.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
+import 'package:http/http.dart' as http;
 
 import '/utils/app_color.dart';
 import '/utils/extension_methods.dart';
@@ -47,10 +52,35 @@ class DashBoardScreenNew extends StatelessWidget {
     const DocumentOverViewScreen()
   ];
 
+  List<ResponseData> workingHours = [];
+  Future<List<ResponseData>> getWorkingHorsApi() async {
+    final response = await http.get(
+        Uri.parse(
+          'http://hrm.manxel.com/api/app/get_worked_hours',
+        ),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':
+              'Bearer 829|oYtewJXp9LXYgbiXaBu8gSMF0crASkJQ1bSPPs5Mcd6c253b'
+          // Add other headers as needed
+        });
+    var data = jsonDecode(response.body.toString());
+
+    if (response.statusCode == 200) {
+      workingHours.add(
+        ResponseData.fromJson(data),
+      );
+      return workingHours;
+    } else {
+      return workingHours;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final myCubit = BlocProvider.of<DashboardCubit>(context);
     //  myCubit.refreshToken();
+    
 
     return Scaffold(
         backgroundColor: AppColor.appBackgroundColor,
@@ -317,7 +347,8 @@ class DashBoardScreenNew extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                      height: context.getScreenHeight * 0.03),
+                                    height: context.getScreenHeight * 0.03,
+                                  ),
                                 ],
                               ),
                             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/widgets/attendance_details_tab.dart';
 import '/ui/screens/attendance/cubit/attendance_cubit.dart';
 import '/ui/screens/attendance/cubit/attendance_state.dart';
 import '/utils/extension_methods.dart';
@@ -42,8 +43,6 @@ class AttendanceRecordsScreen extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: Container(
                       alignment: Alignment.bottomLeft,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.getScreenWidth * 0.02),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -60,44 +59,54 @@ class AttendanceRecordsScreen extends StatelessWidget {
                         ),
                       ),
                       height: context.getScreenHeight * 0.2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.arrow_back,
-                                  color: AppColor.whiteColor,
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.getScreenWidth * 0.02,
+                          vertical: context.getScreenHeight * 0.02,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.arrow_back,
+                                    color: AppColor.whiteColor,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                 ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          ),
-                          const Text(
-                            "Attendance",
-                            style: TextStyle(
-                                color: AppColor.primaryTextWhiteColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w300),
-                          ),
-                          const Text(
-                            "Overview",
-                            style: TextStyle(
-                                color: AppColor.primaryTextWhiteColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
+                              ],
+                            ),
+                            const Text(
+                              "Attendance",
+                              style: TextStyle(
+                                  color: AppColor.primaryTextWhiteColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                            const Text(
+                              "Overview",
+                              style: TextStyle(
+                                  color: AppColor.primaryTextWhiteColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate([
+                      SizedBox(
+                        height: context.getScreenHeight * 0.03,
+                      ),
+                      const AttendanceDetailsTab(),
                       SizedBox(height: context.getScreenHeight * 0.02),
                       Container(
                         height: context.getScreenHeight * 0.08,
@@ -119,7 +128,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                               "Date",
                               style: TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
@@ -130,7 +139,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                               "Time In",
                               style: TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
@@ -141,7 +150,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                               "Time Out",
                               style: TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
@@ -152,7 +161,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                               "Working Hrs",
                               style: TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: AppColor.secondaryTextColor,
                               ),
                             ),
@@ -160,7 +169,7 @@ class AttendanceRecordsScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: context.getScreenHeight * 0.04),
+                      SizedBox(height: context.getScreenHeight * 0.015),
                     ]),
                   ),
                   SliverToBoxAdapter(
