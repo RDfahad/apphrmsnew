@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:hr_emp_proj/data/week_wise_worked_hours_json.dart';
+
 import '/domain/entities/attendance/attendance_records.dart';
 import '../../../domain/repository/attendance_repo/attendance_repo.dart';
 import '/utils/configuration.dart';
@@ -24,6 +26,20 @@ class AttendanceRepoImpl implements AttendanceRepo {
         queryParameters: queryParams,
       );
       return AttendanceRecords.fromJson(json.decode(response.content) ?? {});
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  @override
+  Future<WeekWiseWorkedHours> getWorkingHoursApi() async {
+    try {
+      //this should be get
+    
+      var response = await httpRequest?.get(
+          url: paths.workingHoursURL, token: Config.authorization);
+      var workedHours = jsonDecode(response.content);
+      return WeekWiseWorkedHours.fromJson(workedHours['responseData']['weekWiseWorkedHours']);
     } catch (e) {
       return Future.error(e);
     }

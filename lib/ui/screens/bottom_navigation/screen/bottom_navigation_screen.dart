@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/chat/screens/chat_screen.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:hr_emp_proj/ui/screens/dashboard/bloc/dashboard_state.dart';
+import 'package:hr_emp_proj/ui/screens/mega_menu/screen/mega_menu.dart';
 import 'package:hr_emp_proj/ui/widgets/loader_widget.dart';
 import 'package:hr_emp_proj/utils/extension_methods.dart';
 
@@ -65,6 +67,21 @@ class BottomNavigationScreen extends StatelessWidget {
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
+                      child: Center(
+                        child: Image.asset('assets/icons/mega_menu.png'),
+                      ),
+                    ),
+                    label: 'Tab 4',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Container(
+                      width: context.getScreenWidth * 0.1,
+                      height: context.getScreenHeight * 0.05,
+                      decoration: BoxDecoration(
+                          color: state.bottomNavigationTabState.index == 2
+                              ? AppColor.primaryColor
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(8)),
                       child: const Center(
                           child: Icon(
                         Icons.calendar_today_rounded,
@@ -77,11 +94,11 @@ class BottomNavigationScreen extends StatelessWidget {
                       width: context.getScreenWidth * 0.1,
                       height: context.getScreenHeight * 0.05,
                       decoration: BoxDecoration(
-                          color: state.bottomNavigationTabState.index == 2
+                          color: state.bottomNavigationTabState.index == 3
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
-                      child: const Center(child: Icon(Icons.layers_outlined)),
+                      child: const Center(child: Icon(Icons.chat,),),
                     ),
                     label: 'Tab 3',
                   ),
@@ -90,7 +107,7 @@ class BottomNavigationScreen extends StatelessWidget {
                       width: context.getScreenWidth * 0.1,
                       height: context.getScreenHeight * 0.05,
                       decoration: BoxDecoration(
-                          color: state.bottomNavigationTabState.index == 3
+                          color: state.bottomNavigationTabState.index == 4
                               ? AppColor.primaryColor
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8)),
@@ -132,10 +149,12 @@ class BottomNavigationScreen extends StatelessWidget {
     switch (tab) {
       case BottomNavigationTabState.homeScreen:
         return DashBoardScreenNew();
+      case BottomNavigationTabState.megaMenu:
+        return const MegaMenuScreen();
       case BottomNavigationTabState.attendance:
         return const AttendanceOverViewScreen();
       case BottomNavigationTabState.detailReports:
-        return const DocumentOverViewScreen();
+        return const ChatScreen();
       case BottomNavigationTabState.profile:
         return const ProfileScreen();
       default:

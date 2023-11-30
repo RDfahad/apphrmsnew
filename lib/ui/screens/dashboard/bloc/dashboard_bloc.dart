@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/domain/repository/attendance_repo/attendance_repo.dart';
 
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/entities/authentication_entities/login_user_entity.dart';
@@ -12,8 +13,10 @@ import 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
   final AuthenticationRepo authenticationRepo;
+  final AttendanceRepo attendanceRepo;
 
-  DashboardCubit(this.authenticationRepo) : super(DashboardState.init());
+  DashboardCubit(this.authenticationRepo, this.attendanceRepo)
+      : super(DashboardState.init());
 
   initState() {
     emit(DashboardState.init());
@@ -45,7 +48,24 @@ class DashboardCubit extends Cubit<DashboardState> {
         }
       });
     }
+    getWeeklyWorkingHours();
     emit(state.copyWith(isLoading: false, userData: userData));
+  }
+
+  getWeeklyWorkingHours() async {
+    emit(state.copyWith(
+      workHourLoading: true,
+    ));
+    await attendanceRepo.getWorkingHoursApi().then((value) {
+      log("getWeeklyWorkingHours  from  ${value.tHU}");
+      emit(state.copyWith(workHourLoading: false, workingHours: value));
+    }, onError: (e) {
+      emit(
+        state.copyWith(
+          workHourLoading: false,
+        ),
+      );
+    });
   }
 
   void changeTab(BottomNavigationTabState bottomNavigationTabState) => emit(

@@ -10,7 +10,6 @@ import 'package:hr_emp_proj/domain/repository/profile_repo/profile_repo.dart';
 import 'package:hr_emp_proj/domain/repository/request_repo/request_repo.dart';
 import 'package:hr_emp_proj/ui/screens/document_overview.dart/document_bloc/document_bloc.dart';
 
-
 import '/data/repository_implement/attendence_repo_impl/attendance_repo_implement.dart';
 import '/domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_cubit.dart';
@@ -52,7 +51,8 @@ void main() async {
             create: (BuildContext context) => OnboardingCubit()..init()),
         BlocProvider(
             create: (BuildContext context) => AuthenticationCubit(getIt())),
-        BlocProvider(create: (BuildContext context) => DashboardCubit(getIt())),
+        BlocProvider(
+            create: (BuildContext context) => DashboardCubit(getIt(), getIt())),
         BlocProvider(
             create: (BuildContext context) => AttendanceCubit(getIt())),
         BlocProvider(

@@ -23,8 +23,21 @@ extension DateParsingExtension on String {
   }
 }
 
+double covertTimeInToHours(String timeString) {
+ 
+  List<String> timeParts = timeString.split(':');
+
+  int hours = int.parse(timeParts[0]);
+  int minutes = int.parse(timeParts[1]);
+  int seconds = int.parse(timeParts[2]);
+
+  // Convert to hours
+  return hours + (minutes / 60) + (seconds / 3600);
+}
+
 void nextScreenReplaceCupertino(context, page) {
-  Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => page));
+  Navigator.pushReplacement(
+      context, CupertinoPageRoute(builder: (context) => page));
 }
 
 void nextScreenCupertino(context, page) {

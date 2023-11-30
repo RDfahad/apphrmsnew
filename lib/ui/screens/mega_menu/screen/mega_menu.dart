@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_emp_proj/ui/screens/form_overview/view/form_screen.dart';
+import 'package:hr_emp_proj/utils/helper.dart';
 import '/utils/app_color.dart';
 import '../../../widgets/icon-card.dart';
 import '/utils/extension_methods.dart';
 
 final List listIcon = [
-  Icons.calendar_today_rounded,
+  Icons.calendar_month,
   Icons.layers_outlined,
   Icons.chat,
   Icons.warning_rounded,
   Icons.copy,
 ];
 final List listIconName = [
-  "Attendance",
-  "Leaves",
+  "Forms",
+  "Policies",
   "Requests",
   "Offenses",
   "Documnents",
@@ -27,7 +29,8 @@ class MegaMenuScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
+        padding:
+            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,7 +42,8 @@ class MegaMenuScreen extends StatelessWidget {
                   Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.symmetric(
-                        horizontal: context.getScreenWidth * 0.03, vertical: context.getScreenHeight * 0.02),
+                        horizontal: context.getScreenWidth * 0.03,
+                        vertical: context.getScreenHeight * 0.02),
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -59,15 +63,18 @@ class MegaMenuScreen extends StatelessWidget {
                     child: const Text(
                       "Mega Menu",
                       style: TextStyle(
-                          color: AppColor.primaryTextWhiteColor, fontSize: 28, fontWeight: FontWeight.w600),
+                          color: AppColor.primaryTextWhiteColor,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pop(context);
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(right: 10.0,top: context.getScreenHeight*0.03),
+                      padding: EdgeInsets.only(
+                          right: 10.0, top: context.getScreenHeight * 0.03),
                       child: Align(
                           alignment: Alignment.topRight,
                           child: Image.asset('assets/images/cancel_icon.png')),
@@ -117,20 +124,27 @@ class MegaMenuScreen extends StatelessWidget {
             ),
             SizedBox(height: context.getScreenHeight * 0.01),
             const Text(
-              "HR Management",
+              "Policies & Forms",
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: context.getScreenHeight * 0.01),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
-                4,
+                2,
                 (index) => Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: IconCard(
-                    iconData: listIcon[index],
-                    iconName: listIconName[index],
-                    iconSize: 28,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const FormScreen(),
+                      ));
+                    },
+                    child: IconCard(
+                      iconData: listIcon[index],
+                      iconName: listIconName[index],
+                      iconSize: 28,
+                    ),
                   ),
                 ),
               ),

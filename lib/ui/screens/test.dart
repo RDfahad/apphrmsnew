@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hr_emp_proj/domain/entities/attendance/attendance_records.dart';
-import 'package:hr_emp_proj/models/working_hours_models.dart' as models;
-import 'package:hr_emp_proj/models/working_hours_models.dart';
+
 import 'package:hr_emp_proj/ui/widgets/fl_charts/bar_graph.dart';
 import 'package:hr_emp_proj/utils/app_color.dart';
 import 'package:hr_emp_proj/utils/configuration.dart';
