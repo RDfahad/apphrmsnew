@@ -42,9 +42,7 @@ class RoundButton extends StatelessWidget {
                   child: Text(title,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           // fontWeight: FontWeight.bold,
-                          color: textColor != null
-                              ? textColor
-                              : AppColor.whiteColor)))),
+                          color: textColor ?? AppColor.whiteColor),),),),
     );
   }
 }

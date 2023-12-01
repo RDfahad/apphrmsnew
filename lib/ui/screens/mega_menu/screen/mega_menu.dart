@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hr_emp_proj/utils/app_color.dart';
+import '/utils/app_color.dart';
 import '../../../widgets/icon-card.dart';
-import '../../dashboard/view/dashboard_screen.dart';
-import '/ui/widgets/icon_card.dart';
 import '/utils/extension_methods.dart';
 
 final List listIcon = [
@@ -29,8 +27,7 @@ class MegaMenuScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       body: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
+        padding: EdgeInsets.symmetric(horizontal: context.getScreenWidth * 0.04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,11 +35,11 @@ class MegaMenuScreen extends StatelessWidget {
               height: context.getScreenHeight * 0.25,
               child: Stack(
                 children: [
+                  // Icon(Icons.cancel_outlined),
                   Container(
                     alignment: Alignment.bottomLeft,
                     padding: EdgeInsets.symmetric(
-                        horizontal: context.getScreenWidth * 0.03,
-                        vertical: context.getScreenHeight * 0.02),
+                        horizontal: context.getScreenWidth * 0.03, vertical: context.getScreenHeight * 0.02),
                     decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -62,9 +59,18 @@ class MegaMenuScreen extends StatelessWidget {
                     child: const Text(
                       "Mega Menu",
                       style: TextStyle(
-                          color: AppColor.primaryTextWhiteColor,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600),
+                          color: AppColor.primaryTextWhiteColor, fontSize: 28, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 10.0,top: context.getScreenHeight*0.03),
+                      child: Align(
+                          alignment: Alignment.topRight,
+                          child: Image.asset('assets/images/cancel_icon.png')),
                     ),
                   ),
                   Positioned(

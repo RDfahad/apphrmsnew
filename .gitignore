@@ -49,3 +49,4 @@ app.*.map.json
 
 # Pubsec
 pubspec.lock
+podfile.lock

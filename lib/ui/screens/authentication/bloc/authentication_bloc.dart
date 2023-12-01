@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr_emp_proj/ui/screens/authentication/view/reset_screen.dart';
 import 'package:hr_emp_proj/utils/hive_db/hive_db.dart';
 import '../../../../utils/configuration.dart';
 import '../../../../utils/constants.dart';
+import '../../../../utils/extension_methods.dart';
+import '../../../../utils/helper.dart';
 import '/domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../../data/http/exception_handler.dart';
 import '../../../../domain/repository/authentication_repo/authentication_repo.dart';
@@ -12,15 +16,13 @@ import 'authentication_state.dart';
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final AuthenticationRepo authenticationRepo;
 
-  AuthenticationCubit(this.authenticationRepo)
-      : super(AuthenticationState.init());
+  AuthenticationCubit(this.authenticationRepo) : super(AuthenticationState.init());
 
-  init()async{
-    await state.localAuthenticationService.checkBiometrics().then((biometricAvailable)async{
+  init() async {
+    await state.localAuthenticationService.checkBiometrics().then((biometricAvailable) async {
       emit(state.copyWith(isBiometricAvailable: biometricAvailable));
-      if(biometricAvailable) {
-        await state.localAuthenticationService.getBiometricType().then((
-            biometricType) {
+      if (biometricAvailable) {
+        await state.localAuthenticationService.getBiometricType().then((biometricType) {
           emit(state.copyWith(biometricType: biometricType));
         });
       }
@@ -30,8 +32,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   checkButtonEnabledDisabled() {
-    if (state.emailController.text.isEmpty ||
-        state.passwordController.text.isEmpty) {
+    if (state.emailController.text.isEmpty || state.passwordController.text.isEmpty) {
       emit(state.copyWith(isButtonEnabled: false));
     } else {
       emit(state.copyWith(isButtonEnabled: true));
@@ -43,56 +44,63 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
-  Future<void> loginUser({String? email, String? password,bool isBiometric = false}) async {
-     
-      emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
-      await authenticationRepo.loginUser(email: email, password: password).then((userLogin){
-        if( HiveStorage().getData(GlobalConstants.email) != email){
-          HiveStorage().putData(GlobalConstants.isBiometricEnabled,false);
+  Future<void> loginUser({String? email, String? password, bool isBiometric = false}) async {
+    print('asd');
+    emit(state.copyWith(loginLoading: true, loginSuccessfull: false, error: false, errorMessage: ''));
+    await authenticationRepo.loginUser(email: email, password: password).then((userLogin) {
+      if (HiveStorage().getData(GlobalConstants.email) != email) {
+        HiveStorage().putData(GlobalConstants.isBiometricEnabled, false);
+      }
+      if (userLogin.data != null) {
+        state.hiveStorage.putData(
+            GlobalConstants.userDate,
+            jsonEncode(UserData(
+                    user: userLogin.data!.user,
+                    token: userLogin.data!.token,
+                    tokenType: userLogin.data!.tokenType)
+                .toJson()));
+        state.hiveStorage.putData(GlobalConstants.isLogIn, true);
+        Config.authorization = userLogin.data?.token ?? '';
+        if (!isBiometric) {
+          state.hiveStorage.putData(GlobalConstants.email, state.emailController.text);
+          state.hiveStorage.putData(GlobalConstants.password, state.passwordController.text);
         }
-        if (userLogin.data != null) {
-          state.hiveStorage.putData(
-              GlobalConstants.userDate,
-              jsonEncode(UserData(
-                  user: userLogin.data!.user,
-                  token: userLogin.data!.token,
-                  tokenType: userLogin.data!.tokenType)
-                  .toJson()));
-          state.hiveStorage.putData(
-              GlobalConstants.isLogIn,true);
-          Config.authorization = userLogin.data?.token ?? '';
-          if(!isBiometric){
-            state.hiveStorage.putData(
-                GlobalConstants.email, state.emailController.text);
-            state.hiveStorage.putData(
-                GlobalConstants.password, state.passwordController.text);
-          }
-        }
-        emit(state.copyWith(
+      }
+      emit(state.copyWith(
           loginLoading: false,
           loginSuccessfull: true,
           loginUserModel: userLogin,
           isIconFieldColorEnabled: false,
-        ));
-          },onError: (e){
-        print('asdajsd');
-        log("Log From Cubit Eror $e");
-        ExceptionHandler().handleException(e);
-        emit(state.copyWith(
-          loginLoading: false,
-          error: true,
-          errorMessage: e.toString(),
-          loginSuccessfull: false,
-          isIconFieldColorEnabled: false,
-        ));
-      });
+          emailController: TextEditingController(text: ''),
+          passwordController: TextEditingController(text: '')));
+    }, onError: (e) {
+      print('asdajsd');
+      log("Log From Cubit Eror $e");
+      ExceptionHandler().handleException(e);
+    emit(state.copyWith(
+        loginLoading: false,
+        error: true,
+        errorMessage: e.toString(),
+        loginSuccessfull: false,
+        isIconFieldColorEnabled: false,
+      ));
+    });
+  }
+
+  Future<void> forgotPassword({String? email, required BuildContext context}) async {
+    try {
+      final respone = await authenticationRepo.forgotPassword(email: email);
+      log('reset password ${respone.responseMessage}  ');
+      if (respone.success == true) {
+        nextScreen(context, ResetPasswordScreen());
+      }
+    } catch (e) {
+      log("Error: $e");
+      ExceptionHandler().handleException(e);
+    }
   }
 
   removeError() {
-    emit(state.copyWith(
-        error: false,
-        errorMessage: '',
-        loginSuccessfull: false,
-        signUpSuccessfull: false));
+    emit(state.copyWith(error: false, errorMessage: '', loginSuccessfull: false, signUpSuccessfull: false));
   }
 }

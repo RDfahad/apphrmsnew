@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../data/http/exception_handler.dart';
-import '../../../../domain/entities/attendance/attendance_records.dart';
 import '../../../../domain/repository/attendance_repo/attendance_repo.dart';
 import '/ui/screens/attendance/cubit/attendance_state.dart';
 
@@ -10,37 +9,34 @@ class AttendanceCubit extends Cubit<AttendanceState> {
 
   AttendanceCubit(this.attendanceRepo) : super(AttendanceState.init());
 
-  initState(){
+  initState() {
     emit(AttendanceState.init());
-    }
+  }
 
   getAttendance() async {
-    if(!state.loadMore) {
-      try {
-        emit(state.copyWith(loadMore: true));
-        AttendanceRecords response = await attendanceRepo.getAttendance(
-            pageNumber: state.pageNumber, perPage: state.perPageQuantity);
-        log("From AttendanceRecords response ${response.responseData!
-            .attendenceObject!.data![0].checkInTime}");
-        response.responseData?.attendenceObject?.data?.addAll(
-            state.attendanceRecords.data ?? []);
-        response.responseData?.attendenceObject?.data?.sort((a, b) => a.date!.compareTo(b.date!));
+    if (!state.loadMore && state.errorCode != '995') {
+      emit(state.copyWith(loadMore: true));
+      await attendanceRepo.getAttendance(pageNumber: state.pageNumber, perPage: state.perPageQuantity).then(
+          (response) {
+        log("From AttendanceRecords response ${response.responseData!.attendenceObject!.data![0].checkInTime}");
+        response.responseData?.attendenceObject?.data?.addAll(state.attendanceRecords.data ?? []);
+        response.responseData?.attendenceObject?.data?.sort((a, b) => b.date!.compareTo(a.date!));
         // shouldCallAPI = true;
-        emit(state.copyWith(loadMore: false,
+        emit(state.copyWith(
+            loadMore: false,
             attendanceRecords: response.responseData?.attendenceObject,
             pageNumber: state.pageNumber + 1,
             perPageQuantity: state.perPageQuantity));
-      } catch (e) {
-        // shouldCallAPI = true;
-        emit(state.copyWith(loadMore: false));
+      }, onError: (e) {
+        log('From Attens ${e.errorCode}');
         ExceptionHandler().handleException(e);
-      }
+        emit(state.copyWith(loadMore: false, errorCode: e));
+      });
     }
   }
 
   @override
   Future<void> close() {
-    // TODO: implement close
     emit(AttendanceState.init());
     return super.close();
   }

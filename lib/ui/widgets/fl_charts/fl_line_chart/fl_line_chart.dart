@@ -14,6 +14,7 @@ class FlLineChartScreen extends StatelessWidget {
       color: AppColor.secondaryTextColor,
     );
     return LineChart(
+
       LineChartData(
         borderData: FlBorderData(
             show: false, border: Border.all(color: Colors.black, width: 2)),
@@ -65,7 +66,7 @@ class FlLineChartScreen extends StatelessWidget {
                 gradient: const SweepGradient(colors: [
                   Color.fromARGB(255, 207, 226, 253),
                   Color.fromARGB(255, 194, 215, 245),
-                ])),
+                ],),),
           ),
         ],
       ),
@@ -96,7 +97,7 @@ Widget getLeftTitles(double value, TitleMeta meta) {
       break;
   }
 
-  return SideTitleWidget(child: text, axisSide: meta.axisSide);
+  return SideTitleWidget(axisSide: meta.axisSide, child: text);
 }
 
 Widget getBottomTitles(double value, TitleMeta meta) {
@@ -145,5 +146,5 @@ Widget getBottomTitles(double value, TitleMeta meta) {
       break;
   }
 
-  return SideTitleWidget(child: text, axisSide: meta.axisSide);
+  return SideTitleWidget(axisSide: meta.axisSide, child: text);
 }

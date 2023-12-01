@@ -1,5 +1,7 @@
 import 'dart:convert';
-import 'package:hr_emp_proj/domain/entities/authentication_entities/refresh_token.dart';
+import 'package:hr_emp_proj/domain/entities/authentication_entities/forgot_password_entity.dart';
+
+import '/domain/entities/authentication_entities/refresh_token.dart';
 import '/utils/configuration.dart';
 import '../../../domain/entities/authentication_entities/login_user_entity.dart';
 import '../../../domain/repository/authentication_repo/authentication_repo.dart';
@@ -14,8 +16,7 @@ class AuthenticationRepoImpl implements AuthenticationRepo {
   Future<LoginUserModel> loginUser({String? email, String? password}) async {
     try {
       var body = {"email": email, "password": password};
-      var response = await httpRequest?.post(
-          url: paths.customerLogin, body: body, token: Config.token);
+      var response = await httpRequest?.post(url: paths.customerLogin, body: body, token: Config.token);
       return LoginUserModel.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);
@@ -27,6 +28,17 @@ class AuthenticationRepoImpl implements AuthenticationRepo {
     try {
       var response = await httpRequest?.post(url: paths.refreshToken, token: Config.authorization);
       return RefreshToken.fromJson(json.decode(response.content) ?? {});
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  @override
+  Future<ForgotAndUpdatePasswordModel> forgotPassword({String? email}) async {
+    try {
+      var body = {"email": email};
+      var response = await httpRequest?.post(url: paths.forgotPasswordUrl, body: body, token: Config.token);
+      return ForgotAndUpdatePasswordModel.fromJson(json.decode(response.content) ?? {});
     } catch (e) {
       return Future.error(e);
     }

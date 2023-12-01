@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 extension ScreenConfig on BuildContext {
@@ -10,6 +11,8 @@ extension ScreenConfig on BuildContext {
   Color get getSecondaryColor => Theme.of(this).colorScheme.secondary;
 
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
+  TextTheme get getFontText => Theme.of(this).textTheme;
 }
 
 extension DateParsingExtension on String {
@@ -18,4 +21,12 @@ extension DateParsingExtension on String {
     DateTime endDate = DateTime.parse(otherDate);
     return endDate.difference(startDate);
   }
+}
+
+void nextScreenReplaceCupertino(context, page) {
+  Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => page));
+}
+
+void nextScreenCupertino(context, page) {
+  Navigator.push(context, CupertinoPageRoute(builder: (context) => page));
 }

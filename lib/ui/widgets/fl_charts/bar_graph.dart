@@ -25,7 +25,7 @@ class MyBarGraph extends StatelessWidget {
     );
     myBarData.initialize();
     const style = TextStyle(
-      fontSize: 15,
+      fontSize: 12,
       color: AppColor.secondaryTextColor,
     );
     return BarChart(
@@ -36,8 +36,7 @@ class MyBarGraph extends StatelessWidget {
         borderData: FlBorderData(show: false),
         titlesData: FlTitlesData(
           show: true,
-          topTitles:
-              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           rightTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
@@ -60,8 +59,7 @@ class MyBarGraph extends StatelessWidget {
               reservedSize: 20,
             ),
           ),
-          leftTitles:
-              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           bottomTitles: const AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
@@ -97,7 +95,7 @@ class MyBarGraph extends StatelessWidget {
 
 Widget getBottomTitles(double value, TitleMeta meta) {
   const style = TextStyle(
-    fontSize: 15,
+    fontSize: 12,
     color: Colors.black,
   );
   Widget text;
@@ -120,7 +118,7 @@ Widget getBottomTitles(double value, TitleMeta meta) {
 
       break;
     case 4:
-      text = const Text("Thur", style: style);
+      text = const Text("Thu", style: style);
 
       break;
     case 5:

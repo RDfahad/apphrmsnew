@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hive/hive.dart';
 
 class HiveStorage {
@@ -7,14 +9,21 @@ class HiveStorage {
     mybox.put(key, value);
   }
 
-  putEncryptedData() {}
 
   getData(String key) {
     var data = mybox.get(key);
     return data;
   }
 
-  getEncryptedData() {}
+  putModelData(String key, dynamic value) async {
+    mybox.put(key, jsonEncode(value));
+  }
+
+  getModelData(String key) {
+    var data = mybox.get(key);
+    return jsonDecode(data);
+  }
+
   updateData(String key, dynamic value) async {
     await mybox.put(key, value);
   }

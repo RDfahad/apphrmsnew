@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:hr_emp_proj/domain/entities/attendance/attendance_records.dart';
+import '/domain/entities/attendance/attendance_records.dart';
 import '../../../domain/repository/attendance_repo/attendance_repo.dart';
 import '/utils/configuration.dart';
 import '../../../utils/paths.dart';
