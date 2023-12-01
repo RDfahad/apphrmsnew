@@ -38,7 +38,6 @@ void main() async {
   getIt.registerSingleton<RequestRepo>(RequestRepoImpl(httpRequest: getIt()));
   getIt.registerSingleton<DocumentManagementRepo>(
       DocumentManagementRepoImpl(httpRequest: getIt()));
-
   //Hive DataBase
 
   await Hive.initFlutter();
