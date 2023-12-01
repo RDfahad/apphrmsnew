@@ -39,7 +39,6 @@ void main() async {
   getIt.registerSingleton<DocumentManagementRepo>(
       DocumentManagementRepoImpl(httpRequest: getIt()));
   //Hive DataBase
-
   await Hive.initFlutter();
   await Hive.openBox("UserData");
   // Running App
