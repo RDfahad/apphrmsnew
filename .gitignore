@@ -31,10 +31,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/encryption_public_key.pem
-/manxel.jks
-/output.zip
-/pepk.jar
 
 # Symbolication related
 app.*.symbols
